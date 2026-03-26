@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Claw — Your AI Research Assistant</title>
+  <meta name="description" content="Full-stack research workspace. From idea to paper with AI agents.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="assets/dr-claw.png" alt="Dr. Claw" width="32" height="32">
+        <span>Dr. Claw</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#agents">Agents</a>
+        <a href="https://github.com/OpenLAIR/dr-claw" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="container hero-content">
+      <img src="assets/dr-claw.png" alt="Dr. Claw" class="hero-logo" width="120" height="120">
+      <p class="hero-badge">Open Source &middot; Multi-Agent &middot; GPL-3.0 + AGPL-3.0</p>
+      <h1 class="hero-title">Dr. Claw</h1>
+      <p class="hero-subtitle">Your AI Research Assistant</p>
+      <p class="hero-tagline">From shaping an initial idea to running experiments and preparing publication-ready outputs &mdash; Dr. Claw keeps the full research workflow in one place.</p>
+      <div class="hero-cta">
+        <a href="https://github.com/OpenLAIR/dr-claw" class="btn btn-primary" target="_blank" rel="noopener">Star on GitHub</a>
+        <a href="#quickstart" class="btn btn-secondary">Get Started</a>
+      </div>
+      <div class="hero-terminal">
+        <div class="terminal">
+          <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">dr-claw &mdash; terminal</span>
+          </div>
+          <div class="terminal-body">
+            <div id="terminalOutput" class="terminal-output"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline Outputs -->
+  <section class="section" id="outputs">
+    <div class="container">
+      <p class="section-label">What You Get</p>
+      <h2 class="section-title">From Idea to Paper &mdash; Every Artifact</h2>
+      <p class="section-desc">Dr. Claw's pipeline produces structured, publication-ready outputs at every stage.</p>
+      <div class="output-grid">
+        <div class="output-card">
+          <span class="output-icon">&#x1F4DA;</span>
+          <h3>Survey Reports</h3>
+          <p>Literature reviews with citations from arXiv, Semantic Scholar, and web sources.</p>
+          <code>Survey/reports/</code>
+        </div>
+        <div class="output-card">
+          <span class="output-icon">&#x1F4A1;</span>
+          <h3>Research Ideas</h3>
+          <p>Brainstorming outputs with multi-persona evaluation scores (SCAMPER, SWOT).</p>
+          <code>Ideation/ideas/</code>
+        </div>
+        <div class="output-card">
+          <span class="output-icon">&#x1F52C;</span>
+          <h3>Experiment Code</h3>
+          <p>Implementation from the plan &rarr; implement &rarr; judge loop.</p>
+          <code>Experiment/core_code/</code>
+        </div>
+        <div class="output-card">
+          <span class="output-icon">&#x1F4CA;</span>
+          <h3>Analysis Results</h3>
+          <p>Statistical analysis, tables, charts, and paper-ready figures.</p>
+          <code>Experiment/analysis/</code>
+        </div>
+        <div class="output-card">
+          <span class="output-icon">&#x1F4DD;</span>
+          <h3>Paper Draft</h3>
+          <p>Academic manuscript in IEEE/ACM format with citations and LaTeX math.</p>
+          <code>Publication/paper/</code>
+        </div>
+        <div class="output-card">
+          <span class="output-icon">&#x1F3AC;</span>
+          <h3>Presentation Suite</h3>
+          <p>Slide deck, TTS narration audio, demo video, and project homepage.</p>
+          <code>Promotion/slides/</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline -->
+  <section class="section section-alt" id="pipeline">
+    <div class="container">
+      <p class="section-label">Research Pipeline</p>
+      <h2 class="section-title">5 Stages. End to End.</h2>
+      <p class="section-desc">Each stage is powered by specialized research skills that the agent discovers and follows automatically.</p>
+      <div class="pipeline">
+        <div class="pipeline-stage">
+          <div class="pipeline-icon">&#x1F50D;</div>
+          <h3>Survey</h3>
+          <p>Literature discovery, paper analysis, code survey, and resource preparation.</p>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-icon">&#x1F4A1;</div>
+          <h3>Ideation</h3>
+          <p>Structured brainstorming with creative frameworks and multi-persona evaluation.</p>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-icon">&#x1F9EA;</div>
+          <h3>Experiment</h3>
+          <p>Plan, implement, judge loop with iterative refinement and statistical analysis.</p>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-icon">&#x1F4C4;</div>
+          <h3>Publication</h3>
+          <p>Paper writing, peer review, humanization, citation audit, and Overleaf sync.</p>
+        </div>
+        <div class="pipeline-arrow">&rarr;</div>
+        <div class="pipeline-stage">
+          <div class="pipeline-icon">&#x1F4E3;</div>
+          <h3>Promotion</h3>
+          <p>Academic slides, TTS narration, demo video, and project homepage generation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <div class="container">
+      <p class="section-label">Capabilities</p>
+      <h2 class="section-title">Built for Real Research</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F52C;</div>
+          <h3>Research Lab</h3>
+          <p>Structured dashboard for end-to-end research: define your brief, generate a pipeline of tasks, track progress, and inspect artifacts &mdash; all at a glance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x26A1;</div>
+          <h3>Auto Research</h3>
+          <p>One-click sequential task execution from the Project Dashboard. Open the live session and receive an email when the run completes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4DA;</div>
+          <h3>100+ Research Skills</h3>
+          <p>A curated library spanning idea generation, code survey, experiment development, paper writing, review response, and delivery.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F5C2;</div>
+          <h3>Chat-Driven Pipeline</h3>
+          <p>Describe your research idea in Chat; the agent generates a structured research brief and task list &mdash; no manual templates needed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F916;</div>
+          <h3>Multi-Agent Backend</h3>
+          <p>Seamlessly switch between Claude Code, Gemini CLI, and Codex as your execution engines. Use whichever fits your workflow.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">&#x1F4BB;</div>
+          <h3>Terminal + UI</h3>
+          <p>Use the browser UI for visualization or go terminal-only for stability. Both modes share the same skills and project structure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section class="section section-alt" id="quickstart">
+    <div class="container">
+      <p class="section-label">Get Started</p>
+      <h2 class="section-title">Up and Running in Minutes</h2>
+      <div class="quickstart-grid">
+        <div class="quickstart-step">
+          <div class="step-number">1</div>
+          <h3>Clone &amp; Install</h3>
+          <div class="code-block"><pre>git clone https://github.com/OpenLAIR/dr-claw.git
+cd dr-claw
+npm install
+cp .env.example .env</pre></div>
+        </div>
+        <div class="quickstart-step">
+          <div class="step-number">2</div>
+          <h3>Start the Server</h3>
+          <div class="code-block"><pre>npm run dev</pre></div>
+        </div>
+        <div class="quickstart-step">
+          <div class="step-number">3</div>
+          <h3>Use It</h3>
+          <div class="tabs">
+            <button class="tab active" data-tab="terminal">Terminal</button>
+            <button class="tab" data-tab="ui">Browser UI</button>
+          </div>
+          <div class="tab-content active" id="tab-terminal">
+            <div class="code-block"><pre>pip install -e ./agent-harness
+drclaw auth login --username YOU --password PASS
+
+cd /path/to/your/project
+claude    # or: gemini | codex</pre></div>
+          </div>
+          <div class="tab-content" id="tab-ui">
+            <div class="code-block"><pre>Open http://localhost:5173 in your browser</pre></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agents -->
+  <section class="section" id="agents">
+    <div class="container">
+      <p class="section-label">Multi-Agent</p>
+      <h2 class="section-title">Choose Your Engine</h2>
+      <p class="section-desc">Dr. Claw works with any of these AI coding agents. Install one (or all) and switch freely.</p>
+      <div class="agents-grid">
+        <div class="agent-card">
+          <div class="agent-logo">
+            <img src="assets/icons/claude-ai-icon.svg" alt="Claude" width="48" height="48">
+          </div>
+          <h3>Claude Code</h3>
+          <p class="agent-company">Anthropic</p>
+          <div class="code-block code-sm"><pre>npm install -g @anthropic-ai/claude-code
+claude</pre></div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-logo">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"/><text x="24" y="30" text-anchor="middle" fill="currentColor" font-size="18" font-weight="600">G</text></svg>
+          </div>
+          <h3>Gemini CLI</h3>
+          <p class="agent-company">Google</p>
+          <div class="code-block code-sm"><pre>npm install -g @google/gemini-cli
+gemini</pre></div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-logo">
+            <img src="assets/icons/codex.svg" alt="Codex" width="48" height="48" class="icon-light-only">
+            <img src="assets/icons/codex-white.svg" alt="Codex" width="48" height="48" class="icon-dark-only">
+          </div>
+          <h3>Codex CLI</h3>
+          <p class="agent-company">OpenAI</p>
+          <div class="code-block code-sm"><pre>npm install -g @openai/codex
+codex</pre></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section class="section section-alt" id="integrations">
+    <div class="container">
+      <p class="section-label">Integrations</p>
+      <h2 class="section-title">Works With Your Research Stack</h2>
+      <div class="integrations-track-wrapper">
+        <div class="integrations-track">
+          <span class="integration-pill">arXiv</span>
+          <span class="integration-pill">Semantic Scholar</span>
+          <span class="integration-pill">Overleaf</span>
+          <span class="integration-pill">GitHub</span>
+          <span class="integration-pill">LaTeX</span>
+          <span class="integration-pill">Claude Code</span>
+          <span class="integration-pill">Gemini CLI</span>
+          <span class="integration-pill">Codex CLI</span>
+          <span class="integration-pill">OpenClaw</span>
+          <span class="integration-pill">Google Scholar</span>
+          <span class="integration-pill">VS Code</span>
+          <span class="integration-pill">Cursor</span>
+          <!-- duplicate for seamless loop -->
+          <span class="integration-pill">arXiv</span>
+          <span class="integration-pill">Semantic Scholar</span>
+          <span class="integration-pill">Overleaf</span>
+          <span class="integration-pill">GitHub</span>
+          <span class="integration-pill">LaTeX</span>
+          <span class="integration-pill">Claude Code</span>
+          <span class="integration-pill">Gemini CLI</span>
+          <span class="integration-pill">Codex CLI</span>
+          <span class="integration-pill">OpenClaw</span>
+          <span class="integration-pill">Google Scholar</span>
+          <span class="integration-pill">VS Code</span>
+          <span class="integration-pill">Cursor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshot -->
+  <section class="section" id="screenshot">
+    <div class="container">
+      <p class="section-label">See It In Action</p>
+      <h2 class="section-title">Product Screenshots</h2>
+      <div class="screenshot-grid">
+        <div class="screenshot-card" data-lightbox="assets/screenshots/chat.png">
+          <img src="assets/screenshots/chat.png" alt="Chat interface" loading="lazy">
+          <p>Interactive Chat</p>
+        </div>
+        <div class="screenshot-card" data-lightbox="assets/screenshots/project_dashboard.png">
+          <img src="assets/screenshots/project_dashboard.png" alt="Project dashboard" loading="lazy">
+          <p>Project Dashboard</p>
+        </div>
+        <div class="screenshot-card" data-lightbox="assets/screenshots/skill_library.png">
+          <img src="assets/screenshots/skill_library.png" alt="Skill library" loading="lazy">
+          <p>Skill Library</p>
+        </div>
+        <div class="screenshot-card" data-lightbox="assets/screenshots/research_lab.png">
+          <img src="assets/screenshots/research_lab.png" alt="Research lab" loading="lazy">
+          <p>Research Lab</p>
+        </div>
+        <div class="screenshot-card" data-lightbox="assets/screenshots/terminal_example1.png">
+          <img src="assets/screenshots/terminal_example1.png" alt="Terminal workflow" loading="lazy">
+          <p>Terminal Workflow</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation -->
+  <section class="section section-alt" id="citation">
+    <div class="container">
+      <p class="section-label">Academic Use</p>
+      <h2 class="section-title">Citation</h2>
+      <p class="section-desc">If you find Dr. Claw useful in your research, please cite:</p>
+      <div class="code-block citation-block"><pre>@misc{song2026drclaw,
+  author       = {Dingjie Song and Hanrong Zhang and Dawei Liu
+                  and Yixin Liu and Zhengqing Yuan and Zongxia Li and Siqi Zhang
+                  and Lichao Sun},
+  title        = {Dr. Claw: An AI Research Workspace
+                  from Idea to Paper},
+  year         = {2026},
+  organization = {GitHub},
+  url          = {https://github.com/OpenLAIR/dr-claw},
+}</pre></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/dr-claw.png" alt="Dr. Claw" width="36" height="36">
+        <span>Dr. Claw</span>
+        <p class="footer-tagline">From idea to paper.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Project</h4>
+          <a href="https://github.com/OpenLAIR/dr-claw" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/OpenLAIR/dr-claw/blob/main/docs/faq.md" target="_blank" rel="noopener">FAQ</a>
+          <a href="https://github.com/OpenLAIR/dr-claw/blob/main/docs/configuration.md" target="_blank" rel="noopener">Configuration</a>
+          <a href="https://github.com/OpenLAIR/dr-claw/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://join.slack.com/t/vibe-lab-group/shared_invite/zt-3r4bkcx5t-iGyRMI~r09zt7p_ND2eP9A" target="_blank" rel="noopener">Slack</a>
+          <a href="https://x.com/Vibe2038004" target="_blank" rel="noopener">X / Twitter</a>
+          <a href="https://github.com/OpenLAIR/dr-claw/issues" target="_blank" rel="noopener">Issues</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="https://github.com/OpenLAIR/dr-claw/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+          <a href="https://github.com/OpenLAIR/dr-claw/blob/main/NOTICE" target="_blank" rel="noopener">Notice</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Dr. Claw &middot; GPL-3.0 + AGPL-3.0 &middot; Open Source</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Screenshot preview">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
