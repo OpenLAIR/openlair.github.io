@@ -70,52 +70,17 @@
     });
   }
 
-  /* ---------- Typed hero command ---------- */
+  /* ---------- Hero command (static) ---------- */
   var typed = document.getElementById("typed");
-  if (typed) {
-    var full = 'agent.run("conduct ML research, end to end")';
-    if (reduceMotion) {
-      typed.innerHTML = colorize(full);
-    } else {
-      var i = 0;
-      (function tick() {
-        i++;
-        typed.innerHTML = colorize(full.slice(0, i));
-        if (i < full.length) setTimeout(tick, 34 + (full[i] === " " ? 30 : 0));
-        else litPipeline();
-      })();
-    }
-  } else { litPipeline(); }
+  if (typed) typed.innerHTML = colorize('agent.run("conduct ML research, end to end")');
+  var pipeline = document.getElementById("pipeline");
+  if (pipeline) pipeline.classList.add("lit");
 
   function colorize(s) {
-    // wrap the quoted string in an accent span (handles partial strings while typing)
+    // wrap the quoted string in an accent span
     return s.replace(/(&quot;|")(.*?)("|&quot;|$)/, function (m, a, mid, b) {
       return '<span class="str">' + a + mid + b + "</span>";
     });
-  }
-
-  function litPipeline() {
-    var p = document.getElementById("pipeline");
-    if (!p) return;
-    if (reduceMotion) { p.classList.add("lit"); p.querySelectorAll(".stage").forEach(function(s){s.style.opacity=1;}); return; }
-    var stages = p.querySelectorAll(".stage");
-    p.classList.add("lit");
-    stages.forEach(function (s) { s.style.opacity = ".35"; });
-    var k = 0;
-    (function step() {
-      if (k < stages.length) { stages[k].style.opacity = "1"; k++; setTimeout(step, 220); }
-    })();
-  }
-
-  /* ---------- Scroll reveal ---------- */
-  var reveals = document.querySelectorAll(".reveal");
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    reveals.forEach(function (el) { el.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    reveals.forEach(function (el) { io.observe(el); });
   }
 
   /* ---------- Nav active-section highlight ---------- */
@@ -133,65 +98,4 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- Live-demo mock dashboard ---------- */
-  var dash = document.getElementById("dash");
-  if (dash && !reduceMotion && "IntersectionObserver" in window) {
-    var started = false;
-    new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (e) { if (e.isIntersecting && !started) { started = true; runDash(); obs.disconnect(); } });
-    }, { threshold: 0.4 }).observe(dash);
-  } else if (dash) {
-    // static fallback: fill bars to base
-    dash.querySelectorAll(".agent").forEach(function (a) {
-      a.querySelector(".bar > i").style.width = (a.getAttribute("data-base") || 60) + "%";
-    });
-  }
-
-  function runDash() {
-    // countdown clock
-    var clock = document.getElementById("clock");
-    var remain = 59 * 60 + 12;
-    setInterval(function () {
-      if (remain <= 0) return;
-      remain -= 1;
-      var m = Math.floor(remain / 60), s = remain % 60;
-      clock.textContent = (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
-    }, 1000);
-
-    // progress bars drift upward toward 100
-    var agents = Array.prototype.slice.call(dash.querySelectorAll(".agent"));
-    agents.forEach(function (a) {
-      var bar = a.querySelector(".bar > i");
-      var w = parseFloat(a.getAttribute("data-base")) || 55;
-      bar.style.width = w + "%";
-      setInterval(function () {
-        w = Math.min(99, w + Math.random() * 4);
-        bar.style.width = w.toFixed(1) + "%";
-      }, 1600 + Math.random() * 1200);
-    });
-
-    // scrolling log feed
-    var feed = document.getElementById("feed");
-    var lines = [
-      ['12:04', 'g', 'sakana-run · experiment passed · val_acc=0.712'],
-      ['12:05', 'c', 'openhands · revising hypothesis after failed run'],
-      ['12:06', 'g', 'local-7B · draft section "Results" written'],
-      ['12:07', 'c', 'sakana-run · launching ablation (3 seeds)'],
-      ['12:08', 'g', 'jury · faithfulness check queued'],
-      ['12:09', 'c', 'openhands · sandbox reset · retry step 34'],
-      ['12:10', 'g', 'local-7B · figures rendered · 2 of 3']
-    ];
-    var fi = 0, buffer = [];
-    function push() {
-      var L = lines[fi % lines.length]; fi++;
-      var el = document.createElement("div");
-      el.innerHTML = '<span class="t">[' + L[0] + ']</span> <span class="' + L[1] + '">' + L[2] + '</span>';
-      feed.appendChild(el);
-      buffer.push(el);
-      requestAnimationFrame(function () { el.classList.add("show"); });
-      if (buffer.length > 3) { var old = buffer.shift(); old.remove(); }
-    }
-    push(); push();
-    setInterval(push, 2400);
-  }
 })();

@@ -1,7 +1,7 @@
 /* =============================================================================
    AutoResearch @ NeurIPS 2026 — workshop site
-   Aesthetic: "Agent Terminal / Live Trace"
-   Dark instrument-panel theme · monospace display · phosphor cyan + amber
+   Aesthetic: calm "paper terminal" — light default, monospace display,
+   restrained cyan accent (a dark theme is still available via the nav toggle)
    ============================================================================= */
 
 /* ---------- Tokens ---------- */
@@ -108,34 +108,6 @@ h1, h2, h3, h4 { margin: 0; font-weight: 700; color: var(--ink-bright); line-hei
 p { margin: 0 0 1em; }
 ul { margin: 0; padding: 0; list-style: none; }
 ::selection { background: rgba(79, 230, 203, 0.28); color: #fff; }
-
-/* ---------- Atmosphere: fixed grid + glow + scanlines ---------- */
-.fx { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-.fx-grid {
-  background-image:
-    linear-gradient(var(--line-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(ellipse 120% 90% at 50% -10%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% -10%, #000 30%, transparent 80%);
-  opacity: .7;
-}
-.fx-glow {
-  opacity: var(--glow-op);
-  background:
-    radial-gradient(620px 420px at 12% -6%, rgba(79,230,203,.10), transparent 70%),
-    radial-gradient(560px 420px at 92% 4%, rgba(255,182,92,.07), transparent 70%),
-    radial-gradient(800px 600px at 50% 110%, rgba(154,166,255,.06), transparent 70%);
-}
-.fx-scan {
-  background: repeating-linear-gradient(to bottom, rgba(255,255,255,.014) 0 1px, transparent 1px 3px);
-  mix-blend-mode: overlay;
-  opacity: .6;
-}
-.fx-noise {
-  opacity: .035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* ---------- Layout ---------- */
 .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
@@ -279,12 +251,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 7px 15px 7px 12px; margin-bottom: 30px;
   background: rgba(255,255,255,.015);
 }
-.hero-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 0 rgba(92,224,138,.6); animation: pulse 2.4s infinite; }
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(92,224,138,.55); }
-  70% { box-shadow: 0 0 0 9px rgba(92,224,138,0); }
-  100% { box-shadow: 0 0 0 0 rgba(92,224,138,0); }
-}
+.hero-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); }
 .hero-status b { color: var(--live); font-weight: 600; }
 
 /* terminal command line */
@@ -295,8 +262,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 .cmd .prompt { color: var(--cyan); }
 .cmd .typed { color: var(--ink-bright); }
 .cmd .typed .str { color: var(--amber); }
-.caret { display: inline-block; width: 9px; height: 1.05em; background: var(--cyan); transform: translateY(2px); animation: blink 1.05s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
 
 .hero h1 {
   font-family: var(--display);
@@ -341,8 +306,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   padding: 16px 18px;
   border-right: 1px solid var(--line-soft);
   position: relative;
-  opacity: .35; transform: translateY(0);
-  transition: opacity .5s var(--ease), background .3s;
+  transition: background .3s;
 }
 .pipeline .stage:last-child { border-right: 0; }
 .pipeline.lit .stage { opacity: 1; }
@@ -385,7 +349,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-family: var(--mono); font-size: 12px; color: var(--ink-dim);
   background: rgba(255,255,255,.012);
 }
-.log-head .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); animation: pulse 2.4s infinite; }
+.log-head .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
 .log-body { padding: 6px 0; }
 .log-line {
   display: grid; grid-template-columns: 130px 86px 1fr; gap: 16px; align-items: baseline;
@@ -556,46 +520,11 @@ section + section { border-top: 1px solid var(--line-soft); }
    LIVE DEMO — dashboard panel (signature)
    ============================================================================= */
 .demo { background: linear-gradient(180deg, var(--bg-deep), var(--bg)); }
-.demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-@media (max-width: 920px) { .demo-grid { grid-template-columns: 1fr; gap: 36px; } }
+.demo-grid { display: block; }
 .demo-copy ul { margin-top: 22px; }
 .demo-copy li { padding: 9px 0 9px 26px; position: relative; font-size: .98rem; }
 .demo-copy li::before { content: "▸"; position: absolute; left: 0; color: var(--cyan); }
 .demo-copy li b { color: var(--ink-bright); }
-
-/* dashboard */
-.dash {
-  border: 1px solid var(--line-hard); border-radius: 6px; overflow: hidden;
-  background: var(--bg-deep);
-  box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px var(--line-soft);
-}
-.dash-bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--panel); font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
-.dash-bar .lights i { width: 9px; height: 9px; }
-.dash-bar .live-pill { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; color: var(--live); }
-.dash-bar .live-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); animation: pulse 1.8s infinite; }
-.dash-body { padding: 18px; display: grid; gap: 14px; }
-.dash-clock { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); }
-.dash-clock .lab { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); }
-.dash-clock .val { font-size: 1.7rem; color: var(--amber); font-weight: 600; }
-.agent-row { display: grid; grid-template-columns: 1fr; gap: 9px; }
-.agent {
-  font-family: var(--mono); font-size: 12px;
-  border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 10px 12px;
-  background: var(--panel);
-}
-.agent .ah { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.agent .name { color: var(--ink-bright); }
-.agent .stage-tag { color: var(--cyan); font-size: 11px; }
-.bar { height: 6px; border-radius: 100px; background: var(--bar-track); overflow: hidden; }
-.bar > i { display: block; height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--cyan-deep), var(--cyan)); width: 0; transition: width .9s var(--ease); }
-.agent .meta { display: flex; justify-content: space-between; margin-top: 7px; color: var(--ink-dim); font-size: 11px; }
-.agent .meta .sc { color: var(--amber); }
-.dash-feed { font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); border-top: 1px solid var(--line-soft); padding-top: 12px; min-height: 54px; }
-.dash-feed div { padding: 2px 0; opacity: 0; transform: translateY(4px); }
-.dash-feed div.show { opacity: 1; transform: none; transition: .4s; }
-.dash-feed .t { color: var(--ink-faint); }
-.dash-feed .g { color: var(--live); }
-.dash-feed .c { color: var(--cyan); }
 
 /* =============================================================================
    PEOPLE — speakers / organizers
@@ -632,7 +561,7 @@ section + section { border-top: 1px solid var(--line-soft); }
   border: 1px dashed var(--line-hard); border-radius: var(--radius);
   background: rgba(255,255,255,.01); padding: 20px 24px;
 }
-.tba-panel .dot-tba { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex: none; box-shadow: 0 0 0 0 rgba(255,182,92,.5); animation: pulse 2.6s infinite; }
+.tba-panel .dot-tba { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex: none; box-shadow: 0 0 0 0 rgba(255,182,92,.5); }
 
 /* =============================================================================
    PROGRAM COMMITTEE
@@ -676,9 +605,4 @@ section + section { border-top: 1px solid var(--line-soft); }
 /* =============================================================================
    Scroll reveal
    ============================================================================= */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
-.reveal.d1 { transition-delay: .07s; }
-.reveal.d2 { transition-delay: .14s; }
-.reveal.d3 { transition-delay: .21s; }
-.reveal.d4 { transition-delay: .28s; }
+/* scroll-reveal disabled — content is shown immediately (no animation) */

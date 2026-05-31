@@ -1,15 +1,17 @@
 # AutoResearch @ NeurIPS 2026 — workshop website
 
 Single-page static site for the **AutoResearch** workshop proposal. Aesthetic
-direction: *agent terminal / live trace* — a dark instrument-panel theme that
-echoes the workshop's signature live on-stage agent demo.
+direction: a calm *paper terminal* — light by default, clean and content-first,
+with a monospace display face and a restrained cyan accent as the only nod to the
+"agent terminal" motif. Decorative animation has been intentionally removed; a
+dark theme remains available via the nav toggle.
 
 ```
 site/
 ├─ index.html              # all content + section markup
 ├─ assets/
 │  ├─ css/style.css        # full theme (CSS variables at the top)
-│  ├─ js/main.js           # typed hero, scroll reveal, nav spy, mock dashboard
+│  ├─ js/main.js           # theme toggle, OpenReview guard, mobile nav, nav spy
 │  └─ img/                 # drop speaker / sponsor images here
 └─ README.md
 ```
@@ -65,20 +67,22 @@ All placeholders are intentional — search the codebase for these:
 
 ## Editing notes
 
-- **Light / dark themes.** A toggle in the nav (sun/moon) switches between the
-  dark "agent terminal" theme and a light "paper terminal" theme. The choice is
-  saved to `localStorage` (`ar-theme`); first-time visitors default to their OS
-  `prefers-color-scheme`. An inline script in `<head>` applies the theme before
-  paint to avoid a flash. Dark is the design default — light is defined in the
-  `:root[data-theme="light"]` block in `style.css`.
+- **Light / dark themes.** **Light is the default.** A toggle in the nav
+  (sun/moon) switches to the dark "agent terminal" theme; the choice is saved to
+  `localStorage` (`ar-theme`). An inline script in `<head>` applies the theme
+  before paint to avoid a flash. The dark palette lives in the base `:root`
+  block; light overrides are in `:root[data-theme="light"]` in `style.css`. To
+  change the default, edit the `theme = saved || "light"` line in the `<head>`
+  script of `index.html`.
 - **Theme colors / fonts** live in the `:root` block at the top of `style.css`.
-  Primary accent is phosphor cyan (`--cyan`), secondary is amber (`--amber`).
+  Primary accent is cyan (`--cyan`), secondary is amber (`--amber`).
   Theme-flippable values use semantic vars (`--nav-bg`, `--hover`, `--hero-grad`…).
-- The **mock live dashboard** (`#demo`) is purely decorative — numbers are
-  animated client-side, not real. It illustrates the live-demo format.
+- **No decorative animation.** The site was deliberately simplified for a clean,
+  content-first feel: the background FX layers, typed-hero effect, sequential
+  pipeline reveal, scroll-reveal, and the old mock "live dashboard" were all
+  removed. The hero command line and the four-stage pipeline are now static.
 - Fonts load from Google Fonts: **Martian Mono** (display), **IBM Plex Mono**
   (code/labels), **IBM Plex Sans** (body). Swap the `<link>` in `<head>` to change.
-- Respects `prefers-reduced-motion` — all animation is gated.
 - **Social share card.** The 1200×630 card used by `og:image` / `twitter:image`
   (`assets/img/og-card.png`) is composed deterministically from the site's own
   fonts/colors via the template `assets/og/og-card.html` (not linked from the

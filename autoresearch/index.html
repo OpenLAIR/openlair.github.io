@@ -48,7 +48,7 @@
   (function () {
     try {
       var saved = localStorage.getItem("ar-theme");
-      var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      var theme = saved || "light"; // light is the default; dark only if the visitor opted in
       if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
     } catch (e) {}
   })();
@@ -56,12 +56,6 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070a0e'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%234fe6cb' text-anchor='middle'%3E%26gt;_%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
-
-<!-- atmosphere -->
-<div class="fx fx-grid"></div>
-<div class="fx fx-glow"></div>
-<div class="fx fx-scan"></div>
-<div class="fx fx-noise"></div>
 
 <!-- ===================== NAV ===================== -->
 <header class="nav">
@@ -94,7 +88,7 @@
   <div class="wrap">
     <div class="cmd reveal d1">
       <span class="prompt">autoresearch@neurips:~$</span>
-      <span class="typed" id="typed"></span><span class="caret" aria-hidden="true"></span>
+      <span class="typed" id="typed"></span>
     </div>
 
     <h1 class="reveal d1">AutoResearch</h1>
@@ -111,7 +105,7 @@
       experiments, manuscripts, evaluation — capped by a <b class="cy">live on-stage agent demonstration</b>.</p>
 
     <!-- pipeline strip -->
-    <div class="pipeline reveal d3" id="pipeline">
+    <div class="pipeline lit reveal d3" id="pipeline">
       <div class="stage"><div class="n">01</div><div class="t">Ideate</div><div class="d">hypothesis</div></div>
       <div class="stage"><div class="n">02</div><div class="t">Experiment</div><div class="d">code · run</div></div>
       <div class="stage"><div class="n">03</div><div class="t">Write</div><div class="d">manuscript</div></div>
@@ -226,39 +220,6 @@
           <li><b>A jury</b> scores final result, experimental quality, and report faithfulness.</li>
           <li><b>A local-compute runner-up track</b> keeps the format open to academic teams.</li>
         </ul>
-      </div>
-
-      <!-- mock live dashboard -->
-      <div class="dash reveal d2" id="dash" aria-hidden="true">
-        <div class="dash-bar">
-          <span class="lights"><i></i><i></i><i></i></span>
-          <span>demo://leaderboard</span>
-          <span class="live-pill"><span class="dot"></span> LIVE</span>
-        </div>
-        <div class="dash-body">
-          <div class="dash-clock">
-            <span class="lab">wall-clock remaining</span>
-            <span class="val" id="clock">59:12</span>
-          </div>
-          <div class="agent-row" id="agents">
-            <div class="agent" data-base="68">
-              <div class="ah"><span class="name">agent · sakana-run</span><span class="stage-tag">experiment</span></div>
-              <div class="bar"><i></i></div>
-              <div class="meta"><span>step 41 / ~60</span><span class="sc">score 0.71</span></div>
-            </div>
-            <div class="agent" data-base="52">
-              <div class="ah"><span class="name">agent · openhands</span><span class="stage-tag">debug</span></div>
-              <div class="bar"><i></i></div>
-              <div class="meta"><span>step 33 / ~60</span><span class="sc">score 0.64</span></div>
-            </div>
-            <div class="agent" data-base="80">
-              <div class="ah"><span class="name">agent · local-7B (runner-up)</span><span class="stage-tag">write-up</span></div>
-              <div class="bar"><i></i></div>
-              <div class="meta"><span>step 49 / ~60</span><span class="sc">score 0.58</span></div>
-            </div>
-          </div>
-          <div class="dash-feed" id="feed"></div>
-        </div>
       </div>
     </div>
   </div>
