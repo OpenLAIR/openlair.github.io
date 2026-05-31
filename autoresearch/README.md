@@ -60,8 +60,7 @@ All placeholders are intentional — search the codebase for these:
 | **Contact email** | `index.html` footer (`autoresearch-workshop@googlegroups.com` is a placeholder). |
 | **Organizer names / affiliations** | Deliberately omitted for a public site (just a footer line: "Organizing committee announced on acceptance"). To add a roster, drop a new `<section id="organizers">` with `.person` cards (same markup as the speakers grid). |
 | **Speaker photos** | Optional. Currently monogram avatars. To use real photos, replace the `.avatar` `<div>` with `<img class="avatar" src="assets/img/....jpg">`. Speakers are marked *tentative* — drop the `.tentative-flag` once confirmed. |
-| **Dates** | `index.html` → `#dates` table + `#updates` log. Marked tentative pending acceptance. |
-| **Sponsor logos** | `index.html` → `#sponsors` (`.logo-slot` placeholders). |
+| **Dates** | `index.html` → `#dates` table. Marked tentative pending acceptance. |
 | **Final location** | Shown as *Atlanta · tentative* in the hero meta (`#top`) and footer. Update both once NeurIPS confirms the venue (preference order Atlanta → Sydney → Paris). |
 | **Site URL / social card** | Set to `https://openlair.github.io/autoresearch/` across the `<head>` (`og:url`, `og:image`, `twitter:*`, `canonical`, JSON-LD). Only revisit if the deploy path changes. |
 
@@ -96,11 +95,12 @@ All placeholders are intentional — search the codebase for these:
 
 ## Structure & lifecycle
 
-Section order (single-page scroll): hero → status line → overview → topics →
-**live demo** → call for papers → dates → schedule → speakers → sponsors → footer.
-The live-demo section is placed high on purpose — it's the signature hook. The
-detailed reviewing/policy rules live inside a collapsed `<details>` in the CFP
-section so the two tracks stay front-and-center.
+Section order (single-page scroll): hero → overview → topics → **live demo** →
+call for papers → dates → schedule → speakers → footer. The live-demo section is
+placed high on purpose — it's the signature hook. The page is intentionally lean
+(this is the page used to invite speakers): the old status log, sponsor
+placeholders, and detailed reviewing/policy rules were removed to keep only the
+essentials.
 
 Workshop sites re-order as the event nears. The nav currently leads with the
 **live demo + submit** (submission phase). Closer to December 2026, promote

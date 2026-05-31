@@ -334,39 +334,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 .btn .arr { transition: transform .2s; }
 .btn:hover .arr { transform: translate(2px,-2px); }
 
-/* =============================================================================
-   UPDATES / build log
-   ============================================================================= */
-.updates { padding: 64px 0; }
-.log {
-  border: 1px solid var(--line); border-radius: var(--radius);
-  background: linear-gradient(180deg, var(--panel), var(--bg-deep));
-  overflow: hidden;
-}
-.log-head {
-  display: flex; align-items: center; gap: 10px;
-  padding: 11px 16px; border-bottom: 1px solid var(--line);
-  font-family: var(--mono); font-size: 12px; color: var(--ink-dim);
-  background: rgba(255,255,255,.012);
-}
-.log-head .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
-.log-body { padding: 6px 0; }
-.log-line {
-  display: grid; grid-template-columns: 130px 86px 1fr; gap: 16px; align-items: baseline;
-  padding: 10px 18px; font-family: var(--mono); font-size: 13.5px;
-  border-bottom: 1px solid var(--line-soft);
-}
-.log-line:last-child { border-bottom: 0; }
-.log-line .ts { color: var(--ink-faint); }
-.log-line .tag { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-.log-line .tag.ok { color: var(--live); }
-.log-line .tag.next { color: var(--amber); }
-.log-line .tag.info { color: var(--violet); }
-.log-line .msg { color: var(--ink); }
-.log-line .msg b { color: var(--ink-bright); font-weight: 600; }
-@media (max-width: 640px) {
-  .log-line { grid-template-columns: 1fr; gap: 2px; padding: 12px 16px; }
-}
 
 /* =============================================================================
    OVERVIEW
@@ -448,23 +415,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 .track .lim { font-family: var(--mono); font-size: 13px; color: var(--amber); margin-bottom: 14px; }
 .track ul li { padding: 7px 0 7px 22px; position: relative; font-size: .95rem; color: var(--ink); }
 .track ul li::before { content: "›"; position: absolute; left: 4px; color: var(--cyan); font-family: var(--mono); }
-.cfp-rules {
-  margin-top: 18px; border: 1px solid var(--line); border-radius: var(--radius);
-  background: var(--panel); padding: 0;
-}
-.cfp-rules summary {
-  cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px;
-  font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--cyan-deep); padding: 18px 24px; user-select: none;
-}
-.cfp-rules summary::-webkit-details-marker { display: none; }
-.cfp-rules summary::before { content: "▸"; transition: transform .2s var(--ease); }
-.cfp-rules[open] summary::before { transform: rotate(90deg); }
-.cfp-rules summary:hover { color: var(--cyan); }
-.cfp-rules ul { columns: 2; column-gap: 40px; padding: 0 24px 22px; }
-.cfp-rules li { padding: 6px 0 6px 20px; position: relative; font-size: .93rem; break-inside: avoid; }
-.cfp-rules li::before { content: "•"; position: absolute; left: 2px; color: var(--amber); }
-@media (max-width: 700px) { .cfp-rules ul { columns: 1; } }
 
 /* =============================================================================
    DATES
@@ -576,17 +526,6 @@ section + section { border-top: 1px solid var(--line-soft); }
 .pc-names span::after { content: "·"; color: var(--ink-faint); margin-left: 10px; }
 .pc-names span:last-child::after { content: ""; }
 .pc-foot { margin-top: 28px; font-size: .95rem; color: var(--ink-dim); border-left: 2px solid var(--cyan-deep); padding-left: 16px; }
-
-/* =============================================================================
-   SPONSORS
-   ============================================================================= */
-.logo-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
-.logo-slot {
-  flex: 1 1 150px; min-height: 84px; display: grid; place-items: center;
-  border: 1px dashed var(--line-hard); border-radius: var(--radius);
-  font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .08em; text-transform: uppercase;
-  background: rgba(255,255,255,.01); text-align: center; padding: 10px;
-}
 
 /* =============================================================================
    FOOTER
