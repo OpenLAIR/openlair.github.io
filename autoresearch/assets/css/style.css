@@ -649,10 +649,8 @@ section + section { border-top: 1px solid var(--line-soft); }
 .pc-foot { margin-top: 28px; font-size: .95rem; color: var(--ink-dim); border-left: 2px solid var(--cyan-deep); padding-left: 16px; }
 
 /* =============================================================================
-   SPONSORS / DEI
+   SPONSORS
    ============================================================================= */
-.spon-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px; align-items: start; }
-@media (max-width: 860px) { .spon-grid { grid-template-columns: 1fr; gap: 30px; } }
 .logo-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
 .logo-slot {
   flex: 1 1 150px; min-height: 84px; display: grid; place-items: center;
@@ -660,10 +658,6 @@ section + section { border-top: 1px solid var(--line-soft); }
   font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .08em; text-transform: uppercase;
   background: rgba(255,255,255,.01); text-align: center; padding: 10px;
 }
-.dei-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 26px; }
-.dei-card h4 { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-bottom: 14px; }
-.dei-card li { padding: 8px 0 8px 22px; position: relative; font-size: .93rem; }
-.dei-card li::before { content: "+"; position: absolute; left: 2px; color: var(--cyan); font-family: var(--mono); }
 
 /* =============================================================================
    FOOTER
