@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AutoResearch — Toward End-to-End Automation of ML Research · NeurIPS 2026 Workshop</title>
+<meta name="description" content="AutoResearch is a proposed one-day NeurIPS 2026 workshop on end-to-end AI agents that do machine-learning research — ideation, experiments, manuscripts, and evaluation — capped by a live on-stage agent demo." />
+<meta property="og:title" content="AutoResearch @ NeurIPS 2026" />
+<meta property="og:description" content="End-to-end AI agents that do ML research — ideation, experiments, manuscripts, and evaluation — capped by a live on-stage demo." />
+<meta property="og:type" content="website" />
+<!-- SOCIAL / SEO — canonical home: https://openlair.github.io/autoresearch/ (see README). -->
+<meta property="og:site_name" content="AutoResearch @ NeurIPS 2026" />
+<meta property="og:url" content="https://openlair.github.io/autoresearch/" />
+<meta property="og:image" content="https://openlair.github.io/autoresearch/assets/img/og-card.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="AutoResearch @ NeurIPS 2026 — toward end-to-end automation of machine-learning research, capped by a live on-stage agent demo." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AutoResearch @ NeurIPS 2026" />
+<meta name="twitter:description" content="End-to-end AI agents that do ML research — capped by a live on-stage agent demo. Submit by Aug 29, 2026." />
+<meta name="twitter:image" content="https://openlair.github.io/autoresearch/assets/img/og-card.png" />
+<meta name="twitter:image:alt" content="The AutoResearch loop — ideate, experiment, write, evaluate — run end-to-end by an agent." />
+<link rel="canonical" href="https://openlair.github.io/autoresearch/" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "AutoResearch — Toward End-to-End Automation of ML Research (NeurIPS 2026 Workshop)",
+  "description": "A proposed one-day NeurIPS 2026 workshop on end-to-end AI agents that do machine-learning research — ideation, experiments, manuscripts, and evaluation — capped by a live on-stage agent demonstration.",
+  "startDate": "2026-12-11",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": { "@type": "Place", "name": "NeurIPS 2026 (location tentative — Atlanta preferred)" },
+  "image": "https://openlair.github.io/autoresearch/assets/img/og-card.png",
+  "url": "https://openlair.github.io/autoresearch/",
+  "organizer": { "@type": "Organization", "name": "AutoResearch Workshop Organizing Committee" },
+  "superEvent": { "@type": "Event", "name": "NeurIPS 2026", "url": "https://neurips.cc/Conferences/2026" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<!-- set theme before paint to avoid flash-of-wrong-theme -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("ar-theme");
+      var theme = saved || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      if (theme === "light") document.documentElement.setAttribute("data-theme", "light");
+    } catch (e) {}
+  })();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23070a0e'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%234fe6cb' text-anchor='middle'%3E%26gt;_%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+<!-- atmosphere -->
+<div class="fx fx-grid"></div>
+<div class="fx fx-glow"></div>
+<div class="fx fx-scan"></div>
+<div class="fx fx-noise"></div>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top" aria-label="AutoResearch home">
+      <span class="lights"><i></i><i></i><i></i></span>
+      <span class="nav-path">~/<b>autoresearch</b><span class="sfx"> · neurips&#39;26</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#overview">overview</a>
+      <a href="#demo">live&nbsp;demo</a>
+      <a href="#cfp">submit</a>
+      <a href="#dates">dates</a>
+      <a href="#schedule">schedule</a>
+      <a href="#speakers">speakers</a>
+      <a class="nav-cta" href="#cfp" data-openreview>submit&nbsp;↗</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch color theme" title="Toggle light / dark">
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="cmd reveal d1">
+      <span class="prompt">autoresearch@neurips:~$</span>
+      <span class="typed" id="typed"></span><span class="caret" aria-hidden="true"></span>
+    </div>
+
+    <h1 class="reveal d1">AutoResearch</h1>
+    <p class="hero-sub reveal d2">Toward end-to-end automation of <span>machine-learning research.</span></p>
+
+    <div class="hero-meta reveal d2">
+      <span>📅 <b>NeurIPS 2026</b> · December</span><span class="sep">|</span>
+      <span>📍 <b>Atlanta</b> <span class="sfx">· tentative</span></span><span class="sep">|</span>
+      <span>📝 submit by <b class="cy">Aug 29, 2026</b></span><span class="sep">|</span>
+      <span>🗂 <b>2 tracks</b> — Human &amp; AI</span>
+    </div>
+
+    <p class="tagline reveal d3">The first venue for end-to-end AI agents that do ML research — ideation,
+      experiments, manuscripts, evaluation — capped by a <b class="cy">live on-stage agent demonstration</b>.</p>
+
+    <!-- pipeline strip -->
+    <div class="pipeline reveal d3" id="pipeline">
+      <div class="stage"><div class="n">01</div><div class="t">Ideate</div><div class="d">hypothesis</div></div>
+      <div class="stage"><div class="n">02</div><div class="t">Experiment</div><div class="d">code · run</div></div>
+      <div class="stage"><div class="n">03</div><div class="t">Write</div><div class="d">manuscript</div></div>
+      <div class="stage"><div class="n">04</div><div class="t">Evaluate</div><div class="d">review</div></div>
+    </div>
+
+    <div class="btn-row reveal d4">
+      <a class="btn btn-primary" href="#cfp" data-openreview>Submit on OpenReview <span class="arr">↗</span></a>
+      <a class="btn btn-ghost" href="#cfp">Read the call for papers</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== UPDATES / build log ===================== -->
+<section class="updates" id="updates">
+  <div class="wrap">
+    <div class="log reveal">
+      <div class="log-head"><span class="dot"></span> status</div>
+      <div class="log-body">
+        <div class="log-line"><span class="ts">2026</span><span class="tag next">pending</span><span class="msg"><b>Proposed workshop</b> — awaiting the NeurIPS decision (~Jul 11). The CFP, speakers, and dates below are tentative and firm up on acceptance.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OVERVIEW ===================== -->
+<section id="overview">
+  <div class="wrap">
+    <div class="eyebrow reveal">00 · what &amp; why</div>
+    <div class="overview-grid">
+      <div class="reveal d1">
+      <p class="lead-first">The past two years produced the first autonomous agents that read literature, form
+        hypotheses, write and run code, analyze results, and draft papers with limited human guidance — and the
+        first benchmarks pitting them against expert humans.</p>
+      <p>Yet today's systems still <b style="color:var(--ink-bright)">fail more often than they succeed</b>, and
+        the topic is scattered across &ldquo;AI4Science&rdquo; venues (natural sciences) and &ldquo;Agentic
+        AI&rdquo; venues (agents broadly) — leaving <b style="color:var(--cyan)">ML research itself</b> without a
+        dedicated home, no shared benchmarks or evaluation norms, even as agent-authored manuscripts begin to
+        outpace human review capacity.</p>
+      <p style="margin-bottom:0"><b style="color:var(--ink-bright)">AutoResearch</b> is the first venue to fill
+        that gap — bringing together LLM-agent, AutoML, RL, and evaluation researchers to define what automating
+        ML research means, share what works, and confront what does not.</p>
+      </div>
+      <figure class="overview-fig reveal d2">
+        <picture>
+          <source srcset="assets/img/research-loop.webp" type="image/webp" />
+          <img src="assets/img/research-loop.png" width="1200" height="1200" loading="lazy"
+               alt="Abstract visualization of an autonomous AI research loop — four glowing nodes cycling through ideate, experiment, write, and evaluate." />
+        </picture>
+        <figcaption>The research loop, run end-to-end by an agent.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TOPICS ===================== -->
+<section id="topics">
+  <div class="wrap">
+    <div class="eyebrow reveal">01 · topics of interest</div>
+    <h2 class="section-title reveal d1">Four pillars across the research loop</h2>
+    <p class="section-lead reveal d1">We solicit submissions and invited talks spanning the major stages of
+      automating ML research — the loop, and the cognitive steps inside it.</p>
+
+    <div class="pillars">
+      <article class="pillar reveal d1">
+        <div class="pn">P1</div>
+        <h3>Agent architectures &amp; orchestration</h3>
+        <p>Driving the full research loop, not the individual steps.</p>
+        <div class="kw"><span>long-horizon planning</span><span>memory</span><span>tool use</span><span>multi-agent</span></div>
+      </article>
+      <article class="pillar reveal d2">
+        <div class="pn">P2</div>
+        <h3>Automated experimentation, code &amp; discovery</h3>
+        <p>Agents that write, run, and refine experiments — and surface new findings.</p>
+        <div class="kw"><span>MLE agents</span><span>agentic AutoML</span><span>tree-search</span><span>sandboxing</span></div>
+      </article>
+      <article class="pillar reveal d1">
+        <div class="pn">P3</div>
+        <h3>Scientific reasoning, ideation &amp; writing</h3>
+        <p>The cognitive steps inside the loop — beyond <span class="mono">A+B→C</span>.</p>
+        <div class="kw"><span>ideation</span><span>lit-grounding</span><span>novelty</span><span>agentic review</span></div>
+      </article>
+      <article class="pillar reveal d2">
+        <div class="pn">P4</div>
+        <h3>Benchmarks, evaluation &amp; reproducibility</h3>
+        <p>Measuring research agents on more than a single accuracy score.</p>
+        <div class="kw"><span>MLE-bench</span><span>PaperBench</span><span>RE-Bench</span><span>multi-axis eval</span></div>
+      </article>
+    </div>
+
+    <div class="crosscut reveal">
+      <b>Cross-cutting</b> &nbsp; — &nbsp; safety and dual-use of self-improving loops · auditability of multi-stage
+      pipelines · the generalization gap from computational to wet-lab / clinical settings · knowledge-ecosystem
+      pollution · and authorship / accountability norms for human–AI research.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LIVE DEMO ===================== -->
+<section id="demo" class="demo">
+  <div class="wrap">
+    <div class="eyebrow reveal">★ · the signature event</div>
+    <h2 class="section-title reveal d1">The live AutoResearch demonstration</h2>
+    <div class="demo-grid">
+      <div class="demo-copy reveal d1">
+        <p class="section-lead" style="max-width:none">Submitted agents attempt a
+          <b style="color:var(--ink-bright)">previously unseen ML research task</b>, live, on stage — present
+          capability in real time, not slides about what agents <em>could</em> do.</p>
+        <ul>
+          <li><b>Teams register agents in advance;</b> on the day we release a sealed task (e.g. a held-out MLE-bench variant).</li>
+          <li><b>Agents run on sponsored compute</b> for a fixed budget while the audience watches live dashboards.</li>
+          <li><b>A jury</b> scores final result, experimental quality, and report faithfulness.</li>
+          <li><b>A local-compute runner-up track</b> keeps the format open to academic teams.</li>
+        </ul>
+      </div>
+
+      <!-- mock live dashboard -->
+      <div class="dash reveal d2" id="dash" aria-hidden="true">
+        <div class="dash-bar">
+          <span class="lights"><i></i><i></i><i></i></span>
+          <span>demo://leaderboard</span>
+          <span class="live-pill"><span class="dot"></span> LIVE</span>
+        </div>
+        <div class="dash-body">
+          <div class="dash-clock">
+            <span class="lab">wall-clock remaining</span>
+            <span class="val" id="clock">59:12</span>
+          </div>
+          <div class="agent-row" id="agents">
+            <div class="agent" data-base="68">
+              <div class="ah"><span class="name">agent · sakana-run</span><span class="stage-tag">experiment</span></div>
+              <div class="bar"><i></i></div>
+              <div class="meta"><span>step 41 / ~60</span><span class="sc">score 0.71</span></div>
+            </div>
+            <div class="agent" data-base="52">
+              <div class="ah"><span class="name">agent · openhands</span><span class="stage-tag">debug</span></div>
+              <div class="bar"><i></i></div>
+              <div class="meta"><span>step 33 / ~60</span><span class="sc">score 0.64</span></div>
+            </div>
+            <div class="agent" data-base="80">
+              <div class="ah"><span class="name">agent · local-7B (runner-up)</span><span class="stage-tag">write-up</span></div>
+              <div class="bar"><i></i></div>
+              <div class="meta"><span>step 49 / ~60</span><span class="sc">score 0.58</span></div>
+            </div>
+          </div>
+          <div class="dash-feed" id="feed"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CFP ===================== -->
+<section id="cfp">
+  <div class="wrap">
+    <div class="eyebrow reveal">02 · call for papers</div>
+    <h2 class="section-title reveal d1">Two tracks — Human &amp; AI</h2>
+    <p class="section-lead reveal d1">A first: submissions split by <b class="cy">who did the research</b> — conventional
+      human-authored work, and manuscripts substantially produced by autonomous agents.</p>
+
+    <div class="tracks">
+      <article class="track reveal d1">
+        <div class="tk-tag">Track H · human-authored</div>
+        <h3>Human track</h3>
+        <div class="lim">up to 9 pages · double-blind · archival-optional</div>
+        <ul>
+          <li>Conventional research by human authors across the four pillars — methods, analyses, benchmarks, position papers.</li>
+          <li>Standard tools allowed; AI assistance disclosed per NeurIPS policy.</li>
+          <li>Anonymized, double-blind; each paper receives ≥&nbsp;3 reviews.</li>
+        </ul>
+      </article>
+      <article class="track reveal d2">
+        <div class="tk-tag">Track AI · agent-authored</div>
+        <h3>AI track</h3>
+        <div class="lim">up to 9 pages · single-blind · disclosure required</div>
+        <ul>
+          <li>Manuscripts where an autonomous agent did the substantial research and writing — the workshop's signature submission type.</li>
+          <li>A required <b style="color:var(--ink-bright)">provenance statement</b>: which system, what humans did, and a reproducible trajectory / log.</li>
+          <li>Also welcomes system reports &amp; demos of research agents — a natural on-ramp to the live demo.</li>
+          <li>Single-blind; explicitly open to closed-source industry systems.</li>
+        </ul>
+      </article>
+    </div>
+
+    <details class="cfp-rules reveal">
+      <summary>Reviewing &amp; policy details</summary>
+      <ul>
+        <li>Managed exclusively in <a href="#" data-openreview>OpenReview</a> (link added on acceptance).</li>
+        <li>No concurrent / prior submission at NeurIPS or other ML/AI venues; authors attest to this.</li>
+        <li>Each paper gets ≥&nbsp;3 reviews; no reviewer handles more than three papers.</li>
+        <li>Reviewers may not use LLMs, per the NeurIPS 2026 reviewer policy, and attest at onboarding.</li>
+        <li>Double-blind (Human track) / single-blind (AI track); COIs enforced via OpenReview.</li>
+        <li>AI-track papers must include a provenance statement and a reproducible agent trajectory.</li>
+        <li>Organizers and their COI authors do not submit and give no talks.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ===================== DATES ===================== -->
+<section id="dates">
+  <div class="wrap">
+    <div class="eyebrow reveal">03 · important dates</div>
+    <h2 class="section-title reveal d1">Timeline to December</h2>
+    <p class="section-lead reveal d1">All paper deadlines are <b class="cy">Anywhere on Earth (AoE)</b>. Dates marked
+      tentative are finalized once the workshop is accepted.</p>
+
+    <table class="dates-table reveal">
+      <tbody>
+        <tr><td class="milestone">Call for papers released</td><td class="date">Jul 2026</td></tr>
+        <tr class="key"><td class="milestone">Paper submission deadline (both tracks)</td><td class="date">Aug 29, 2026 (AoE)</td></tr>
+        <tr><td class="milestone">Reviews returned</td><td class="date">Sep 18, 2026</td></tr>
+        <tr><td class="milestone">Author notifications</td><td class="date">Sep 26, 2026</td></tr>
+        <tr><td class="milestone">Camera-ready / poster files due</td><td class="date">Nov 15, 2026</td></tr>
+        <tr class="key"><td class="milestone">Workshop day</td><td class="date">Dec 2026</td></tr>
+      </tbody>
+    </table>
+    <p class="aoe-note reveal">// tentative pending acceptance · all paper deadlines are AoE</p>
+  </div>
+</section>
+
+<!-- ===================== SCHEDULE ===================== -->
+<section id="schedule">
+  <div class="wrap">
+    <div class="eyebrow reveal">04 · day-of program</div>
+    <h2 class="section-title reveal d1">One day, ≈ 8 hours</h2>
+    <p class="section-lead reveal d1">One day, ≈ 8 hours, with <b class="cy">≥ 30% unstructured</b> for posters, panel,
+      and demo. The anchor moments:</p>
+    <p class="sched-note reveal">// provisional — times finalized closer to the event</p>
+
+    <div class="sched reveal">
+      <div class="sched-row"><span class="time">AM</span><span class="what">Four invited talks — one per pillar <small>30 + 10 min each, in person</small></span><span class="kind">invited</span></div>
+      <div class="sched-row"><span class="time">AM/PM</span><span class="what">Two contributed-paper sessions &amp; two poster sessions</span><span class="kind">contributed</span></div>
+      <div class="sched-row demo"><span class="time">15:25</span><span class="what">Live AutoResearch demo — sealed, previously-unseen task <small>60 min</small></span><span class="kind">live</span></div>
+      <div class="sched-row"><span class="time">16:25</span><span class="what">Panel &amp; town hall — &ldquo;AutoResearch in 2030?&rdquo;</span><span class="kind">panel</span></div>
+      <div class="sched-row"><span class="time">17:15</span><span class="what">Closing &amp; awards</span><span class="kind">close</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SPEAKERS ===================== -->
+<section id="speakers">
+  <div class="wrap">
+    <div class="eyebrow reveal">05 · invited speakers</div>
+    <h2 class="section-title reveal d1">Across the four pillars</h2>
+    <p class="section-lead reveal d1">A priority invitee for each of the four pillars, plus additional voices from a
+      deeper candidate pool. All speakers attend in person and commit that their AutoResearch talk is substantively
+      distinct from any other 2026 workshop talk.</p>
+
+    <div class="people">
+      <div class="person reveal d1">
+        <div class="avatar">CL</div>
+        <div class="pname">Chris Lu</div>
+        <div class="paff">Sakana AI</div>
+        <div class="prole">P1 · The AI Scientist v1/v2</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+      <div class="person reveal d2">
+        <div class="avatar v1">YT</div>
+        <div class="pname">Yuandong Tian</div>
+        <div class="paff">Meta FAIR</div>
+        <div class="prole">P2 · search / planning agents</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+      <div class="person reveal d3">
+        <div class="avatar v2">RS</div>
+        <div class="pname">Richard Socher</div>
+        <div class="paff">you.com</div>
+        <div class="prole">P3 · search-augmented agents</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+      <div class="person reveal d4">
+        <div class="avatar v3">BB</div>
+        <div class="pname">Beth Barnes</div>
+        <div class="paff">METR</div>
+        <div class="prole">P4 · RE-Bench &amp; frontier evals</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+      <div class="person reveal d1">
+        <div class="avatar v1">DY</div>
+        <div class="pname">Diyi Yang</div>
+        <div class="paff">Stanford</div>
+        <div class="prole">P3 · human–AI co-writing &amp; review</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+      <div class="person reveal d2">
+        <div class="avatar v2">HS</div>
+        <div class="pname">Huan Sun</div>
+        <div class="paff">Ohio State</div>
+        <div class="prole">P4 · ScienceAgentBench</div>
+        <span class="tentative-flag">invited · tentative</span>
+      </div>
+    </div>
+    <p class="note-inline reveal"><b>// tentative.</b> Invitations are sent on acceptance; a panel of additional voices joins on the day.</p>
+  </div>
+</section>
+
+<!-- ===================== SPONSORS / DEI ===================== -->
+<section id="sponsors">
+  <div class="wrap">
+    <div class="eyebrow reveal">06 · partners &amp; inclusion</div>
+    <div class="spon-grid">
+      <div class="reveal d1">
+        <h2 class="section-title">Sponsors</h2>
+        <p class="section-lead">The live demo runs on sponsored compute, and travel grants widen who can attend.
+          Compute and travel-grant partners are listed here as they are confirmed.</p>
+        <div class="logo-row">
+          <div class="logo-slot">Cloud compute partner<br />— TBA —</div>
+          <div class="logo-slot">Travel-grant partner<br />— TBA —</div>
+          <div class="logo-slot">Become a sponsor<br /><a href="#contact">contact us ↗</a></div>
+        </div>
+      </div>
+      <aside class="dei-card reveal d2">
+        <h4>Diversity &amp; inclusion</h4>
+        <ul>
+          <li>≥ 40% women / non-binary speakers; CFP partners incl. WiML, LatinX / Black / Queer in AI.</li>
+          <li>Travel grants + a local-compute demo track so academic teams can compete.</li>
+          <li>CC-BY recordings of all talks.</li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="reveal">
+        <h2>AutoResearch<span class="cy">.</span></h2>
+        <p class="dim">Toward end-to-end automation of machine-learning research. A proposed one-day workshop at
+          NeurIPS 2026 — the inaugural edition. Location tentative — Atlanta preferred (Sydney, Paris backups).
+          Organizing committee announced on acceptance.</p>
+        <p class="mono" style="font-size:13px;color:var(--ink-dim);margin-top:18px">
+          contact: <a href="mailto:autoresearch-workshop@googlegroups.com">autoresearch-workshop@googlegroups.com</a>
+        </p>
+      </div>
+      <div class="reveal d1">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#demo">Live demo</a></li>
+          <li><a href="#cfp">Call for papers</a></li>
+          <li><a href="#dates">Important dates</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+        </ul>
+      </div>
+      <div class="reveal d2">
+        <h5>Elsewhere</h5>
+        <ul>
+          <li><a href="#" data-openreview>OpenReview portal ↗</a></li>
+          <li><a href="https://neurips.cc/Conferences/2026" target="_blank" rel="noopener">NeurIPS 2026 ↗</a></li>
+          <li><a href="#demo">Live demo track</a></li>
+          <li><a href="#sponsors">Sponsor us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 AutoResearch organizing committee · draft site</span>
+      <span class="mono">built for NeurIPS 2026 · all dates &amp; names tentative</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
