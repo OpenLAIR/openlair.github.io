@@ -254,6 +254,26 @@
   /* two-up figures */
   .twofig{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
   @media(max-width:760px){.twofig{grid-template-columns:1fr;}}
+  .analysis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;align-items:stretch;}
+  @media(max-width:920px){.analysis-grid{grid-template-columns:1fr;}}
+  .rqcard{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;gap:14px;
+  }
+  .rqcard figure{margin:0;}
+  .rqcard img{width:100%;height:auto;display:block;border-radius:6px;}
+  .rqcard h3{margin:0;font-size:17px;font-weight:600;color:var(--ink);}
+  .rqcard p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6;}
+  .rqstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rqstat{border:1px solid var(--line-soft);border-radius:10px;padding:12px;background:#f8fafc;}
+  .rqstat .v{font-family:"IBM Plex Serif",serif;font-size:24px;line-height:1;font-weight:600;color:var(--green);}
+  .rqstat .l{font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:7px;}
+  .mini-table{border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px;}
+  .mini-table table{width:100%;border-collapse:collapse;}
+  .mini-table th,.mini-table td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--line-soft);}
+  .mini-table tr:last-child th,.mini-table tr:last-child td{border-bottom:0;}
+  .mini-table th:first-child{text-align:left;color:var(--ink-soft);font-weight:600;}
+  .mini-table td.ok{background:var(--green-tint);color:var(--green-deep);font-weight:600;}
 
   /* bibtex */
   .bib{
@@ -500,18 +520,46 @@
 <section id="analysis" class="alt-bg">
   <div class="wrap">
     <div class="sec-tag">Analysis</div>
-    <h2>Skills transfer; the self-built verifier holds up</h2>
-    <p class="lead">The same skill files produced by Opus 4.6 transfer as-is to weaker models, and the virtual verifier — which never sees ground-truth tests — peaks at a few refinement rounds.</p>
+    <h2>Skills transfer; the self-built verifier aligns; each component matters</h2>
+    <p class="lead">The same skill files produced by Opus 4.6 transfer as-is to weaker models. The virtual verifier covers most hidden test intents without seeing ground-truth tests, and the refinement loop peaks at a few iterations.</p>
 
-    <div class="twofig" style="margin-top:28px;">
-      <figure class="figcard">
-        <img src="assets/transfer_bar.png" alt="Bar chart of average reward when transferring Opus 4.6-generated skills to four weaker models.">
-        <figcaption><b>RQ1 — Transferability.</b> OpenSkill-generated skills yield the highest reward across four weaker target models (+5.5 to +14.8 points over no-skill), with no model-specific adaptation.</figcaption>
-      </figure>
-      <figure class="figcard">
-        <img src="assets/ablation_panels.png" alt="Two ablation panels on SocialMaze: reward vs refinement iterations, and component contributions.">
-        <figcaption><b>RQ3 — Ablations (SocialMaze).</b> (a) Reward peaks at a few refinement rounds, then overfits. (b) Open-world query and the virtual verifier each help over a parametric-only baseline and are largely complementary.</figcaption>
-      </figure>
+    <div class="analysis-grid">
+      <article class="rqcard">
+        <figure>
+          <img src="assets/transfer_bar.png" alt="Bar chart of average reward when transferring Opus 4.6-generated skills to four weaker models.">
+        </figure>
+        <h3>RQ1 — Transferability</h3>
+        <p>OpenSkill-generated skills yield the highest reward across four weaker target models, improving by +5.5 to +14.8 points over no-skill with no model-specific adaptation.</p>
+      </article>
+
+      <article class="rqcard">
+        <h3>RQ2 — Virtual Verifier Quality</h3>
+        <p>Without access to ground-truth tests, the virtual verifier still provides a meaningful proxy signal for skill refinement.</p>
+        <div class="mini-table" aria-label="Proxy result and ground-truth reward alignment">
+          <table>
+            <tbody>
+              <tr><th></th><th>GT reward &gt; 0</th><th>GT reward = 0</th></tr>
+              <tr><th>Proxy pass</th><td class="ok">39.29%</td><td>29.76%</td></tr>
+              <tr><th>Proxy fail</th><td>9.52%</td><td class="ok">21.43%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="rqstats">
+          <div class="rqstat"><div class="v">80.5%</div><div class="l">recall against GT-positive outcomes</div></div>
+          <div class="rqstat"><div class="v">60.7%</div><div class="l">overall proxy / GT agreement</div></div>
+          <div class="rqstat"><div class="v">88.9%</div><div class="l">GT test intents covered</div></div>
+          <div class="rqstat"><div class="v">3.4×</div><div class="l">median test count vs. GT suite</div></div>
+        </div>
+        <p>The remaining gaps mainly come from benchmark-specific anti-cheat checks and deeper semantic-quality tests that require domain expertise beyond the task specification.</p>
+      </article>
+
+      <article class="rqcard">
+        <figure>
+          <img src="assets/ablation_panels.png" alt="Two ablation panels on SocialMaze: reward vs refinement iterations, and component contributions.">
+        </figure>
+        <h3>RQ3 — Component Contribution</h3>
+        <p>On SocialMaze, reward peaks at three refinement rounds. Open-world query and the virtual verifier each improve over a parametric-only baseline and are largely complementary.</p>
+      </article>
     </div>
   </div>
 </section>
