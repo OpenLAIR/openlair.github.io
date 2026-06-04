@@ -260,21 +260,21 @@
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     padding:24px;display:flex;flex-direction:column;gap:14px;
   }
-  .rqcard.feature{grid-column:1/-1;display:grid;grid-template-columns:minmax(240px,.75fr) minmax(0,1.25fr);gap:24px;align-items:start;}
-  @media(max-width:860px){.rqcard.feature{grid-template-columns:1fr;}}
+  .rqcard.feature{grid-column:1/-1;display:grid;grid-template-columns:1.05fr 1.25fr 1fr;gap:24px;align-items:stretch;}
+  @media(max-width:980px){.rqcard.feature{grid-template-columns:1fr 1fr;}.rqcard.feature .rqstats{grid-column:1/-1;}}
+  @media(max-width:680px){.rqcard.feature{grid-template-columns:1fr;}.rqcard.feature .rqstats{grid-column:auto;}}
   .rqcard .copy{display:flex;flex-direction:column;gap:12px;}
   .rqcard figure{margin:0;}
   .rqcard img{width:100%;height:auto;display:block;border-radius:6px;}
   .rqcard:not(.feature) img{max-height:230px;object-fit:contain;}
   .rqcard h3{margin:0;font-size:17px;font-weight:600;color:var(--ink);}
   .rqcard p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.6;}
-  .rqstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
-  @media(max-width:640px){.rqstats{grid-template-columns:1fr 1fr;}}
-  .rqstat{border:1px solid var(--line-soft);border-radius:10px;padding:12px;background:#f8fafc;}
+  .rqstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rqstat{border:1px solid var(--line-soft);border-radius:10px;padding:12px;background:#f8fafc;min-height:82px;}
   .rqstat .v{font-family:"IBM Plex Serif",serif;font-size:24px;line-height:1;font-weight:600;color:var(--green);}
   .rqstat .l{font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:7px;}
   .mini-table{border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px;}
-  .rqcard.feature .rqstats{grid-column:1/-1;}
+  .rqcard.feature .mini-table{align-self:start;}
   .mini-table table{width:100%;border-collapse:collapse;}
   .mini-table th,.mini-table td{padding:7px 8px;text-align:center;border-bottom:1px solid var(--line-soft);}
   .mini-table tr:last-child th,.mini-table tr:last-child td{border-bottom:0;}
