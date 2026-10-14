@@ -23,7 +23,14 @@ body {
   box-shadow: 0 0 0 100vmax var(--night);
   clip-path: inset(0 -100vmax);
 }
+/* The glow is painted once, full-bleed, behind both the header and the hero, so no box edge shows where the
+   width-limited column ends. The header is transparent over it and sits above the hero's paint. */
 .site-header {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+  box-shadow: none;
+  clip-path: none;
   border-bottom-color: var(--night-rule);
   color: var(--on-night);
 }
@@ -32,9 +39,19 @@ body {
   isolation: isolate;
   color: var(--on-night);
   padding-bottom: 44px;
-  background-image:
-    radial-gradient(ellipse 46% 52% at 12% 22%, rgba(76, 112, 255, 0.34), transparent 72%),
-    radial-gradient(ellipse 40% 46% at 88% 70%, rgba(64, 196, 222, 0.18), transparent 72%);
+  /* Let the glow layer reach up behind the header (at most 200px tall). */
+  clip-path: inset(-200px -100vmax 0);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -200px calc(50% - 50vw) 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 34vw 420px at 22vw 260px, rgba(76, 112, 255, 0.34), transparent 72%),
+    radial-gradient(ellipse 30vw 380px at 82vw 72%, rgba(64, 196, 222, 0.18), transparent 72%),
+    var(--night);
 }
 /* A hairline of light where the night band meets the paper. */
 .hero::after {
