@@ -116,23 +116,40 @@
     playButton.setAttribute("aria-pressed", "false");
   }
 
-  playButton.addEventListener("click", () => {
-    if (playing || !enabled()) return stopPlayback();
+  // Playback runs by default: it starts when the explorer scrolls into view and loops through the four
+  // measured depths, holding the deepest one before starting over. Choosing a depth or pressing Stop hands
+  // control to the reader for the rest of the visit.
+  let userStopped = false;
+  let explorerVisible = false;
+  function startPlayback() {
+    if (playing || !enabled() || document.hidden) return;
     playing = true;
     playButton.setAttribute("aria-pressed", "true");
     playButton.querySelector(".play-label").textContent = "Stop playback";
     setDepth(0);
-    let next = 1;
+    // Each depth shows for 1.25 s; the deepest one holds for 2.6 s before the loop restarts at depth 1.
     function advance() {
-      if (!playing || !enabled() || document.hidden || next === depths.length)
-        return stopPlayback();
-      setDepth(next++);
-      playbackTimer = setTimeout(advance, 1250);
+      if (!playing || !enabled() || document.hidden) return stopPlayback();
+      const next = (selectedDepth + 1) % depths.length;
+      setDepth(next);
+      playbackTimer = setTimeout(advance, next === depths.length - 1 ? 2600 : 1250);
     }
     playbackTimer = setTimeout(advance, 1250);
+  }
+  function resumeAutoplay() {
+    if (!userStopped && explorerVisible) startPlayback();
+  }
+  playButton.addEventListener("click", () => {
+    if (playing || !enabled()) {
+      userStopped = true;
+      return stopPlayback();
+    }
+    userStopped = false;
+    startPlayback();
   });
   radios.forEach((radio, index) =>
     radio.addEventListener("change", () => {
+      userStopped = true;
       stopPlayback();
       setDepth(index);
     }),
@@ -151,7 +168,7 @@
         : "Resume motion";
     playButton.disabled = !on;
     playButton.title = on
-      ? "Play the four measured depth results once"
+      ? "Play the four measured depth results in a loop"
       : "Choose a depth manually while motion is paused";
     if (!on || document.hidden) {
       stopPlayback();
@@ -165,6 +182,7 @@
         .querySelectorAll(".reveal-pending")
         .forEach((el) => el.classList.remove("reveal-pending"));
     updateHeroActivity();
+    if (on && !document.hidden) resumeAutoplay();
   }
   motionToggle.addEventListener("click", () => {
     userPaused = !userPaused;
@@ -194,9 +212,13 @@
           heroVisible = entry.isIntersecting;
           updateHeroActivity();
         }
-        if (entry.target === explorer && !entry.isIntersecting) {
-          stopPlayback();
-          finishChart();
+        if (entry.target === explorer) {
+          explorerVisible = entry.isIntersecting;
+          if (explorerVisible) resumeAutoplay();
+          else {
+            stopPlayback();
+            finishChart();
+          }
         }
       }),
     );
