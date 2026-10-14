@@ -28,11 +28,11 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css?v=9316405ece0e" />
     <link rel="stylesheet" href="motion.css?v=f934d05f356c" />
-    <link rel="stylesheet" href="decision-demo.css?v=bd7e1990cfab" />
+    <link rel="stylesheet" href="decision-demo.css?v=2bd3016232fa" />
     <script src="release-config.js?v=0d9f5cd61477" defer></script>
     <script src="app.js?v=5ce27de0b036" defer></script>
     <script src="decision-cases.js?v=9adacadff0a0" defer></script>
-    <script src="decision-demo.js?v=b9d2978e1123" defer></script>
+    <script src="decision-demo.js?v=5214b7ff22e2" defer></script>
     <script src="motion.js?v=7a7ca94c5282" defer></script>
   </head>
   <body>
@@ -61,7 +61,7 @@
             id="hero-title"
             aria-label="Lev: Thinking Fast and Deep with Looped Decision Models"
           >
-            <span class="sr-only">Lev: </span>Thinking fast<br />and
+            <span class="sr-only">Lev: </span>Thinking fast <br />and
             <em>deep.</em>
           </h1>
           <p class="title-tail">with looped decision models</p>
@@ -81,16 +81,20 @@
             <div class="case-input" id="case-input-easy">
               <p class="case-rule"><strong>Context</strong> Cameron picked Robin up from the airport.</p>
               <ul class="case-options" aria-label="Easy case options"><li data-answer="0"><span class="option-key">A</span><div><strong>got Robin seasick</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="1" class="is-selected"><span class="option-key">B</span><div><strong>got into Cameron&#x27;s automobile</strong></div><span class="answer-mark" aria-hidden="true">✓</span></li><li data-answer="2"><span class="option-key">C</span><div><strong>got lost looking for Cameron</strong></div><span class="answer-mark" aria-hidden="true"></span></li></ul>
-              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/social_i_qa">Social IQa</a> · validation #1407<br />In LevBench development · CC-BY-4.0</p>
+              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/social_i_qa">Social IQa</a> · validation #1407<span class="case-source-split"> · LevBench development ·</span> CC-BY-4.0</p>
             </div>
             <div class="case-input" id="case-input-hard" hidden>
               <p class="case-rule"><strong>Context</strong> in a bag of small balls 1 / 4 are green , 1 / 8 are blue , 1 / 12 are yellow and the remaining 26 white . how many balls are blue ?</p>
               <ul class="case-options case-options--numeric" aria-label="Hard case options"><li data-answer="0"><span class="option-key">A</span><div><strong>6</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="1"><span class="option-key">B</span><div><strong>5</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="2"><span class="option-key">C</span><div><strong>4</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="3"><span class="option-key">D</span><div><strong>3</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="4"><span class="option-key">E</span><div><strong>8</strong></div><span class="answer-mark" aria-hidden="true"></span></li></ul>
-              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/math_qa">MathQA</a> · validation #883<br />In LevBench development · Apache-2.0</p>
+              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/math_qa">MathQA</a> · validation #883<span class="case-source-split"> · LevBench development ·</span> Apache-2.0</p>
             </div>
-            <p class="case-answer" id="case-answer">The model selects B, matching the dataset label: got into Cameron&#x27;s automobile. The stopper clears the threshold at loop 1.</p>
+            <p class="case-answer" id="case-answer">Correct: B — got into Cameron’s automobile. The stopper clears τ after one loop.</p>
             <p class="case-playback" id="case-playback">Autoplay · choose a case to keep it selected.</p>
-            <details class="case-provenance"><summary>Source &amp; recorded trace</summary><p>Lev-2.6B · S31, seed 0 · E06. Saved fp32 outputs, with the experiment’s per-loop temperature scaling. The stopper is reconstructed offline using the original cross-fitting procedure; neither example enters its own stopper fit.</p><p>Social IQa: Sap et al. (2019), <a href="assets/licenses/Social-IQa-CC-BY-4.0.txt">CC BY 4.0</a>. MathQA: Amini et al. (2019); AQuA-RAT, Google/DeepMind (2017), <a href="assets/licenses/Apache-2.0.txt">Apache 2.0</a>. MathQA comes from Lev’s formula-verified subset, formatted as a typed request. Original context and options are retained; headings and answer explanations are editorial.</p><p><a href="assets/decision-cases.json">View both records, logits, probabilities and stopper parameters ↗</a></p></details>
+            <a class="case-provenance" id="case-provenance-link" href="assets/decision-cases.json">Source &amp; recorded trace ↗</a>
+            <dialog class="case-source-dialog" id="case-source-dialog" aria-labelledby="case-source-title">
+              <div class="source-dialog-heading"><h2 id="case-source-title">About these examples</h2><button type="button" id="case-source-close" autofocus>Close <span aria-hidden="true">×</span></button></div>
+              <p>Lev-2.6B · S31, seed 0 · E06. Saved fp32 outputs, with the experiment’s per-loop temperature scaling. The stopper is reconstructed offline using the original cross-fitting procedure; neither example enters its own stopper fit.</p><p>Social IQa: Sap et al. (2019), <a href="assets/licenses/Social-IQa-CC-BY-4.0.txt">CC BY 4.0</a>. MathQA: Amini et al. (2019); AQuA-RAT, Google/DeepMind (2017), <a href="assets/licenses/Apache-2.0.txt">Apache 2.0</a>. MathQA comes from Lev’s formula-verified subset, formatted as a typed request. Original context and options are retained; headings and answer explanations are editorial.</p><p><a href="assets/decision-cases.json">View both records, logits, probabilities and stopper parameters ↗</a></p><p>These are two selected successful examples, not an accuracy estimate. Easy/Hard describe the observed trajectories, not dataset difficulty labels. The fitted threshold of 92.25% targets 98% aggregate agreement; the final loop returns the top option even when uncertainty remains.</p>
+            </dialog>
           </section>
         </div>
         <figure class="hero-diagram decision-demo" data-option-count="3" data-scenario="easy" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
@@ -160,7 +164,7 @@
             <div class="demo-step-controls"><button type="button" id="demo-replay" disabled><span aria-hidden="true">↺</span> Replay</button><button type="button" id="demo-next" disabled>Next step <span aria-hidden="true">→</span></button></div>
             <button id="motion-toggle" type="button" aria-pressed="false" hidden><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button>
           </div>
-          <figcaption id="diagram-desc">Recorded Lev-2.6B outputs on two selected LevBench development examples. Stopper scores are reconstructed from the original E06 procedure; fitted τ = 92.25%, targeting 98% aggregate agreement. Easy/Hard describe these trajectories, not dataset difficulty labels. The final loop returns the top option even if uncertainty remains. <a href="assets/decision-cases.json">Trace &amp; provenance ↗</a></figcaption>
+          <figcaption id="diagram-desc">Recorded Lev-2.6B · LevBench development. Reconstructed stopper. <a class="case-provenance-trigger" href="assets/decision-cases.json">Source &amp; method ↗</a></figcaption>
           <p class="sr-only" id="demo-announcement" role="status" aria-live="polite"></p>
         </figure>
         <div class="authors">
