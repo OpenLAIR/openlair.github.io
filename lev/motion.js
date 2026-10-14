@@ -1,6 +1,6 @@
 "use strict";
 
-// The only numbers displayed are the measured endpoints. Animation is illustrative.
+// The depth explorer displays measured endpoints. The hero is an illustrative decision flow.
 (() => {
   const depths = [
     { accuracy: "63.2", cost: "25", x: 65, y: 171.28 },
@@ -14,10 +14,6 @@
   const diagram = document.querySelector(".hero-diagram");
   const motionToggle = document.querySelector("#motion-toggle");
   const motionLabel = motionToggle.querySelector(".motion-label");
-  const orbit = document.querySelector("#loop-motion-path");
-  const orbitLength = orbit.getTotalLength();
-  const particles = [...document.querySelectorAll(".loop-particles circle")];
-  const loopBadges = [...document.querySelectorAll(".loop-sequence b")];
   const explorer = document.querySelector(".depth-explorer");
   const radios = [...document.querySelectorAll('input[name="depth"]')];
   const playButton = document.querySelector("#play-depths");
@@ -38,10 +34,6 @@
   const fractions = distances.map((value) => value / distances.at(-1));
   let userPaused = false;
   let heroVisible = diagram.getBoundingClientRect().top < innerHeight;
-  let heroFrame = null;
-  let previousFrame = null;
-  let heroElapsed = 0;
-  let currentLoop = -1;
   let chartFrame = null;
   let chartPosition = 0;
   let selectedDepth = 0;
@@ -49,46 +41,11 @@
   let playing = false;
   const enabled = () => !reduced.matches && !userPaused;
 
-  function drawHero() {
-    const phase = (heroElapsed % 2200) / 2200;
-    particles.forEach((particle, i) => {
-      const offset = Math.max(0, i - 1) * 0.023;
-      const point = orbit.getPointAtLength(
-        ((phase - offset + 1) % 1) * orbitLength,
-      );
-      particle.setAttribute("transform", `translate(${point.x} ${point.y})`);
-    });
-    const loop = Math.floor(heroElapsed / 2200) % 4;
-    if (loop !== currentLoop) {
-      loopBadges.forEach((badge, i) =>
-        badge.classList.toggle("is-active", i === loop),
-      );
-      currentLoop = loop;
-    }
-  }
-
-  function animateHero(time) {
-    heroFrame = null;
-    if (!enabled() || !heroVisible || document.hidden) return;
-    if (previousFrame !== null)
-      heroElapsed += Math.min(time - previousFrame, 80);
-    previousFrame = time;
-    drawHero();
-    heroFrame = requestAnimationFrame(animateHero);
-  }
-
   function updateHeroActivity() {
     const running = enabled() && heroVisible && !document.hidden;
     diagram.classList.toggle("is-running", running);
     hero.classList.toggle("is-running", running);
-    if (running && heroFrame === null) {
-      previousFrame = null;
-      heroFrame = requestAnimationFrame(animateHero);
-    } else if (!running) {
-      cancelAnimationFrame(heroFrame);
-      heroFrame = null;
-      previousFrame = null;
-    }
+    window.LevDecisionDemo?.setRunning(running);
   }
 
   function drawChart(position) {
@@ -213,13 +170,16 @@
     userPaused = !userPaused;
     syncMotion();
   });
+  document.addEventListener("lev:pause-motion", () => {
+    userPaused = true;
+    syncMotion();
+  });
   reduced.addEventListener("change", syncMotion);
   document.addEventListener("visibilitychange", syncMotion);
   document.querySelector(".depth-controls").disabled = false;
   motionToggle.hidden = false;
   playButton.hidden = false;
   stopPlayback();
-  drawHero();
   setDepth(0, false);
   syncMotion();
 
