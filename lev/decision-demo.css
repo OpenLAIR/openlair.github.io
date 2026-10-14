@@ -55,7 +55,8 @@
 .loop-row[data-state="complete"] .return-route span { color: var(--blue); }
 .loop-row[data-state="exited"] .layer-stack > span { border-color: #87afa6; background: #e3efe9; }
 .loop-row[data-state="exited"] .gate-label { color: #156d61; font-weight: bold; }
-.loop-row[data-state="exited"] .return-route { visibility: hidden; }
+.loop-row[data-state="exited"] .return-route,
+.loop-row[data-state="skipped"] .return-route { visibility: hidden; }
 .demo-outcome { display: flex; align-items: center; gap: 10px; background: var(--wash); color: #334b86; border-radius: 4px; min-height: 44px; padding: 8px 11px; }
 .demo-outcome p { font-size: 11px; line-height: 1.5; }
 .outcome-symbol { font: 21px var(--serif); }
@@ -161,4 +162,15 @@
   .stopper-comparison { font-size: 11px; }
   .stopper-explainer { font-size: 9px; }
   .loop-gate::before { left: -10px; }
+}
+
+/* Two cases make the depth contrast explicit before playback starts. */
+.demo-scenarios button { display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 8px 10px; }
+.demo-scenarios button strong { font: 600 13px var(--sans); }
+.demo-scenarios button > span { font: 10px var(--mono); }
+.case-summary { font: 11px/1.5 var(--sans); color: var(--ink); min-height: 33px; margin: 0 0 9px; }
+@media (max-width: 400px) {
+  .demo-scenarios button { flex-direction: column; align-items: center; gap: 3px; }
+  .demo-scenarios button > span { font-size: 9px; }
+  .case-summary { font-size: 10px; min-height: 30px; }
 }

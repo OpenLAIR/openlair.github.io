@@ -8,9 +8,8 @@
   // The example threshold is illustrative; 98% in the paper is a fitting target,
   // not a universal per-question probability threshold.
   const examples = {
-    fast: { probabilities: [[88, 8, 4]], agreement: [.97] },
-    deeper: { probabilities: [[46, 37, 17], [43, 46, 11], [8, 86, 6]], agreement: [.61, .84, .97] },
-    full: { probabilities: [[44, 39, 17], [38, 45, 17], [42, 43, 15], [12, 78, 10]], agreement: [.56, .73, .81] },
+    easy: { label: "Easy", summary: "A clear preference. Select A after one loop; skip the remaining three.", probabilities: [[88, 8, 4]], agreement: [.97] },
+    hard: { label: "Hard", summary: "Close alternatives. Refine the decision across four loops before selecting B.", probabilities: [[44, 39, 17], [38, 45, 17], [42, 43, 15], [12, 78, 10]], agreement: [.56, .73, .81] },
   };
   const threshold = .95;
   const rows = [...diagram.querySelectorAll(".loop-row")];
@@ -18,7 +17,7 @@
   const status = diagram.querySelector("#demo-status");
   const announcement = diagram.querySelector("#demo-announcement");
   const durations = [900, 1100, 1400, 1600];
-  let scenario = "deeper";
+  let scenario = "easy";
   let loop = 0;
   let phase = 0; // decoder pass, readout, stopper prediction, decision
   let elapsed = 0;
@@ -69,28 +68,33 @@
       row.querySelector(".continue-branch").hidden = final;
     });
     buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.scenario === scenario)));
+    diagram.dataset.scenario = scenario;
+    diagram.querySelector("#demo-case-summary").textContent = data.summary;
     diagram.dataset.loop = String(loop + 1);
     diagram.dataset.phase = ["compute", "readout", "stopper", "decision"][phase];
     diagram.dataset.finished = String(atExit());
-    diagram.querySelector("#demo-loop-label").textContent = `Loop 0${loop + 1} / 04`;
+    diagram.querySelector("#demo-loop-label").textContent = `${data.label} · 0${loop + 1} / 04`;
     const values = data.probabilities[loop];
     const winner = "ABC"[values.indexOf(Math.max(...values))];
     status.textContent = phase === 0
-      ? `Loop ${loop + 1} · ${loop === 0 ? "Read the request" : "Reuse the hidden state"}. Run the same decoder.`
+      ? `${data.label} · Loop ${loop + 1} · ${loop === 0 ? "Read the request" : "Reuse the hidden state"}. Run the same decoder.`
       : phase === 1
-        ? `Loop ${loop + 1} · The shared head scores A, B and C. ${winner} leads; now check whether to stop.`
+        ? `${data.label} · Loop ${loop + 1} · The shared head scores A, B and C. ${winner} leads; now check whether to stop.`
         : phase === 2
-          ? `Loop ${loop + 1} · Stopper g${"₁₂₃"[loop]} predicts ${Math.round(data.agreement[loop] * 100)}% agreement with the deepest answer. Compare with τ = 95%.`
+          ? `${data.label} · Loop ${loop + 1} · Stopper g${"₁₂₃"[loop]} predicts ${Math.round(data.agreement[loop] * 100)}% agreement with the deepest answer. Compare with τ = 95%.`
         : atExit()
-          ? `Loop ${loop + 1} · Select ${winner}. ${loop === 3 ? "Maximum depth reached." : `${3 - loop} ${loop === 2 ? "loop" : "loops"} skipped: predicted agreement is high enough.`}`
-          : `Loop ${loop + 1} · Don't select yet. Predicted agreement is too low → loop ${loop + 2}.`;
+          ? `${data.label} · Loop ${loop + 1} · Select ${winner}. ${loop === 3 ? "Maximum depth reached." : `${3 - loop} ${loop === 2 ? "loop" : "loops"} skipped: predicted agreement is high enough.`}`
+          : `${data.label} · Loop ${loop + 1} · Don't select yet. Predicted agreement is too low → loop ${loop + 2}.`;
     diagram.querySelector(".outcome-symbol").textContent = atExit() ? "↗" : phase === 3 ? "↻" : "→";
     if (manual) announcement.textContent = status.textContent;
   }
 
-  function advance() {
+  function advance(cycleCases = false) {
     if (phase < 3) phase = loop === 3 && phase === 1 ? 3 : phase + 1;
-    else if (atExit()) { loop = 0; phase = 0; }
+    else if (atExit()) {
+      if (cycleCases) scenario = scenario === "easy" ? "hard" : "easy";
+      loop = 0; phase = 0;
+    }
     else { loop++; phase = 0; }
     elapsed = 0;
   }
@@ -100,7 +104,7 @@
     if (!running) return;
     if (previous !== null) elapsed += Math.min(time - previous, 100);
     previous = time;
-    if (elapsed >= (atExit() ? 3600 : durations[phase])) { advance(); render(); }
+    if (elapsed >= (atExit() ? 3600 : durations[phase])) { advance(true); render(); }
     frame = requestAnimationFrame(tick);
   }
 
@@ -129,6 +133,6 @@
     document.dispatchEvent(new Event("lev:pause-motion"));
     advance(); render(true);
   });
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { loop = 2; phase = 3; }
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { loop = 0; phase = 3; }
   render();
 })();
