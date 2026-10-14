@@ -16,7 +16,8 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const status = diagram.querySelector("#demo-status");
   const announcement = diagram.querySelector("#demo-announcement");
-  const durations = [900, 1100, 1400, 1600];
+  // Leave time to read each distribution and the stopper comparison.
+  const durations = [1200, 1500, 1900, 2100];
   let scenario = "easy";
   let loop = 0;
   let phase = 0; // decoder pass, readout, stopper prediction, decision
@@ -134,7 +135,7 @@
     if (!running || (atExit() && !autoTour)) return;
     if (previous !== null) elapsed += Math.min(time - previous, 100);
     previous = time;
-    if (elapsed >= (atExit() ? 3600 : durations[phase])) { advance(true); render(); }
+    if (elapsed >= (atExit() ? 5000 : durations[phase])) { advance(true); render(); }
     frame = requestAnimationFrame(tick);
   }
 
