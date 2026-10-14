@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f2" />
+    <title>Lev: Thinking Fast and Deep with Looped Decision Models</title>
+    <meta
+      name="description"
+      content="One checkpoint, multiple depth operating points. Lev is a System 1.5 decision model that scores options at every loop step, without generating reasoning tokens."
+    />
+    <meta
+      property="og:title"
+      content="Lev: Thinking Fast and Deep with Looped Decision Models"
+    />
+    <meta
+      property="og:description"
+      content="One checkpoint. Multiple depths. Decision models that think in loops."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://openlair.github.io/lev/" />
+    <meta
+      property="og:image"
+      content="https://openlair.github.io/lev/assets/social.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://openlair.github.io/lev/" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="motion.css" />
+    <script src="release-config.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="motion.js" defer></script>
+  </head>
+  <body>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="wordmark" href="#" aria-label="Lev home"
+        >L<span>EV</span
+        ><svg viewBox="0 0 28 28" aria-hidden="true">
+          <path d="M6 9a10 10 0 1 1-1 10M6 3v7h7" /></svg
+      ></a>
+      <nav aria-label="Main navigation">
+        <a href="#idea">The idea</a><a href="#results">Results</a
+        ><a href="#release">Resources <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="signal" aria-hidden="true"></span> System 1.5 decision
+            models
+          </p>
+          <h1
+            id="hero-title"
+            aria-label="Lev: Thinking Fast and Deep with Looped Decision Models"
+          >
+            <span class="sr-only">Lev: </span>Thinking fast<br />and
+            <em>deep.</em>
+          </h1>
+          <p class="title-tail">with looped decision models</p>
+          <p class="hero-summary">
+            One checkpoint, multiple depth operating points.<br
+              class="desktop-break"
+            />
+            More computation through loops in hidden space.
+          </p>
+        </div>
+        <figure class="hero-diagram" aria-labelledby="diagram-title">
+          <svg
+            viewBox="0 0 470 360"
+            role="img"
+            aria-labelledby="diagram-title diagram-desc"
+          >
+            <title id="diagram-title">Think in loops.</title>
+            <desc id="diagram-desc">
+              The same decoder stack runs repeatedly. A shared head reads one
+              probability per option after each step. No reasoning text is
+              generated. The animated loop is an illustration, not live
+              inference.
+            </desc>
+            <defs>
+              <marker
+                id="arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="4"
+                orient="auto"
+              >
+                <path
+                  d="m1 1 5 3-5 3"
+                  fill="none"
+                  stroke="#254cce"
+                  stroke-width="1.3"
+                />
+              </marker>
+            </defs>
+            <path
+              class="orbit orbit-outer"
+              d="M350 187c37-62-29-123-114-123S85 107 85 182s67 123 151 123 141-34 139-88"
+            />
+            <path
+              class="orbit"
+              d="M331 168c3-52-33-82-95-82s-105 36-105 96 43 100 105 100 103-39 102-79"
+              marker-end="url(#arrow)"
+            />
+            <path
+              id="loop-motion-path"
+              d="M331 168c3-52-33-82-95-82s-105 36-105 96 43 100 105 100 103-39 102-79Q338 184 331 168Z"
+              fill="none"
+              stroke="none"
+            />
+            <path
+              class="diagram-arrow"
+              d="M30 182h118M324 182h113"
+              marker-end="url(#arrow)"
+            />
+            <rect
+              class="decoder"
+              x="147"
+              y="129"
+              width="177"
+              height="104"
+              rx="5"
+            />
+            <text class="diagram-small" x="235" y="154" text-anchor="middle">
+              SAME WEIGHTS
+            </text>
+            <text class="diagram-formula" x="235" y="199" text-anchor="middle">
+              F
+              <tspan dy="8" font-size="21">θ</tspan>
+            </text>
+            <text class="diagram-caption" x="34" y="209" text-anchor="middle">
+              input
+            </text>
+            <text class="diagram-caption" x="417" y="209" text-anchor="middle">
+              readout
+            </text>
+            <circle cx="236" cy="65" r="6" fill="#254cce" />
+            <circle cx="85" cy="182" r="6" fill="#7f9aef" />
+            <circle cx="235" cy="305" r="6" fill="#7f9aef" />
+            <circle cx="366" cy="232" r="6" fill="#c3d266" />
+            <g class="loop-particles" aria-hidden="true">
+              <circle r="10" class="particle-glow" />
+              <circle r="4.5" />
+              <circle r="3" />
+              <circle r="2" />
+            </g>
+            <text class="diagram-top" x="235" y="30" text-anchor="middle">
+              DEEPER COMPUTATION. SHARED PARAMETERS.
+            </text>
+            <text class="diagram-bottom" x="235" y="345" text-anchor="middle">
+              Read an answer after every loop.
+            </text>
+          </svg>
+          <figcaption class="motion-controls">
+            <span class="loop-sequence" aria-hidden="true"
+              ><span>Loop</span><b class="is-active">01</b><b>02</b><b>03</b
+              ><b>04</b></span
+            >
+            <button
+              id="motion-toggle"
+              type="button"
+              aria-pressed="false"
+              hidden
+            >
+              <span class="motion-icon" aria-hidden="true"></span
+              ><span class="motion-label">Pause motion</span>
+            </button>
+          </figcaption>
+        </figure>
+        <div class="authors">
+          <p>
+            <span>Dingjie Song<sup>1,*</sup></span
+            ><span>Zhiling Yan<sup>1,*</sup></span
+            ><span>Yuxuan Zhang<sup>2,3</sup></span
+            ><span>Lichao Sun<sup>1,†</sup></span>
+          </p>
+          <p class="affiliations">
+            <span><sup>1</sup> Lehigh University</span
+            ><span><sup>2</sup> University of British Columbia</span
+            ><span><sup>3</sup> Vector Institute</span>
+          </p>
+          <p class="contributions">
+            * Equal contribution <span>† Corresponding author</span>
+          </p>
+        </div>
+        <nav class="resource-rail" aria-label="Research resources">
+          <a href="#paper" data-resource="paper"
+            ><span>Paper <span aria-hidden="true">↗</span></span
+            ><small>Forthcoming</small></a
+          >
+          <a href="https://github.com/OpenLAIR/lev" data-resource="code"
+            ><span>Code <span aria-hidden="true">↗</span></span
+            ><small>Private</small></a
+          >
+          <a
+            href="https://huggingface.co/collections/songdj/lev-thinking-fast-and-deep-with-looped-decision-models-6acefb135880c9d373cf42ba"
+            data-resource="models"
+            ><span>Models <span aria-hidden="true">↗</span></span
+            ><small>Private</small></a
+          >
+          <a
+            href="https://huggingface.co/collections/songdj/lev-thinking-fast-and-deep-with-looped-decision-models-6acefb135880c9d373cf42ba"
+            data-resource="data"
+            ><span>Data <span aria-hidden="true">↗</span></span
+            ><small>Planned</small></a
+          >
+          <a href="#release" data-resource="demo"
+            ><span>Demo <span aria-hidden="true">↗</span></span
+            ><small>Upcoming</small></a
+          >
+        </nav>
+      </section>
+
+      <section id="idea" class="section wrap" aria-labelledby="idea-title">
+        <div class="section-label">
+          <span>01 / The idea</span><span>Depth is a choice.</span>
+        </div>
+        <div class="idea-grid">
+          <h2 id="idea-title">
+            A fast answer.<br />A deeper answer.<br /><em>The same model.</em>
+          </h2>
+          <div class="prose">
+            <p class="lead">
+              <strong>TL;DR</strong> Lev turns a natively looped language model
+              into a decision model that can answer at several depths from one
+              checkpoint.
+            </p>
+            <p>
+              A shared pointer head scores the options after every loop step.
+              Training all steps together makes each readout useful. Choose a
+              fixed depth to match your compute budget, or let an
+              agreement-based stopper choose per question using unlabelled
+              requests.
+            </p>
+            <p>
+              Its output is a probability for each option. Extra computation
+              happens in hidden states, without decoding a chain of reasoning.
+            </p>
+          </div>
+        </div>
+
+        <div class="depth-explorer" aria-labelledby="explorer-title">
+          <div class="explorer-copy">
+            <p class="eyebrow">Explore the measured depth curve</p>
+            <h3 id="explorer-title">
+              Same 2.6B weights.<br />Four operating points.
+            </h3>
+            <p>
+              Choose a depth to see the reported JevBench result for Lev-2.6B.
+            </p>
+            <div class="depth-toolbar">
+              <fieldset class="depth-controls" disabled>
+                <legend>Loop depth</legend>
+                <label
+                  ><input type="radio" name="depth" value="1" checked /><span
+                    >1</span
+                  ></label
+                >
+                <label
+                  ><input type="radio" name="depth" value="2" /><span
+                    >2</span
+                  ></label
+                >
+                <label
+                  ><input type="radio" name="depth" value="3" /><span
+                    >3</span
+                  ></label
+                >
+                <label
+                  ><input type="radio" name="depth" value="4" /><span
+                    >4</span
+                  ></label
+                >
+              </fieldset>
+              <button id="play-depths" type="button" hidden>
+                <span class="play-label">Play depths</span
+                ><span aria-hidden="true">↗</span>
+              </button>
+            </div>
+            <div class="depth-readout" aria-live="polite" aria-atomic="true">
+              <p>
+                <strong id="accuracy">63.2<span>%</span></strong
+                ><span>JevBench accuracy</span>
+              </p>
+              <p>
+                <strong id="compute">25<span>%</span></strong
+                ><span>of the four-loop cost</span>
+              </p>
+            </div>
+            <p class="explorer-note">
+              Reported measurements, not live inference.<br />231 public items ·
+              accuracy measured in fp32.
+            </p>
+          </div>
+          <div class="chart-area">
+            <svg
+              class="depth-chart"
+              viewBox="0 0 510 310"
+              role="img"
+              aria-labelledby="curve-title curve-desc"
+            >
+              <title id="curve-title">
+                Lev-2.6B JevBench accuracy by loop depth
+              </title>
+              <desc id="curve-desc">
+                Depth one: 63.2 percent. Depth two: 71.0 percent. Depth three:
+                75.3 percent. Depth four: 76.2 percent. Accuracy increases on
+                the same weights.
+              </desc>
+              <g class="chart-grid">
+                <path
+                  d="M65 250H470M65 202H470M65 154H470M65 106H470M65 58H470"
+                />
+              </g>
+              <g class="chart-axis">
+                <text x="45" y="255">55</text>
+                <text x="45" y="207">60</text>
+                <text x="45" y="159">65</text>
+                <text x="45" y="111">70</text>
+                <text x="45" y="63">75</text>
+                <text x="65" y="288">1</text>
+                <text x="200" y="288">2</text>
+                <text x="335" y="288">3</text>
+                <text x="470" y="288">4</text>
+              </g>
+              <text class="chart-label" x="64" y="22">Accuracy (%)</text>
+              <text class="chart-label" x="470" y="308" text-anchor="end">
+                Loop depth
+              </text>
+              <path
+                class="curve-fill"
+                d="M65 171.28 200 96.4 335 55.12 470 46.48V250H65Z"
+              />
+              <path
+                class="curve-line"
+                d="m65 171.28 135-74.88 135-41.28 135-8.64"
+              />
+              <path
+                class="curve-highlight"
+                d="m65 171.28 135-74.88 135-41.28 135-8.64"
+                pathLength="1"
+                stroke-dasharray="0 1"
+              />
+              <g class="curve-points">
+                <circle cx="65" cy="171.28" r="5" />
+                <circle cx="200" cy="96.4" r="5" />
+                <circle cx="335" cy="55.12" r="5" />
+                <circle cx="470" cy="46.48" r="5" />
+              </g>
+              <g class="point-labels">
+                <text x="65" y="153">63.2</text>
+                <text x="200" y="78">71.0</text>
+                <text x="335" y="37">75.3</text>
+                <text x="470" y="28">76.2</text>
+              </g>
+              <circle id="selected-halo" cx="65" cy="171.28" r="17" />
+              <circle id="selected-point" cx="65" cy="171.28" r="10" />
+            </svg>
+            <p class="chart-caption">
+              One checkpoint · all depths trained jointly
+            </p>
+            <p class="source-note">
+              Source: main results table and JevBench appendix.<br />Fixed depth
+              <i>k</i> uses <i>k</i>/4 of the four-loop step cost.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="method" class="section wrap" aria-labelledby="method-title">
+        <div class="section-label">
+          <span>02 / How it works</span><span>Read. Loop. Decide.</span>
+        </div>
+        <div class="section-heading">
+          <h2 id="method-title">Think in loops.</h2>
+          <p>
+            A shared decoder stack and readout.<br />An answer available after
+            every step.
+          </p>
+        </div>
+        <figure class="paper-figure method-figure">
+          <a href="assets/method.svg" aria-label="Open full-size method figure"
+            ><img
+              src="assets/method.svg"
+              alt="Lev method: a packed state and questions pass through the same decoder stack at each loop. A shared pointer head reads option scores. A stopper predicts agreement with the deepest answer; a shared state runs to the deepest exit of its questions."
+              width="1115"
+              height="415"
+              loading="lazy"
+          /></a>
+          <figcaption>
+            <span>From the paper / Method</span> Drawn for four loops. Each
+            question can exit at its own depth; the shared state runs as deep as
+            its deepest question.
+            <a href="assets/method.pdf"
+              >View original PDF <span aria-hidden="true">↗</span></a
+            >
+          </figcaption>
+        </figure>
+        <ol class="method-steps">
+          <li>
+            <span class="step-index">01</span>
+            <h3>Train every depth.</h3>
+            <p>
+              Start with Ouro or Nanbeige4.2. Share the LoRA adapter and pointer
+              head across loop steps, and average their training losses.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">02</span>
+            <h3>Read after each loop.</h3>
+            <p>
+              Return one probability per option. A further loop continues from
+              the previous hidden state, using the same parameters.
+            </p>
+          </li>
+          <li>
+            <span class="step-index">03</span>
+            <h3>Choose when to stop.</h3>
+            <p>
+              Use a fixed depth, or predict agreement with the deepest answer.
+              Fit the stopper and its threshold on unlabelled requests.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section
+        id="results"
+        class="section wrap"
+        aria-labelledby="results-title"
+      >
+        <div class="section-label">
+          <span>03 / Evidence</span><span>What the experiments show</span>
+        </div>
+        <div class="results-grid">
+          <div class="results-text">
+            <h2 id="results-title">More depth.<br />More room to decide.</h2>
+            <article class="finding">
+              <p class="finding-number">+13.0 <span>accuracy points</span></p>
+              <h3>Depth improves the same checkpoint.</h3>
+              <p>
+                Lev-2.6B rises from 63.2% at depth one to 76.2% at depth four on
+                the 231 public JevBench items. Most of the gain comes from
+                standard and hard questions.
+              </p>
+              <p class="source-note">Main results table; Analysis, RQ1.</p>
+            </article>
+            <article class="finding">
+              <p class="finding-number">
+                15–24<span>% less loop computation</span>
+              </p>
+              <h3>On-demand depth saves compute.</h3>
+              <p>
+                On the pooled held-out development panels, the three models use
+                76–85% of the deepest-pass cost while losing 0.3–0.8 accuracy
+                points.
+              </p>
+              <p class="source-note">
+                Appendix, “On-demand depth,” pooled development rows. Cost is
+                token-weighted across packed requests; this is not a measured
+                serving speedup.
+              </p>
+            </article>
+            <article class="finding">
+              <p class="finding-number">
+                +5.4 / +7.5 <span>accuracy points</span>
+              </p>
+              <h3>Small models cover a useful latency range.</h3>
+              <p>
+                On locked LevBench test, on-demand Lev-1.4B and Lev-3B exceed
+                the best dense model or cascade at the same estimated mean
+                latency: 46 ms and 39 ms, respectively.
+              </p>
+              <p class="source-note">
+                Analysis, RQ4; cascade appendix. Single H200, bf16, one request
+                at a time. Request latencies are priced by fits to measured
+                development timings, without fused kernels or graph capture.
+              </p>
+            </article>
+          </div>
+          <figure class="paper-figure teaser-figure">
+            <a href="assets/figure-1.svg" aria-label="Open full-size Figure 1"
+              ><img
+                src="assets/figure-1.svg"
+                alt="Figure 1: on-demand Lev-2.6B spends more loop steps on harder JevBench tiers. Small Lev models improve the locked LevBench test latency frontier. Depth raises standard and hard JevBench accuracy."
+                width="719"
+                height="708"
+                loading="lazy"
+            /></a>
+            <figcaption>
+              <span>From the paper / Figure 1</span> Top: steps by JevBench
+              difficulty. Bottom left: locked LevBench test accuracy versus
+              latency. Bottom right: standard and hard JevBench accuracy.
+              <a href="assets/figure-1.pdf"
+                >View original PDF <span aria-hidden="true">↗</span></a
+              >
+            </figcaption>
+          </figure>
+        </div>
+        <details class="result-table">
+          <summary>
+            See all three checkpoints on public JevBench
+            <span aria-hidden="true">+</span>
+          </summary>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Accuracy (%) on 231 public items. Each row uses one checkpoint.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Model</th>
+                  <th scope="col">Backbone</th>
+                  <th scope="col">Depth 1</th>
+                  <th scope="col">Depth 2</th>
+                  <th scope="col">Depth 3</th>
+                  <th scope="col">Depth 4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Lev-1.4B</th>
+                  <td>Ouro-1.4B</td>
+                  <td>58.0</td>
+                  <td>65.4</td>
+                  <td>68.0</td>
+                  <td>68.0</td>
+                </tr>
+                <tr>
+                  <th scope="row">Lev-2.6B</th>
+                  <td>Ouro-2.6B</td>
+                  <td>63.2</td>
+                  <td>71.0</td>
+                  <td>75.3</td>
+                  <td>76.2</td>
+                </tr>
+                <tr>
+                  <th scope="row">Lev-3B</th>
+                  <td>Nanbeige4.2-3B</td>
+                  <td>69.3</td>
+                  <td>72.7</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="source-note">
+            Source: paper main results table. The main Lev-3B checkpoint uses
+            two loops.
+          </p>
+        </details>
+      </section>
+
+      <section class="limitations" aria-labelledby="limitations-title">
+        <div class="wrap limits-grid">
+          <div>
+            <p class="eyebrow">Scope & limitations</p>
+            <h2 id="limitations-title">
+              Where the gains<br />do—and don’t—hold.
+            </h2>
+          </div>
+          <div class="prose">
+            <p>
+              <strong>Extra depth helps most on harder questions.</strong> Easy
+              JevBench questions are nearly solved already. More steps can also
+              change a correct answer into an incorrect one; agreement with the
+              deepest answer is not a guarantee of correctness.
+            </p>
+            <p>
+              <strong>Adaptive depth is a second, conditional benefit.</strong>
+              On locked test, Lev-1.4B and Lev-3B beat their fixed-depth
+              frontiers. Lev-2.6B does not establish a statistically significant
+              gain over its frontier.
+            </p>
+            <p>
+              <strong>Latency depends on the implementation.</strong> The
+              low-latency advantage partly reflects gaps in the dense models
+              tested. At matched floating-point operations on development data,
+              Lev is at or below the dense alternatives. Optimised adaptive
+              batching and end-to-end serving remain future work.
+            </p>
+            <p class="source-note">
+              The study covers three backbones from 1.4B to 3B and 231 public
+              JevBench items. See the paper’s Analysis and Limitations for the
+              full scope.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="release"
+        class="section wrap"
+        aria-labelledby="release-title"
+      >
+        <div class="section-label">
+          <span>04 / Resources</span
+          ><span id="release-label"
+            >Private artifacts · public release pending</span
+          >
+        </div>
+        <div class="section-heading">
+          <h2 id="release-title">Follow the research.</h2>
+          <p id="release-intro">
+            Code and model repositories are in private staging. Links are
+            provided for authorized accounts; data and the live demo are
+            forthcoming.
+          </p>
+        </div>
+        <nav class="project-links" aria-label="Project resources">
+          <a href="#main"><span>Project</span><small>This page</small></a>
+          <a href="#paper" data-resource="paper"
+            ><span>Paper</span><small>Forthcoming</small></a
+          >
+          <a href="https://github.com/OpenLAIR/lev" data-resource="code"
+            ><span>GitHub code</span><small>Private</small></a
+          >
+          <a
+            href="https://huggingface.co/collections/songdj/lev-thinking-fast-and-deep-with-looped-decision-models-6acefb135880c9d373cf42ba"
+            data-resource="models"
+            ><span>Hugging Face collection</span><small>Private</small></a
+          >
+        </nav>
+        <div
+          id="paper"
+          class="paper-status"
+          tabindex="-1"
+          aria-labelledby="paper-status-title"
+        >
+          <p class="eyebrow">Paper status</p>
+          <h3 id="paper-status-title">
+            Lev: Thinking Fast and Deep with Looped Decision Models
+          </h3>
+          <p>
+            The arXiv preprint and its identifier are forthcoming. This project
+            page is the current paper-status link; it will link directly to the
+            preprint once an identifier is available.
+          </p>
+          <a href="#citation">View provisional citation ↓</a>
+        </div>
+        <div class="release-list">
+          <div>
+            <span class="release-kind">Paper</span>
+            <p>
+              The manuscript and full experimental results.<code
+                >arXiv identifier forthcoming.</code
+              >
+            </p>
+            <a data-resource="paper" href="#paper"
+              ><span>Paper</span><small>Forthcoming</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Code</span>
+            <p>
+              Training, depth readouts, analysis, and reproduction.<code
+                >OpenLAIR/lev · private staging; authorized accounts only.</code
+              >
+            </p>
+            <a data-resource="code" href="https://github.com/OpenLAIR/lev"
+              ><span>Code</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Models</span>
+            <p>
+              Lev-1.4B, Lev-2.6B, and Lev-3B.<code
+                >Private checkpoints in the Lev Hugging Face collection.</code
+              >
+            </p>
+            <a
+              data-resource="models"
+              href="https://huggingface.co/collections/songdj/lev-thinking-fast-and-deep-with-looped-decision-models-6acefb135880c9d373cf42ba"
+              ><span>Models</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Data</span>
+            <p>
+              LevBench, training resources, and reproduction artifacts are
+              planned.<code
+                >The private collection currently contains models only;
+                source-specific dataset terms apply.</code
+              >
+            </p>
+            <a
+              data-resource="data"
+              href="https://huggingface.co/collections/songdj/lev-thinking-fast-and-deep-with-looped-decision-models-6acefb135880c9d373cf42ba"
+              ><span>Data</span><small>Planned</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Demo</span>
+            <p>
+              Explore option probabilities across loop depths.<code
+                >Live inference is planned for a later release.</code
+              >
+            </p>
+            <a data-resource="demo" href="#release"
+              ><span>Demo</span><small>Upcoming</small></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="citation"
+        class="citation wrap"
+        aria-labelledby="citation-title"
+      >
+        <div class="citation-heading">
+          <div>
+            <p class="eyebrow">Build on this work</p>
+            <h2 id="citation-title">Citation</h2>
+          </div>
+          <button id="copy-citation" type="button" hidden>
+            Copy BibTeX <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <pre
+          tabindex="0"
+          aria-label="BibTeX citation"
+        ><code id="bibtex">@misc{song2026lev,
+  title  = {Lev: Thinking Fast and Deep with Looped Decision Models},
+  author = {Song, Dingjie and Yan, Zhiling and Zhang, Yuxuan and Sun, Lichao},
+  year   = {2026},
+  note   = {Manuscript; preprint forthcoming},
+  url    = {https://openlair.github.io/lev/}
+}</code></pre>
+        <p class="source-note">
+          Provisional citation. The arXiv identifier will be added after
+          publication.
+        </p>
+        <p
+          id="copy-status"
+          class="copy-status"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </section>
+    </main>
+    <footer class="wrap">
+      <a class="wordmark" href="#" aria-label="Back to top">L<span>EV</span></a>
+      <p>
+        Thinking in loops.<br /><span
+          >Lehigh University · UBC · Vector Institute</span
+        >
+      </p>
+      <a href="#main">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
