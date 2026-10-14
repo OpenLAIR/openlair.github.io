@@ -3,23 +3,13 @@
 (() => {
   const diagram = document.querySelector(".decision-demo");
   if (!diagram) return;
-  // Hand-authored teaching examples, never evaluation records or model output.
-  // Stopper agreement is a separate prediction from the option probabilities.
-  // The example threshold is illustrative; 98% in the paper is a fitting target,
-  // not a universal per-question probability threshold.
-  const examples = {
-    easy: {
-      label: "Easy", kind: "direct rule", options: ["Maple", "Cedar", "Pine"],
-      explanation: "Maple is paid and in stock. Cedar is unpaid; Pine is out of stock.",
-      probabilities: [[88, 8, 4]], agreement: [.97],
-    },
-    hard: {
-      label: "Hard", kind: "rule + exception", options: ["Maple", "Cedar", "Pine"],
-      explanation: "Cedar qualifies: 60 hours is within the 72-hour priority limit. Maple exceeds 48 hours; Pine is out of stock.",
-      probabilities: [[44, 39, 17], [38, 45, 17], [42, 43, 15], [12, 78, 10]], agreement: [.56, .73, .81],
-    },
-  };
-  const threshold = .95;
+  // Archived fp32 readouts; stopper scores reconstructed with unchanged E06 settings.
+  const trace = window.LevDecisionCases;
+  if (!trace?.cases) return;
+  const examples = Object.fromEntries(Object.entries(trace.cases).map(([key, data]) => [key, {
+    ...data, probabilities: data.probabilities.slice(0, data.exitDepth),
+  }]));
+  const percent = value => `${(value * 100).toFixed(2)}%`;
   const rows = [...diagram.querySelectorAll(".loop-row")];
   const buttons = [...document.querySelectorAll(".demo-scenarios button[data-scenario]")];
   const casePanels = [...document.querySelectorAll(".case-input")];
@@ -40,6 +30,10 @@
 
   function render(manual = false) {
     const data = example();
+    const threshold = data.threshold;
+    diagram.dataset.optionCount = String(data.options.length);
+    document.querySelector("#case-question").textContent = data.heading;
+    diagram.querySelector("#demo-threshold").textContent = percent(threshold);
     rows.forEach((row, index) => {
       const read = index < loop || (index === loop && phase >= 1);
       const evaluated = index < loop || (index === loop && phase >= 2);
@@ -51,28 +45,41 @@
       const skipped = atExit() && index > loop;
       row.dataset.current = String(index === loop);
       row.dataset.state = skipped ? "skipped" : index > loop ? "waiting" : exits ? "exited" : judged ? "complete" : phase === 0 ? "computing" : phase === 1 ? "reading" : "stopping";
+      const distribution = row.querySelector(".option-distribution");
+      if (distribution.children.length !== data.options.length) {
+        distribution.replaceChildren(...data.options.map(() => {
+          const bar = document.createElement("div");
+          bar.className = "option-bar";
+          bar.innerHTML = '<span class="bar-value"></span><span class="bar-track"><span class="bar-fill"></span></span><span class="bar-label"></span>';
+          return bar;
+        }));
+      }
       row.querySelectorAll(".option-bar").forEach((bar, option) => {
+        bar.querySelector(".bar-label").textContent = data.options[option];
+        bar.title = `${data.option_keys[option].toUpperCase()}: ${data.option_text[option]}`;
         const probability = values?.[option];
         bar.classList.toggle("is-top", winner === option);
-        bar.querySelector(".bar-value").textContent = probability === undefined ? "—" : `${probability}%`;
+        bar.querySelector(".bar-value").textContent = probability === undefined ? "—" : `${probability.toFixed(1)}%`;
         bar.querySelector(".bar-fill").style.setProperty("--probability", (probability ?? 0) / 100);
       });
-      row.querySelector(".option-distribution").setAttribute("aria-label", `Loop ${index + 1}: ${values ? values.map((value, option) => `${data.options[option]} ${value} percent`).join(", ") : skipped ? "skipped" : "not computed yet"}`);
+      row.querySelector(".option-distribution").setAttribute("aria-label", `Loop ${index + 1}: ${values ? values.map((value, option) => `${data.option_text[option]} ${value.toFixed(2)} percent`).join(", ") : skipped ? "skipped" : "not computed yet"}`);
       const score = evaluated && !final ? data.agreement[index] : undefined;
       const stopper = row.querySelector(".stopper-block");
       const inputLabel = index === 0 ? "p¹" : `p${"¹²³⁴"[index - 1]}, p${"¹²³⁴"[index]}`;
       stopper.querySelector(".stopper-inputs").textContent = final ? "No stopper" : inputLabel;
       stopper.querySelector(".stopper-comparison").textContent = score === undefined
         ? final ? (judged ? "Return answer" : "—") : "g = ?"
-        : `${Math.round(score * 100)}% ${score >= threshold ? "≥" : "<"} ${threshold * 100}%`;
+        : `${percent(score)} ${score >= threshold ? "≥" : "<"} ${percent(threshold)}`;
       stopper.querySelector(".stopper-meter").style.setProperty("--agreement", score ?? 0);
+      stopper.querySelector(".stopper-meter").style.setProperty("--threshold", `${threshold * 100}%`);
+      stopper.querySelector(".stopper-threshold").title = `Fitted threshold: ${percent(threshold)}`;
       stopper.querySelector(".stopper-meter").hidden = final;
       stopper.setAttribute("aria-label", final
         ? `Loop 4: maximum depth; no stopper needed${judged ? "; return the current answer" : ""}`
-        : `Loop ${index + 1}: stopper uses ${index === 0 ? "the current readout" : "the previous and current readouts"}; ${score === undefined ? "prediction pending" : `predicted agreement ${Math.round(score * 100)} percent ${score >= threshold ? "meets" : "is below"} the illustrative threshold of 95 percent`}`);
+        : `Loop ${index + 1}: stopper uses ${index === 0 ? "the current readout" : "the previous and current readouts"}; ${score === undefined ? "prediction pending" : `predicted agreement ${percent(score)} ${score >= threshold ? "meets" : "is below"} the fitted threshold of ${percent(threshold)}`}`);
       row.querySelector(".gate-label").textContent = skipped ? "Not needed" : !judged
         ? evaluated ? "Compare to τ" : read ? (final ? "Depth limit" : "Predict agreement") : "Await readout"
-        : exits ? `Ship ${data.options[winner]}` : "Continue";
+        : exits ? `Select ${data.options[winner]}` : "Continue";
       row.querySelector(".exit-branch").classList.toggle("is-chosen", exits);
       row.querySelector(".continue-branch").classList.toggle("is-chosen", judged && !exits);
       row.querySelector(".exit-branch").innerHTML = final ? 'Exit <span aria-hidden="true">↗</span>' : 'Yes <span aria-hidden="true">↗</span>';
@@ -89,7 +96,7 @@
         option.querySelector(".answer-mark").textContent = chosen ? "✓" : "";
       });
     });
-    document.querySelector("#case-answer").textContent = atExit() ? data.explanation : "Read the rule and compare the three orders. Watch the decision unfold.";
+    document.querySelector("#case-answer").textContent = atExit() ? data.explanation : "Read the input and compare the options. Watch the recorded decision unfold.";
     document.querySelector("#case-playback").textContent = autoTour
       ? "Autoplay · choose a case to keep it selected."
       : atExit() ? `${data.label} complete · Replay to watch again.` : `${data.label} selected · plays once, then stays here.`;
@@ -102,11 +109,11 @@
     status.textContent = phase === 0
       ? `${data.label} · Loop ${loop + 1} · ${loop === 0 ? "Read the request" : "Reuse the hidden state"}. Run the same decoder.`
       : phase === 1
-        ? `${data.label} · Loop ${loop + 1} · The shared head scores Maple, Cedar and Pine. ${winner} leads; now check whether to stop.`
+        ? `${data.label} · Loop ${loop + 1} · The shared head scores the ${data.options.length} options. ${winner} leads; now check whether to stop.`
         : phase === 2
-          ? `${data.label} · Loop ${loop + 1} · Stopper g${"₁₂₃"[loop]} predicts ${Math.round(data.agreement[loop] * 100)}% agreement with the deepest answer. Compare with τ = 95%.`
+          ? `${data.label} · Loop ${loop + 1} · Stopper g${"₁₂₃"[loop]} predicts ${percent(data.agreement[loop])} agreement with the deepest answer. Compare with τ = ${percent(threshold)}.`
         : atExit()
-          ? `${data.label} · Loop ${loop + 1} · Ship ${winner}. ${loop === 3 ? "Maximum depth reached." : `${3 - loop} ${loop === 2 ? "loop" : "loops"} skipped: predicted agreement is high enough.`}`
+          ? `${data.label} · Loop ${loop + 1} · Select ${winner}. ${loop === 3 ? "Maximum depth reached; return the top option, even with uncertainty." : `${3 - loop} ${loop === 2 ? "loop" : "loops"} skipped: predicted agreement is high enough.`}`
           : `${data.label} · Loop ${loop + 1} · Don't select yet. Predicted agreement is too low → loop ${loop + 2}.`;
     diagram.querySelector(".outcome-symbol").textContent = atExit() ? "↗" : phase === 3 ? "↻" : "→";
     if (manual) announcement.textContent = status.textContent;
