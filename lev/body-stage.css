@@ -1,0 +1,310 @@
+/* The article below the dark first screen. The night band returns twice, on the depth explorer (the one
+   interactive panel in the body) and on the citation and footer that close the page; everything else stays
+   on paper and only picks up the hero's blue-to-cyan accent. Loaded after hero-stage.css. */
+:root {
+  --accent-gradient: linear-gradient(100deg, #3c63e6 0%, #3f86f0 45%, #19a9bf 100%);
+  --card-radius: 14px;
+  --card-shadow: 0 1px 0 rgba(28, 44, 92, 0.04), 0 18px 44px -26px rgba(28, 56, 140, 0.35);
+}
+
+/* Accent words and headline numbers take the hero's gradient. */
+.section h2 em,
+.finding-number {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section h2 em {
+  padding-right: 0.06em;
+}
+.finding-number span {
+  -webkit-text-fill-color: var(--muted);
+}
+
+/* Section labels: the step number sits on a short bar of the accent gradient instead of the plain rule. */
+.section-label {
+  position: relative;
+}
+.section-label::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 72px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+}
+
+/* Idea: the TL;DR reads as a pull quote. */
+.prose .lead {
+  padding-left: 18px;
+  border-left: 2px solid transparent;
+  border-image: linear-gradient(180deg, #3c63e6, #19a9bf) 1;
+}
+
+/* Depth explorer on night. */
+.depth-explorer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--on-night);
+  background:
+    radial-gradient(ellipse 55% 70% at 0% 0%, rgba(76, 112, 255, 0.3), transparent 70%),
+    radial-gradient(ellipse 45% 60% at 100% 100%, rgba(64, 196, 222, 0.16), transparent 70%),
+    var(--night);
+  border-radius: 18px;
+  box-shadow: 0 30px 70px -40px rgba(12, 20, 51, 0.9);
+}
+.depth-explorer .eyebrow,
+.depth-explorer .chart-caption {
+  color: var(--cyan);
+}
+.depth-explorer h3 {
+  color: var(--on-night);
+}
+.depth-explorer .explorer-copy > p:not(.eyebrow),
+.depth-explorer .source-note,
+.depth-explorer .depth-readout p > span,
+.depth-explorer .depth-controls legend {
+  color: var(--on-night-muted);
+}
+.depth-explorer .depth-readout strong {
+  color: var(--on-night);
+}
+.depth-explorer .depth-readout p:first-child strong {
+  background: linear-gradient(100deg, #9cb6ff, var(--cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.depth-explorer .depth-controls label span {
+  color: var(--on-night);
+  border-color: rgba(174, 192, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(174, 192, 255, 0.06);
+}
+.depth-explorer .depth-controls input:hover + span {
+  border-color: var(--cyan);
+}
+.depth-explorer .depth-controls input:checked + span {
+  color: var(--night);
+  background: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 0 18px -2px rgba(95, 216, 230, 0.7);
+}
+.depth-explorer .depth-controls input:focus-visible + span {
+  outline-color: var(--cyan);
+}
+.motion-enabled .depth-explorer .depth-controls label:hover span {
+  box-shadow: 0 3px 0 rgba(95, 216, 230, 0.35);
+}
+.depth-explorer #play-depths {
+  color: var(--cyan);
+}
+.depth-explorer a:focus-visible,
+.depth-explorer button:focus-visible {
+  outline-color: var(--cyan);
+}
+.depth-explorer .chart-grid path {
+  stroke: rgba(174, 192, 255, 0.14);
+}
+.depth-explorer .chart-axis,
+.depth-explorer .chart-label {
+  fill: var(--on-night-muted);
+}
+.depth-explorer .curve-fill {
+  fill: rgba(95, 140, 255, 0.16);
+  opacity: 1;
+}
+.depth-explorer .curve-line {
+  stroke: #9cb6ff;
+}
+.depth-explorer .curve-highlight {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 5px rgba(95, 216, 230, 0.8));
+}
+.depth-explorer .curve-points {
+  fill: #9cb6ff;
+}
+.depth-explorer .point-labels {
+  fill: var(--on-night);
+}
+.depth-explorer #selected-point {
+  fill: var(--cyan);
+  stroke: var(--night);
+  filter: drop-shadow(0 0 8px rgba(95, 216, 230, 0.9));
+}
+.depth-explorer #selected-halo {
+  fill: var(--cyan);
+  opacity: 0.18;
+}
+
+/* Paper figures sit on lifted white cards. */
+.paper-figure > a {
+  border-radius: var(--card-radius);
+  border-color: rgba(28, 44, 92, 0.08);
+  box-shadow: var(--card-shadow);
+}
+
+/* Method: the three steps are a sequence, so they share one timeline with a node per step. */
+.method-steps li {
+  position: relative;
+  border-top: 0;
+  padding-top: 30px;
+}
+.method-steps li::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: -35px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(60, 99, 230, 0.55), rgba(25, 169, 191, 0.55));
+}
+.method-steps li:last-child::before {
+  right: 0;
+}
+.method-steps li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid #3f86f0;
+  box-shadow: 0 0 0 4px rgba(63, 134, 240, 0.12);
+}
+.method-steps .step-index {
+  display: inline-block;
+}
+
+/* Results: the jump-to table summary gets the same quiet card treatment as the figures. */
+.result-table {
+  border: 1px solid rgba(28, 44, 92, 0.08);
+  border-radius: var(--card-radius);
+  padding: 18px 22px;
+  background: #fff;
+}
+
+/* Limitations: a pale band in the page's own blue instead of sage. */
+.limitations {
+  background:
+    radial-gradient(ellipse 50% 90% at 0% 0%, rgba(60, 99, 230, 0.08), transparent 70%),
+    #eef1f8;
+}
+.limits-grid .eyebrow {
+  color: var(--blue);
+}
+
+/* Resources: rows answer the pointer, and the one public resource is clearly marked. */
+.release-list > div {
+  transition: background 0.2s;
+}
+.release-list > div:hover {
+  background: rgba(60, 99, 230, 0.05);
+}
+.release-list small,
+.project-links small {
+  border-radius: 999px;
+}
+.release-list a[data-available="true"] small {
+  color: #fff;
+  border-color: transparent;
+  background: var(--accent-gradient);
+}
+.paper-status {
+  border-left: 0;
+  padding: 22px 26px;
+  border-radius: var(--card-radius);
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    var(--accent-gradient) border-box;
+  border: 1px solid transparent;
+  box-shadow: var(--card-shadow);
+}
+
+/* Citation and footer close the page on night. */
+.citation pre {
+  color: #dfe6ff;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, rgba(64, 196, 222, 0.14), transparent 70%),
+    var(--night);
+  border-left: 0;
+  border-radius: var(--card-radius);
+  box-shadow: 0 24px 60px -36px rgba(12, 20, 51, 0.9);
+}
+.citation pre:focus-visible {
+  outline-color: var(--cyan);
+}
+.citation button {
+  border-radius: 999px;
+  padding-inline: 18px;
+}
+footer {
+  background-color: var(--night);
+  box-shadow: 0 0 0 100vmax var(--night);
+  clip-path: inset(0 -100vmax);
+  border-top: 0;
+  color: var(--on-night);
+}
+footer .wordmark,
+footer a {
+  color: var(--on-night);
+}
+footer a:hover {
+  color: var(--cyan);
+}
+footer p span {
+  color: var(--on-night-muted);
+}
+footer a:focus-visible {
+  outline-color: var(--cyan);
+}
+
+@media (max-width: 760px) {
+  .method-steps li::before {
+    right: auto;
+    top: 6px;
+    bottom: -40px;
+    left: 5px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(60, 99, 230, 0.55), rgba(25, 169, 191, 0.55));
+  }
+  .method-steps li:last-child::before {
+    display: none;
+  }
+  .method-steps li {
+    padding-top: 0;
+    padding-left: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .release-list > div {
+    transition: none;
+  }
+}
+@media print {
+  .depth-explorer,
+  .citation pre,
+  footer {
+    background: none;
+    color: inherit;
+    box-shadow: none;
+    clip-path: none;
+  }
+  .section h2 em,
+  .finding-number,
+  .depth-explorer .depth-readout p:first-child strong {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+}
+/* On night the unvisited part of the measured curve needs more contrast than on paper. */
+.depth-explorer .curve-line {
+  opacity: 0.55;
+}
