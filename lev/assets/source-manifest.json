@@ -1,0 +1,12 @@
+{
+  "figure-1": {
+    "source": "fig_teaser_tiers.pdf",
+    "sha256": "58fcce15410ced2b08f32a31eb9823ec41d7c4a48d8bd1f2a9846ef00cc86c28",
+    "description": "Original paper figure, exported to SVG with text preserved as vector paths."
+  },
+  "method": {
+    "source": "fig_method_focused.pdf",
+    "sha256": "cbfa4fd343f592e18f04819c778f960ee7bf686b4324835255f7fc25185d7e4b",
+    "description": "Original paper figure, exported to SVG with text preserved as vector paths."
+  }
+}
