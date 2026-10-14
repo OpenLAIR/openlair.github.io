@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f8f7f2" />
+    <meta name="theme-color" content="#0c1433" />
     <title>Lev: Thinking Fast and Deep with Looped Decision Models</title>
     <meta
       name="description"
@@ -26,14 +26,15 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://openlair.github.io/lev/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=9316405ece0e" />
+    <link rel="stylesheet" href="styles.css?v=de3c97b981ca" />
     <link rel="stylesheet" href="motion.css?v=f934d05f356c" />
     <link rel="stylesheet" href="decision-demo.css?v=2bd3016232fa" />
-    <script src="release-config.js?v=0d9f5cd61477" defer></script>
-    <script src="app.js?v=5ce27de0b036" defer></script>
+    <link rel="stylesheet" href="hero-stage.css?v=8b3c58bd9d4a" />
+    <script src="release-config.js?v=c4b975090490" defer></script>
+    <script src="app.js?v=610c16f2221d" defer></script>
     <script src="decision-cases.js?v=9adacadff0a0" defer></script>
     <script src="decision-demo.js?v=8bde66b1b9d0" defer></script>
-    <script src="motion.js?v=7a7ca94c5282" defer></script>
+    <script src="motion.js?v=cbd9edfef48e" defer></script>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -45,13 +46,25 @@
           <path d="M6 9a10 10 0 1 1-1 10M6 3v7h7" /></svg
       ></a>
       <nav aria-label="Main navigation">
-        <a href="#idea">The idea</a><a href="#results">Results</a
-        ><a href="#release">Resources <span aria-hidden="true">↗</span></a>
+        <a href="https://openlair.github.io/lev/assets/lev-paper.pdf" data-resource="paper"><span>Paper ↗</span><small class="sr-only">PDF</small></a>
+        <a href="https://github.com/OpenLAIR/lev" data-resource="code"><span>Code ↗</span><small class="sr-only">Private</small></a>
+        <a href="https://huggingface.co/collections/songdj/lev" data-resource="models"><span>Models ↗</span><small class="sr-only">Private</small></a>
+        <a href="#datasets" data-resource="data"><span>Data ↓</span><small class="sr-only">Private</small></a>
       </nav>
     </header>
 
     <main id="main">
       <section class="hero wrap" aria-labelledby="hero-title">
+        <!-- Decorative: one arc per loop step; a point of light laps the ring and each lap lights one more arc. -->
+        <svg class="loop-orbit" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+          <circle class="ring" cx="300" cy="300" r="250" />
+          <circle class="ring ring-inner" cx="300" cy="300" r="214" />
+          <path class="arc" d="M317.4 50.6A250 250 0 0 1 549.4 282.6" />
+          <path class="arc" d="M549.4 317.4A250 250 0 0 1 317.4 549.4" />
+          <path class="arc" d="M282.6 549.4A250 250 0 0 1 50.6 317.4" />
+          <path class="arc" d="M50.6 282.6A250 250 0 0 1 282.6 50.6" />
+          <circle class="comet" cx="300" cy="300" r="250" transform="rotate(-90 300 300)" />
+        </svg>
         <div class="hero-copy">
           <p class="eyebrow">
             <span class="signal" aria-hidden="true"></span> System 1.5 decision
@@ -184,9 +197,9 @@
           </p>
         </div>
         <nav class="resource-rail" aria-label="Research resources">
-          <a href="#paper" data-resource="paper"
+          <a href="https://openlair.github.io/lev/assets/lev-paper.pdf" data-resource="paper"
             ><span>Paper <span aria-hidden="true">↗</span></span
-            ><small>Forthcoming</small></a
+            ><small>PDF ↗</small></a
           >
           <a href="https://github.com/OpenLAIR/lev" data-resource="code"
             ><span>Code <span aria-hidden="true">↗</span></span
@@ -204,10 +217,7 @@
             ><span>Data <span aria-hidden="true">↗</span></span
             ><small>Private</small></a
           >
-          <a href="#release" data-resource="demo"
-            ><span>Demo <span aria-hidden="true">↗</span></span
-            ><small>Upcoming</small></a
-          >
+
         </nav>
       </section>
 
@@ -603,14 +613,14 @@
         <div class="section-heading">
           <h2 id="release-title">Follow the research.</h2>
           <p id="release-intro">
-            Code, model, and dataset repositories are in private staging. Links
-            require an authorized account; the live inference demo is forthcoming.
+            Read the paper PDF below. Code, model, and dataset repositories are
+            currently private and require an authorized account.
           </p>
         </div>
         <nav class="project-links" aria-label="Project resources">
           <a href="#main"><span>Project</span><small>This page</small></a>
-          <a href="#paper" data-resource="paper"
-            ><span>Paper</span><small>Forthcoming</small></a
+          <a href="https://openlair.github.io/lev/assets/lev-paper.pdf" data-resource="paper"
+            ><span>Paper</span><small>PDF ↗</small></a
           >
           <a href="https://github.com/OpenLAIR/lev" data-resource="code"
             ><span>GitHub code</span><small>Private</small></a
@@ -635,22 +645,21 @@
             Lev: Thinking Fast and Deep with Looped Decision Models
           </h3>
           <p>
-            The arXiv preprint and its identifier are forthcoming. This project
-            page is the current paper-status link; it will link directly to the
-            preprint once an identifier is available.
+            The manuscript is available as a PDF. An arXiv link will be added
+            when its identifier is available.
           </p>
-          <a href="#citation">View provisional citation ↓</a>
+          <a href="https://openlair.github.io/lev/assets/lev-paper.pdf">Read the paper PDF ↗</a> · <a href="#citation">View provisional citation ↓</a>
         </div>
         <div class="release-list">
           <div>
             <span class="release-kind">Paper</span>
             <p>
               The manuscript and full experimental results.<code
-                >arXiv identifier forthcoming.</code
+                >PDF available · arXiv identifier forthcoming.</code
               >
             </p>
-            <a data-resource="paper" href="#paper"
-              ><span>Paper</span><small>Forthcoming</small></a
+            <a data-resource="paper" href="https://openlair.github.io/lev/assets/lev-paper.pdf"
+              ><span>Paper</span><small>PDF ↗</small></a
             >
           </div>
           <div>
@@ -722,17 +731,7 @@
               ><span>Lev-results</span><small>Private</small></a
             >
           </div>
-          <div>
-            <span class="release-kind">Demo</span>
-            <p>
-              Explore option probabilities across loop depths.<code
-                >Live inference is planned for a later release.</code
-              >
-            </p>
-            <a data-resource="demo" href="#release"
-              ><span>Demo</span><small>Upcoming</small></a
-            >
-          </div>
+
         </div>
       </section>
 

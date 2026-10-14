@@ -268,7 +268,7 @@ svg {
 .resource-rail {
   grid-column: 1/-1;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin-top: 32px;
   border-block: 1px solid var(--rule);
 }
