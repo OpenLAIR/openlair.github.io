@@ -1,0 +1,256 @@
+/* Dark hero stage: the header and first screen sit on a night-blue band; the article below stays on paper.
+   Loaded after the other stylesheets and only overrides colours, surfaces and the decorative loop orbit. */
+:root {
+  --night: #0c1433;
+  --night-2: #131f4d;
+  --glow: #6f96ff;
+  --cyan: #5fd8e6;
+  --on-night: #eef1fb;
+  --on-night-muted: #a3aed0;
+  --night-rule: rgba(174, 192, 255, 0.16);
+}
+
+/* Full-bleed night band behind the width-limited header and hero (a box-shadow, so it adds no layout width).
+   The loop orbit may reach past a narrow viewport, so the page clips horizontal overflow; clip, unlike hidden,
+   does not create a scroll container. */
+html,
+body {
+  overflow-x: clip;
+}
+.site-header,
+.hero {
+  background-color: var(--night);
+  box-shadow: 0 0 0 100vmax var(--night);
+  clip-path: inset(0 -100vmax);
+}
+.site-header {
+  border-bottom-color: var(--night-rule);
+  color: var(--on-night);
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  color: var(--on-night);
+  padding-bottom: 44px;
+  background-image:
+    radial-gradient(ellipse 46% 52% at 12% 22%, rgba(76, 112, 255, 0.34), transparent 72%),
+    radial-gradient(ellipse 40% 46% at 88% 70%, rgba(64, 196, 222, 0.18), transparent 72%);
+}
+/* A hairline of light where the night band meets the paper. */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(111, 150, 255, 0.7) 30%, rgba(95, 216, 230, 0.7) 70%, transparent);
+}
+.hero > :not(.loop-orbit) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header on night. */
+.site-header .wordmark,
+.site-header nav a,
+.site-header nav a:last-child {
+  color: var(--on-night);
+}
+.site-header .wordmark svg {
+  stroke: var(--cyan);
+}
+.site-header nav a:hover,
+.site-header nav a[aria-current="location"] {
+  color: var(--cyan);
+}
+.reading-progress span {
+  background: linear-gradient(90deg, var(--glow), var(--cyan));
+}
+
+/* Title block. */
+.hero-copy > .eyebrow {
+  color: var(--on-night-muted);
+}
+.hero .signal {
+  background: var(--cyan);
+  box-shadow: 0 0 0 0 rgba(95, 216, 230, 0.6);
+}
+.motion-enabled .hero.is-running .signal {
+  animation: signal-pulse 2.4s ease-out infinite;
+}
+@keyframes signal-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(95, 216, 230, 0.55); }
+  70%, 100% { box-shadow: 0 0 0 9px rgba(95, 216, 230, 0); }
+}
+.hero h1 {
+  color: var(--on-night);
+}
+.hero h1 em {
+  color: var(--cyan);
+  background: linear-gradient(100deg, #9cb6ff 0%, var(--glow) 38%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-right: 0.08em;
+}
+.hero .title-tail {
+  color: #cfd7f2;
+}
+.hero .hero-summary {
+  color: var(--on-night-muted);
+}
+
+/* The two hero cards become lit glass panels; their contents keep the light reading surface. */
+.hero .case-worked-example,
+.hero .decision-demo {
+  color: var(--ink);
+  background: #fbfcff;
+  border-color: rgba(160, 186, 255, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(95, 216, 230, 0.08),
+    0 28px 70px -28px rgba(46, 92, 255, 0.65),
+    0 0 46px -18px rgba(95, 216, 230, 0.45);
+}
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .hero .case-worked-example,
+  .hero .decision-demo {
+    background: rgba(251, 252, 255, 0.985);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
+  }
+}
+
+/* Authors and the resource rail on night. */
+.hero .authors {
+  color: var(--on-night);
+}
+.hero .authors sup {
+  color: var(--cyan);
+}
+.hero .affiliations,
+.hero .contributions {
+  color: var(--on-night-muted);
+}
+.hero .resource-rail {
+  border-color: var(--night-rule);
+}
+.hero .resource-rail a {
+  color: var(--on-night);
+  border-left-color: var(--night-rule);
+}
+.hero .resource-rail a span span,
+.hero .resource-rail a[data-available="true"] small {
+  color: var(--cyan);
+}
+.hero .resource-rail small,
+.hero .resource-rail a[data-visibility="private"] small {
+  color: var(--on-night-muted);
+}
+.hero .resource-rail a:hover {
+  background: rgba(174, 192, 255, 0.08);
+  color: var(--on-night);
+}
+
+/* Focus rings stay visible on night. */
+.site-header a:focus-visible,
+.hero > :not(.case-worked-example):not(.decision-demo) a:focus-visible {
+  outline-color: var(--cyan);
+}
+
+/* The loop orbit: four arcs for the four loop steps; a point of light runs the ring, and each lap lights one more arc. */
+.loop-orbit {
+  position: absolute;
+  z-index: 0;
+  left: -150px;
+  top: -200px;
+  width: 560px;
+  height: 560px;
+  pointer-events: none;
+  overflow: visible;
+}
+.loop-orbit .ring {
+  fill: none;
+  stroke: rgba(150, 175, 255, 0.1);
+  stroke-width: 1;
+}
+.loop-orbit .ring-inner {
+  stroke-dasharray: 2 7;
+  stroke: rgba(150, 175, 255, 0.16);
+}
+.loop-orbit .arc {
+  fill: none;
+  stroke: var(--glow);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 6px rgba(111, 150, 255, 0.85));
+}
+.loop-orbit .arc:nth-of-type(4) {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 7px rgba(95, 216, 230, 0.9));
+}
+.loop-orbit .comet {
+  fill: none;
+  stroke: #e9f6ff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 46 1525;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(160, 225, 255, 0.95));
+}
+.motion-enabled .hero.is-running .loop-orbit .comet {
+  opacity: 1;
+  animation: comet-lap 2.6s linear infinite;
+}
+.motion-enabled .hero.is-running .loop-orbit .arc {
+  animation: arc-charge-1 13s linear infinite;
+}
+.motion-enabled .hero.is-running .loop-orbit .arc:nth-of-type(2) { animation-name: arc-charge-2; }
+.motion-enabled .hero.is-running .loop-orbit .arc:nth-of-type(3) { animation-name: arc-charge-3; }
+.motion-enabled .hero.is-running .loop-orbit .arc:nth-of-type(4) { animation-name: arc-charge-4; }
+@keyframes comet-lap {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1571; }
+}
+/* A lap is a fifth of the 13 s cycle: arc k lights as lap k ends, lap 5 holds all four, then they fade together. */
+@keyframes arc-charge-1 { 0%, 17% { opacity: 0.14; } 20%, 94% { opacity: 0.9; } 100% { opacity: 0.14; } }
+@keyframes arc-charge-2 { 0%, 37% { opacity: 0.14; } 40%, 94% { opacity: 0.9; } 100% { opacity: 0.14; } }
+@keyframes arc-charge-3 { 0%, 57% { opacity: 0.14; } 60%, 94% { opacity: 0.9; } 100% { opacity: 0.14; } }
+@keyframes arc-charge-4 { 0%, 77% { opacity: 0.14; } 80%, 94% { opacity: 1; } 100% { opacity: 0.14; } }
+
+@media (max-width: 1050px) {
+  .loop-orbit {
+    left: -190px;
+    top: -210px;
+  }
+}
+@media (max-width: 760px) {
+  /* On phones the orbit sits at the right edge; keep it inside the hero's own width. */
+  .hero {
+    overflow-x: clip;
+  }
+  .loop-orbit {
+    left: auto;
+    right: -190px;
+    top: -60px;
+    width: 380px;
+    height: 380px;
+    opacity: 0.8;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loop-orbit .comet {
+    display: none;
+  }
+}
+@media print {
+  .site-header,
+  .hero {
+    background: none;
+    box-shadow: none;
+    clip-path: none;
+    color: inherit;
+  }
+  .loop-orbit {
+    display: none;
+  }
+}

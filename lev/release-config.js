@@ -4,11 +4,11 @@
 window.LEV_RELEASE = {
   paper: {
     linked: true,
-    available: false,
-    visibility: "pending",
-    url: "#paper",
-    status: "Forthcoming",
-    hint: "arXiv identifier forthcoming. View paper status on this page.",
+    available: true,
+    visibility: "public",
+    url: "https://openlair.github.io/lev/assets/lev-paper.pdf",
+    status: "PDF",
+    hint: "Read the Lev manuscript PDF. The arXiv identifier is forthcoming.",
   },
   code: {
     linked: true,
@@ -57,13 +57,5 @@ window.LEV_RELEASE = {
     url: "https://huggingface.co/datasets/songdj/Lev-results",
     status: "Private",
     hint: "Private results and reproduction materials without source question or training-example text.",
-  },
-  demo: {
-    linked: false,
-    available: false,
-    visibility: "pending",
-    url: null,
-    status: "Upcoming",
-    hint: "Live model demo planned for a later release.",
   },
 };

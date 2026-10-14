@@ -47,7 +47,7 @@ if (privateCount > 0) {
   document.querySelector("#release-label").textContent =
     "Private artifacts · public release pending";
   document.querySelector("#release-intro").textContent =
-    "Code, model, and dataset repositories are in private staging. Links require an authorized account; the live inference demo is forthcoming.";
+    "Read the paper PDF below. Code, model, and dataset repositories are currently private and require an authorized account.";
 } else if (availableCount > 0) {
   document.querySelector("#release-label").textContent =
     availableCount === Object.keys(release).length

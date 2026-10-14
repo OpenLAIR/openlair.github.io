@@ -231,12 +231,18 @@
   }
 
   const progress = document.querySelector(".reading-progress span");
-  const nav = [...document.querySelectorAll(".site-header nav a")].map(
-    (link) => ({
-      link,
-      section: document.querySelector(link.getAttribute("href")),
-    }),
-  );
+  // Only in-page links (#id) highlight a section; external links such as the paper PDF are skipped.
+  const nav = [...document.querySelectorAll(".site-header nav a")]
+    .map((link) => {
+      const href = link.getAttribute("href") || "";
+      return {
+        link,
+        section: /^#[A-Za-z][\w-]*$/.test(href)
+          ? document.getElementById(href.slice(1))
+          : null,
+      };
+    })
+    .filter((item) => item.section);
   let scrollFrame = null;
   function updateReading() {
     scrollFrame = null;
