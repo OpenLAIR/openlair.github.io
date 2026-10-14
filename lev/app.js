@@ -51,10 +51,12 @@ if (privateCount > 0) {
 } else if (availableCount > 0) {
   document.querySelector("#release-label").textContent =
     availableCount === Object.keys(release).length
-      ? "Research resources"
+      ? "Paper · code · models · data"
       : "Release in progress";
   document.querySelector("#release-intro").textContent =
-    "Explore the available paper, code, models, and data. Each resource shows its current availability below.";
+    availableCount === Object.keys(release).length
+        ? "Read the paper, browse the code, and download the models and data. Every resource below is public."
+        : "Explore the available paper, code, models, and data. Each resource shows its current availability below.";
 }
 
 const copyButton = document.querySelector("#copy-citation");
