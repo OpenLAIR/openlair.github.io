@@ -13,6 +13,7 @@
     easy: "Correct: B — got into Cameron’s automobile. The stopper clears τ after one loop.",
     hard: "Correct: 6. White is 13/24 of the total: 26 ÷ (13/24) = 48 balls; 48 ÷ 8 = 6.",
   };
+  const pendingAnswer = "Read the input and compare the options. Watch the recorded decision unfold.";
   const percent = value => `${(value * 100).toFixed(2)}%`;
   const rows = [...diagram.querySelectorAll(".loop-row")];
   const buttons = [...document.querySelectorAll(".demo-scenarios button[data-scenario]")];
@@ -101,7 +102,7 @@
         option.querySelector(".answer-mark").textContent = chosen ? "✓" : "";
       });
     });
-    document.querySelector("#case-answer").textContent = atExit() ? answerSummaries[scenario] : "Read the input and compare the options. Watch the recorded decision unfold.";
+    document.querySelector("#case-answer").textContent = atExit() ? answerSummaries[scenario] : pendingAnswer;
     document.querySelector("#case-playback").textContent = autoTour
       ? "Autoplay · choose a case to keep it selected."
       : atExit() ? `${data.label} complete · Replay to watch again.` : `${data.label} selected · plays once, then stays here.`;
@@ -179,6 +180,57 @@
   if (reducedMotion.matches) { loop = 0; phase = 3; }
   render();
   document.querySelector(".demo-scenarios").hidden = false;
+
+  // Reserve the tallest complete case at this width, including playback results.
+  // Re-measure only when the layout changes, never when a case or phase changes.
+  const inputCard = document.querySelector(".case-worked-example");
+  function sizeInputCard() {
+    const measuringCard = inputCard.cloneNode(true);
+    const heading = measuringCard.querySelector("#case-question");
+    const kind = measuringCard.querySelector("#case-kind");
+    const answer = measuringCard.querySelector("#case-answer");
+    const playback = measuringCard.querySelector("#case-playback");
+    const panels = [...measuringCard.querySelectorAll(".case-input")].map(panel => [panel.id, panel]);
+    measuringCard.querySelector("dialog").remove();
+    measuringCard.querySelectorAll("[id]").forEach(element => element.removeAttribute("id"));
+    measuringCard.inert = true;
+    measuringCard.setAttribute("aria-hidden", "true");
+    Object.assign(measuringCard.style, {
+      position: "absolute", visibility: "hidden", pointerEvents: "none",
+      top: "0", left: "0", margin: "0", minHeight: "0", height: "auto",
+      width: `${inputCard.getBoundingClientRect().width}px`,
+    });
+    inputCard.parentElement.append(measuringCard);
+    let height = 0;
+    for (const [key, data] of Object.entries(examples)) {
+      heading.textContent = data.heading;
+      kind.textContent = `${data.label} · ${data.kind}`;
+      panels.forEach(([id, panel]) => { panel.hidden = id !== `case-input-${key}`; });
+      for (const summary of [pendingAnswer, answerSummaries[key]]) {
+        answer.textContent = summary;
+        for (const message of ["Autoplay · choose a case to keep it selected.", `${data.label} selected · plays once, then stays here.`, `${data.label} complete · Replay to watch again.`]) {
+          playback.textContent = message;
+          height = Math.max(height, measuringCard.getBoundingClientRect().height);
+        }
+      }
+    }
+    measuringCard.remove();
+    inputCard.style.minHeight = `${Math.ceil(height)}px`;
+  }
+  sizeInputCard();
+  let sizeFrame;
+  const queueCardSizing = () => {
+    cancelAnimationFrame(sizeFrame);
+    sizeFrame = requestAnimationFrame(sizeInputCard);
+  };
+  let cardWidth = inputCard.getBoundingClientRect().width;
+  new ResizeObserver(() => {
+    const width = inputCard.getBoundingClientRect().width;
+    if (width !== cardWidth) { cardWidth = width; queueCardSizing(); }
+  }).observe(inputCard);
+  window.addEventListener("resize", queueCardSizing);
+  document.fonts.ready.then(queueCardSizing);
+
   const sourceDialog = document.querySelector("#case-source-dialog");
   if (sourceDialog?.showModal) {
     document.querySelectorAll("#case-provenance-link, .case-provenance-trigger").forEach(link => {
