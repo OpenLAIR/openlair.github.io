@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="styles.css?v=9316405ece0e" />
     <link rel="stylesheet" href="motion.css?v=f934d05f356c" />
     <link rel="stylesheet" href="decision-demo.css?v=fbc0aee835e8" />
-    <script src="release-config.js?v=87690b5c79f6" defer></script>
-    <script src="app.js?v=bc88b82420d8" defer></script>
+    <script src="release-config.js?v=0d9f5cd61477" defer></script>
+    <script src="app.js?v=5ce27de0b036" defer></script>
     <script src="decision-cases.js?v=9adacadff0a0" defer></script>
     <script src="decision-demo.js?v=5567b8547256" defer></script>
     <script src="motion.js?v=7a7ca94c5282" defer></script>
@@ -195,10 +195,10 @@
             ><small>Private</small></a
           >
           <a
-            href="https://huggingface.co/collections/songdj/lev"
+            href="#datasets"
             data-resource="data"
             ><span>Data <span aria-hidden="true">↗</span></span
-            ><small>Planned</small></a
+            ><small>Private</small></a
           >
           <a href="#release" data-resource="demo"
             ><span>Demo <span aria-hidden="true">↗</span></span
@@ -599,9 +599,8 @@
         <div class="section-heading">
           <h2 id="release-title">Follow the research.</h2>
           <p id="release-intro">
-            Code and model repositories are in private staging. Links are
-            provided for authorized accounts; data and the live demo are
-            forthcoming.
+            Code, model, and dataset repositories are in private staging. Links
+            require an authorized account; the live inference demo is forthcoming.
           </p>
         </div>
         <nav class="project-links" aria-label="Project resources">
@@ -616,6 +615,9 @@
             href="https://huggingface.co/collections/songdj/lev"
             data-resource="models"
             ><span>Hugging Face collection</span><small>Private</small></a
+          >
+          <a href="#datasets" data-resource="data"
+            ><span>Datasets</span><small>Private</small></a
           >
         </nav>
         <div
@@ -671,19 +673,49 @@
               ><span>Models</span><small>Private</small></a
             >
           </div>
-          <div>
-            <span class="release-kind">Data</span>
+          <div id="datasets">
+            <span class="release-kind">Benchmark</span>
             <p>
-              LevBench, training resources, and reproduction artifacts are
-              planned.<code
-                >The private collection currently contains models only;
-                source-specific dataset terms apply.</code
+              LevBench subset filtered by source redistribution terms, with
+              reconstruction recipes.<code
+                >This is not the full original benchmark. Obtain excluded sources
+                lawfully under their own terms.</code
               >
             </p>
             <a
-              data-resource="data"
-              href="https://huggingface.co/collections/songdj/lev"
-              ><span>Data</span><small>Planned</small></a
+              data-resource="benchmark"
+              href="https://huggingface.co/datasets/songdj/LevBench"
+              ><span>LevBench</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Training</span>
+            <p>
+              Lev-train-v2 subset filtered by source redistribution terms,
+              plus training-data recipes.<code
+                >The full original training mixture is not downloadable here;
+                remaining sources require lawful local acquisition.</code
+              >
+            </p>
+            <a
+              data-resource="training"
+              href="https://huggingface.co/datasets/songdj/Lev-train-v2"
+              ><span>Lev-train-v2</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Results</span>
+            <p>
+              Results and reproduction materials without source question or
+              training-example text.<code
+                >Lev-results contains no original benchmark questions or training
+                examples.</code
+              >
+            </p>
+            <a
+              data-resource="results"
+              href="https://huggingface.co/datasets/songdj/Lev-results"
+              ><span>Lev-results</span><small>Private</small></a
             >
           </div>
           <div>
