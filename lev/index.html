@@ -71,63 +71,95 @@
             More computation through loops in hidden space.
           </p>
         </div>
-        <figure class="hero-diagram decision-demo" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
-          <div class="demo-heading"><div><span class="eyebrow">Inside a decision</span><h2 id="diagram-title">An answer at every loop.</h2></div><span class="demo-live"><span></span> <span id="demo-loop-label">Loop 03 / 04</span></span></div>
-          <div class="demo-scenarios" role="group" aria-label="Illustrative decision examples">
-            <button type="button" data-scenario="fast" aria-pressed="false" disabled>Quick decision</button>
-            <button type="button" data-scenario="deeper" aria-pressed="true" disabled>Think deeper</button>
-            <button type="button" data-scenario="full" aria-pressed="false" disabled>Full depth</button>
+        <figure class="hero-diagram decision-demo" data-scenario="easy" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
+          <div class="demo-heading"><div><span class="eyebrow">Inside a decision</span><h2 id="diagram-title">An answer at every loop.</h2></div><span class="demo-live"><span></span> <span id="demo-loop-label">Easy · 01 / 04</span></span></div>
+          <div class="demo-scenarios" role="group" aria-label="Easy and hard illustrative cases">
+            <button type="button" data-scenario="easy" aria-pressed="true" disabled><strong>Easy</strong><span>Decide in 1 loop</span></button>
+            <button type="button" data-scenario="hard" aria-pressed="false" disabled><strong>Hard</strong><span>Think for 4 loops</span></button>
           </div>
+          <p class="case-summary" id="demo-case-summary">A clear preference. Select A after one loop; skip the remaining three.</p>
           <p class="stopper-explainer"><strong>Stopper <i>g</i><sub>k</sub></strong> predicts whether this answer matches the deepest one.<span>Stop if <i>g</i><sub>k</sub> ≥ <i>τ</i> · example <i>τ</i> = 95%</span></p>
           <div class="flow-headings" aria-hidden="true"><span>Shared decoder</span><span>Option probabilities</span><span>Stopper → decision</span></div>
           <ol class="loop-flow" aria-label="Four loops of the same decoder">
-<li class="loop-row" data-loop="1" data-state="complete">
-                <div class="loop-compute"><span class="loop-number">01</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-                <div class="option-distribution" role="img" aria-label="Loop 1: A 46 percent, B 37 percent, C 17 percent"><div class="option-bar is-top" data-option="A"><span class="bar-value">46%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.46"></span></span><span class="bar-label">A</span></div><div class="option-bar" data-option="B"><span class="bar-value">37%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.37"></span></span><span class="bar-label">B</span></div><div class="option-bar" data-option="C"><span class="bar-value">17%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.17"></span></span><span class="bar-label">C</span></div></div>
-                <div class="loop-gate"><div class="stopper-block" role="img" aria-label="Loop 1: stopper predicts 61 percent agreement; example threshold 95 percent">
+            <li class="loop-row" data-loop="1" data-state="exited">
+              <div class="loop-compute"><span class="loop-number">01</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
+              <div class="option-distribution" role="img" aria-label="Loop 1: A 88 percent, B 8 percent, C 4 percent">
+                  <div class="option-bar is-top" data-option="A"><span class="bar-value">88%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.88"></span></span><span class="bar-label">A</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.08"></span></span><span class="bar-label">B</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">4%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.04"></span></span><span class="bar-label">C</span></div>
+              </div>
+              <div class="loop-gate">
+                <div class="stopper-block" role="img" aria-label="Loop 1: stopper predicts 97 percent agreement; example threshold 95 percent">
                   <span class="stopper-name">Stopper g<sub>1</sub></span><span class="stopper-inputs">p¹</span>
-                  <span class="stopper-comparison">61% < 95%</span>
-                  <span class="stopper-meter" style="--agreement:0.61"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
-                </div><span class="gate-label">Continue</span><div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch is-chosen">No <span aria-hidden="true">↓</span></span></div></div>
-                <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
-              </li>
-<li class="loop-row" data-loop="2" data-state="complete">
-                <div class="loop-compute"><span class="loop-number">02</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-                <div class="option-distribution" role="img" aria-label="Loop 2: A 43 percent, B 46 percent, C 11 percent"><div class="option-bar" data-option="A"><span class="bar-value">43%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.43"></span></span><span class="bar-label">A</span></div><div class="option-bar is-top" data-option="B"><span class="bar-value">46%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.46"></span></span><span class="bar-label">B</span></div><div class="option-bar" data-option="C"><span class="bar-value">11%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.11"></span></span><span class="bar-label">C</span></div></div>
-                <div class="loop-gate"><div class="stopper-block" role="img" aria-label="Loop 2: stopper predicts 84 percent agreement; example threshold 95 percent">
-                  <span class="stopper-name">Stopper g<sub>2</sub></span><span class="stopper-inputs">p¹, p²</span>
-                  <span class="stopper-comparison">84% < 95%</span>
-                  <span class="stopper-meter" style="--agreement:0.84"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
-                </div><span class="gate-label">Continue</span><div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch is-chosen">No <span aria-hidden="true">↓</span></span></div></div>
-                <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
-              </li>
-<li class="loop-row" data-loop="3" data-state="exited">
-                <div class="loop-compute"><span class="loop-number">03</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-                <div class="option-distribution" role="img" aria-label="Loop 3: A 8 percent, B 86 percent, C 6 percent"><div class="option-bar" data-option="A"><span class="bar-value">8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.08"></span></span><span class="bar-label">A</span></div><div class="option-bar is-top" data-option="B"><span class="bar-value">86%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.86"></span></span><span class="bar-label">B</span></div><div class="option-bar" data-option="C"><span class="bar-value">6%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.06"></span></span><span class="bar-label">C</span></div></div>
-                <div class="loop-gate"><div class="stopper-block" role="img" aria-label="Loop 3: stopper predicts 97 percent agreement; example threshold 95 percent">
-                  <span class="stopper-name">Stopper g<sub>3</sub></span><span class="stopper-inputs">p², p³</span>
                   <span class="stopper-comparison">97% ≥ 95%</span>
                   <span class="stopper-meter" style="--agreement:0.97"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
-                </div><span class="gate-label">Select B</span><div class="gate-branches"><span class="exit-branch is-chosen">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div></div>
-                <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
-              </li>
-<li class="loop-row" data-loop="4" data-state="skipped">
-                <div class="loop-compute"><span class="loop-number">04</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-                <div class="option-distribution" role="img" aria-label="Loop 4: not computed"><div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0.0"></span></span><span class="bar-label">A</span></div><div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0.0"></span></span><span class="bar-label">B</span></div><div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0.0"></span></span><span class="bar-label">C</span></div></div>
-                <div class="loop-gate"><div class="stopper-block" role="img" aria-label="Maximum depth: no stopper needed">
+                </div>
+                <span class="gate-label">Select A</span>
+                <div class="gate-branches"><span class="exit-branch is-chosen">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
+              </div>
+              <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
+            </li>
+            <li class="loop-row" data-loop="2" data-state="skipped">
+              <div class="loop-compute"><span class="loop-number">02</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
+              <div class="option-distribution" role="img" aria-label="Loop 2: skipped">
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+              </div>
+              <div class="loop-gate">
+                <div class="stopper-block" role="img" aria-label="Loop 2: skipped">
+                  <span class="stopper-name">Stopper g<sub>2</sub></span><span class="stopper-inputs">p¹, p²</span>
+                  <span class="stopper-comparison">—</span>
+                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                </div>
+                <span class="gate-label">Not needed</span>
+                <div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
+              </div>
+              <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
+            </li>
+            <li class="loop-row" data-loop="3" data-state="skipped">
+              <div class="loop-compute"><span class="loop-number">03</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
+              <div class="option-distribution" role="img" aria-label="Loop 3: skipped">
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+              </div>
+              <div class="loop-gate">
+                <div class="stopper-block" role="img" aria-label="Loop 3: skipped">
+                  <span class="stopper-name">Stopper g<sub>3</sub></span><span class="stopper-inputs">p², p³</span>
+                  <span class="stopper-comparison">—</span>
+                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                </div>
+                <span class="gate-label">Not needed</span>
+                <div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
+              </div>
+              <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
+            </li>
+            <li class="loop-row" data-loop="4" data-state="skipped">
+              <div class="loop-compute"><span class="loop-number">04</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
+              <div class="option-distribution" role="img" aria-label="Loop 4: skipped">
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+              </div>
+              <div class="loop-gate">
+                <div class="stopper-block" role="img" aria-label="Loop 4: skipped">
                   <span class="stopper-name">Depth limit</span><span class="stopper-inputs">No stopper</span>
                   <span class="stopper-comparison">—</span>
                   <span class="stopper-meter" hidden style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
-                </div><span class="gate-label">Not needed</span><div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch" hidden>Final <span aria-hidden="true">↓</span></span></div></div>
+                </div>
+                <span class="gate-label">Not needed</span>
+                <div class="gate-branches"><span class="exit-branch">Exit <span aria-hidden="true">↗</span></span><span class="continue-branch" hidden>No <span aria-hidden="true">↓</span></span></div>
+              </div>
 
-              </li>
+            </li>
           </ol>
-          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Loop 3 · Select B. The remaining loop is skipped.</p></div>
+          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Easy · Loop 1 · Select A. The remaining three loops are skipped.</p></div>
           <div class="demo-toolbar">
             <div class="demo-step-controls"><button type="button" id="demo-replay" disabled><span aria-hidden="true">↺</span> Replay</button><button type="button" id="demo-next" disabled>Next step <span aria-hidden="true">→</span></button></div>
             <button id="motion-toggle" type="button" aria-pressed="false" hidden><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button>
           </div>
-          <figcaption id="diagram-desc">Illustrative probabilities and threshold, not live inference. The stopper uses current/prior readouts (margin, entropy, KL, …): gₖ = σ(wₖᵀfₖ + bₖ). It is fitted without answer labels; the paper targets 98% aggregate agreement when fitting τ.</figcaption>
+          <figcaption id="diagram-desc">Illustrative Easy/Hard cases, probabilities and threshold, not live inference. Autoplay alternates the two cases. The stopper uses current/prior readouts (margin, entropy, KL, …): gₖ = σ(wₖᵀfₖ + bₖ). It is fitted without answer labels; the paper targets 98% aggregate agreement when fitting τ.</figcaption>
           <p class="sr-only" id="demo-announcement" role="status" aria-live="polite"></p>
         </figure>
         <div class="authors">
