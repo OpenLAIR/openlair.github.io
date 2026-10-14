@@ -26,13 +26,13 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://openlair.github.io/lev/" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="motion.css" />
-    <link rel="stylesheet" href="decision-demo.css" />
-    <script src="release-config.js" defer></script>
-    <script src="app.js" defer></script>
-    <script src="decision-demo.js" defer></script>
-    <script src="motion.js" defer></script>
+    <link rel="stylesheet" href="styles.css?v=9316405ece0e" />
+    <link rel="stylesheet" href="motion.css?v=f934d05f356c" />
+    <link rel="stylesheet" href="decision-demo.css?v=f27928c1f474" />
+    <script src="release-config.js?v=0d9f5cd61477" defer></script>
+    <script src="app.js?v=5ce27de0b036" defer></script>
+    <script src="decision-demo.js?v=287b4783e8aa" defer></script>
+    <script src="motion.js?v=7a7ca94c5282" defer></script>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -70,23 +70,44 @@
             />
             More computation through loops in hidden space.
           </p>
+          <section class="case-worked-example" aria-labelledby="case-question">
+            <div class="case-card-heading"><span class="eyebrow">Example input</span><span class="case-kind" id="case-kind">Easy · direct rule</span></div>
+            <h2 id="case-question">Which order can ship today?</h2>
+            <div class="demo-scenarios" role="group" aria-label="Choose an example to play" hidden>
+              <button type="button" data-scenario="easy" aria-pressed="true" aria-controls="case-input-easy"><strong>Easy</strong><span>1 loop</span></button>
+              <button type="button" data-scenario="hard" aria-pressed="false" aria-controls="case-input-hard"><strong>Hard</strong><span>4 loops</span></button>
+            </div>
+            <div class="case-input" id="case-input-easy">
+              <p class="case-rule"><strong>Rule</strong> An order can ship only if it is paid and in stock.</p>
+              <ul class="case-options" aria-label="Easy case options">
+                <li data-answer="0"><span class="option-key">A</span><div><strong>Maple</strong><span>Paid · in stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+                <li data-answer="1"><span class="option-key">B</span><div><strong>Cedar</strong><span>Unpaid · in stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+                <li data-answer="2"><span class="option-key">C</span><div><strong>Pine</strong><span>Paid · out of stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+              </ul>
+            </div>
+            <div class="case-input" id="case-input-hard" hidden>
+              <p class="case-rule"><strong>Rule</strong> An order must be paid, in stock and approved within 48 hours. <strong>Exception:</strong> priority orders keep approval for 72 hours.</p>
+              <ul class="case-options" aria-label="Hard case options">
+                <li data-answer="0"><span class="option-key">A</span><div><strong>Maple</strong><span>Paid · in stock · standard<br />Approved 60 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+                <li data-answer="1"><span class="option-key">B</span><div><strong>Cedar</strong><span>Paid · in stock · priority<br />Approved 60 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+                <li data-answer="2"><span class="option-key">C</span><div><strong>Pine</strong><span>Paid · out of stock · priority<br />Approved 24 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
+              </ul>
+            </div>
+            <p class="case-answer" id="case-answer">Maple meets both conditions. The other two orders each fail one.</p>
+            <p class="case-playback" id="case-playback">Autoplay · choose a case to keep it selected.</p>
+          </section>
         </div>
         <figure class="hero-diagram decision-demo" data-scenario="easy" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
           <div class="demo-heading"><div><span class="eyebrow">Inside a decision</span><h2 id="diagram-title">An answer at every loop.</h2></div><span class="demo-live"><span></span> <span id="demo-loop-label">Easy · 01 / 04</span></span></div>
-          <div class="demo-scenarios" role="group" aria-label="Easy and hard illustrative cases">
-            <button type="button" data-scenario="easy" aria-pressed="true" disabled><strong>Easy</strong><span>Decide in 1 loop</span></button>
-            <button type="button" data-scenario="hard" aria-pressed="false" disabled><strong>Hard</strong><span>Think for 4 loops</span></button>
-          </div>
-          <p class="case-summary" id="demo-case-summary">A clear preference. Select A after one loop; skip the remaining three.</p>
           <p class="stopper-explainer"><strong>Stopper <i>g</i><sub>k</sub></strong> predicts whether this answer matches the deepest one.<span>Stop if <i>g</i><sub>k</sub> ≥ <i>τ</i> · example <i>τ</i> = 95%</span></p>
-          <div class="flow-headings" aria-hidden="true"><span>Shared decoder</span><span>Option probabilities</span><span>Stopper → decision</span></div>
+          <div class="flow-headings" aria-hidden="true"><span>Shared decoder</span><span>Order probabilities</span><span>Stopper → decision</span></div>
           <ol class="loop-flow" aria-label="Four loops of the same decoder">
             <li class="loop-row" data-loop="1" data-state="exited">
               <div class="loop-compute"><span class="loop-number">01</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-              <div class="option-distribution" role="img" aria-label="Loop 1: A 88 percent, B 8 percent, C 4 percent">
-                  <div class="option-bar is-top" data-option="A"><span class="bar-value">88%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.88"></span></span><span class="bar-label">A</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.08"></span></span><span class="bar-label">B</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">4%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.04"></span></span><span class="bar-label">C</span></div>
+              <div class="option-distribution" role="img" aria-label="Loop 1: Maple 88 percent, Cedar 8 percent, Pine 4 percent">
+                  <div class="option-bar is-top" data-option="A"><span class="bar-value">88%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.88"></span></span><span class="bar-label">Maple</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.08"></span></span><span class="bar-label">Cedar</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">4%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.04"></span></span><span class="bar-label">Pine</span></div>
               </div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 1: stopper predicts 97 percent agreement; example threshold 95 percent">
@@ -94,7 +115,7 @@
                   <span class="stopper-comparison">97% ≥ 95%</span>
                   <span class="stopper-meter" style="--agreement:0.97"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
                 </div>
-                <span class="gate-label">Select A</span>
+                <span class="gate-label">Ship Maple</span>
                 <div class="gate-branches"><span class="exit-branch is-chosen">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
               </div>
               <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
@@ -102,9 +123,9 @@
             <li class="loop-row" data-loop="2" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">02</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
               <div class="option-distribution" role="img" aria-label="Loop 2: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
               </div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 2: skipped">
@@ -120,9 +141,9 @@
             <li class="loop-row" data-loop="3" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">03</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
               <div class="option-distribution" role="img" aria-label="Loop 3: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
               </div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 3: skipped">
@@ -138,9 +159,9 @@
             <li class="loop-row" data-loop="4" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">04</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
               <div class="option-distribution" role="img" aria-label="Loop 4: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div>
+                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
+                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
+                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
               </div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 4: skipped">
@@ -154,12 +175,12 @@
 
             </li>
           </ol>
-          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Easy · Loop 1 · Select A. The remaining three loops are skipped.</p></div>
+          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Easy · Loop 1 · Ship Maple. Paid and in stock; three loops skipped.</p></div>
           <div class="demo-toolbar">
             <div class="demo-step-controls"><button type="button" id="demo-replay" disabled><span aria-hidden="true">↺</span> Replay</button><button type="button" id="demo-next" disabled>Next step <span aria-hidden="true">→</span></button></div>
             <button id="motion-toggle" type="button" aria-pressed="false" hidden><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button>
           </div>
-          <figcaption id="diagram-desc">Illustrative Easy/Hard cases, probabilities and threshold, not live inference. Autoplay alternates the two cases. The stopper uses current/prior readouts (margin, entropy, KL, …): gₖ = σ(wₖᵀfₖ + bₖ). It is fitted without answer labels; the paper targets 98% aggregate agreement when fitting τ.</figcaption>
+          <figcaption id="diagram-desc">The order examples are fully specified on this page. Probabilities and the 95% threshold illustrate the mechanism; they are not measured model outputs. Manual case selection plays once and stays selected. The stopper uses current/prior readouts (margin, entropy, KL, …): gₖ = σ(wₖᵀfₖ + bₖ). It is fitted without answer labels; the paper targets 98% aggregate agreement when fitting τ.</figcaption>
           <p class="sr-only" id="demo-announcement" role="status" aria-live="polite"></p>
         </figure>
         <div class="authors">
@@ -194,10 +215,10 @@
             ><small>Private</small></a
           >
           <a
-            href="https://huggingface.co/collections/songdj/lev"
+            href="#datasets"
             data-resource="data"
             ><span>Data <span aria-hidden="true">↗</span></span
-            ><small>Planned</small></a
+            ><small>Private</small></a
           >
           <a href="#release" data-resource="demo"
             ><span>Demo <span aria-hidden="true">↗</span></span
@@ -598,9 +619,8 @@
         <div class="section-heading">
           <h2 id="release-title">Follow the research.</h2>
           <p id="release-intro">
-            Code and model repositories are in private staging. Links are
-            provided for authorized accounts; data and the live demo are
-            forthcoming.
+            Code, model, and dataset repositories are in private staging. Links
+            require an authorized account; the live inference demo is forthcoming.
           </p>
         </div>
         <nav class="project-links" aria-label="Project resources">
@@ -615,6 +635,9 @@
             href="https://huggingface.co/collections/songdj/lev"
             data-resource="models"
             ><span>Hugging Face collection</span><small>Private</small></a
+          >
+          <a href="#datasets" data-resource="data"
+            ><span>Datasets</span><small>Private</small></a
           >
         </nav>
         <div
@@ -670,19 +693,49 @@
               ><span>Models</span><small>Private</small></a
             >
           </div>
-          <div>
-            <span class="release-kind">Data</span>
+          <div id="datasets">
+            <span class="release-kind">Benchmark</span>
             <p>
-              LevBench, training resources, and reproduction artifacts are
-              planned.<code
-                >The private collection currently contains models only;
-                source-specific dataset terms apply.</code
+              LevBench subset filtered by source redistribution terms, with
+              reconstruction recipes.<code
+                >This is not the full original benchmark. Obtain excluded sources
+                lawfully under their own terms.</code
               >
             </p>
             <a
-              data-resource="data"
-              href="https://huggingface.co/collections/songdj/lev"
-              ><span>Data</span><small>Planned</small></a
+              data-resource="benchmark"
+              href="https://huggingface.co/datasets/songdj/LevBench"
+              ><span>LevBench</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Training</span>
+            <p>
+              Lev-train-v2 subset filtered by source redistribution terms,
+              plus training-data recipes.<code
+                >The full original training mixture is not downloadable here;
+                remaining sources require lawful local acquisition.</code
+              >
+            </p>
+            <a
+              data-resource="training"
+              href="https://huggingface.co/datasets/songdj/Lev-train-v2"
+              ><span>Lev-train-v2</span><small>Private</small></a
+            >
+          </div>
+          <div>
+            <span class="release-kind">Results</span>
+            <p>
+              Results and reproduction materials without source question or
+              training-example text.<code
+                >Lev-results contains no original benchmark questions or training
+                examples.</code
+              >
+            </p>
+            <a
+              data-resource="results"
+              href="https://huggingface.co/datasets/songdj/Lev-results"
+              ><span>Lev-results</span><small>Private</small></a
             >
           </div>
           <div>

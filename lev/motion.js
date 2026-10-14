@@ -174,6 +174,10 @@
     userPaused = true;
     syncMotion();
   });
+  document.addEventListener("lev:play-motion", () => {
+    userPaused = false;
+    syncMotion();
+  });
   reduced.addEventListener("change", syncMotion);
   document.addEventListener("visibilitychange", syncMotion);
   document.querySelector(".depth-controls").disabled = false;
