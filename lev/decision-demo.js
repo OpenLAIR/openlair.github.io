@@ -9,6 +9,10 @@
   const examples = Object.fromEntries(Object.entries(trace.cases).map(([key, data]) => [key, {
     ...data, probabilities: data.probabilities.slice(0, data.exitDepth),
   }]));
+  const answerSummaries = {
+    easy: "Correct: B — got into Cameron’s automobile. The stopper clears τ after one loop.",
+    hard: "Correct: 6. White is 13/24 of the total: 26 ÷ (13/24) = 48 balls; 48 ÷ 8 = 6.",
+  };
   const percent = value => `${(value * 100).toFixed(2)}%`;
   const rows = [...diagram.querySelectorAll(".loop-row")];
   const buttons = [...document.querySelectorAll(".demo-scenarios button[data-scenario]")];
@@ -97,7 +101,7 @@
         option.querySelector(".answer-mark").textContent = chosen ? "✓" : "";
       });
     });
-    document.querySelector("#case-answer").textContent = atExit() ? data.explanation : "Read the input and compare the options. Watch the recorded decision unfold.";
+    document.querySelector("#case-answer").textContent = atExit() ? answerSummaries[scenario] : "Read the input and compare the options. Watch the recorded decision unfold.";
     document.querySelector("#case-playback").textContent = autoTour
       ? "Autoplay · choose a case to keep it selected."
       : atExit() ? `${data.label} complete · Replay to watch again.` : `${data.label} selected · plays once, then stays here.`;
@@ -175,4 +179,20 @@
   if (reducedMotion.matches) { loop = 0; phase = 3; }
   render();
   document.querySelector(".demo-scenarios").hidden = false;
+  const sourceDialog = document.querySelector("#case-source-dialog");
+  if (sourceDialog?.showModal) {
+    document.querySelectorAll("#case-provenance-link, .case-provenance-trigger").forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        document.dispatchEvent(new Event("lev:pause-motion"));
+        sourceDialog.showModal();
+      });
+    });
+    document.querySelector("#case-source-close").addEventListener("click", () => sourceDialog.close());
+    sourceDialog.addEventListener("click", event => {
+      if (event.target !== sourceDialog) return;
+      const rect = sourceDialog.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) sourceDialog.close();
+    });
+  }
 })();
