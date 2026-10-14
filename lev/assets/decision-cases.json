@@ -1,0 +1,337 @@
+{
+  "model": "Lev-2.6B",
+  "checkpoint": "ouro26-ls-s0 (S31, seed 0)",
+  "experiment": "E06",
+  "split": "development",
+  "temperatures": [
+    1.148698354997035,
+    1.1755479062836087,
+    1.148698354997035,
+    1.148698354997035
+  ],
+  "min_agree": 0.98,
+  "probability_definition": "softmax(archived fp32 logits / per-depth calibration temperature); probabilities are percentages",
+  "stopper": "Reconstructed offline with the unchanged E06 two-fold, group-disjoint agreement-fitting procedure; not a new model run. Calibration plus the opposite development fold train each logistic regressor. The held-out case never enters its stopper fit. τ is fitted on the opposite fold for 98% aggregate agreement.",
+  "selection": "Two selected successful examples for mechanism explanation, not a representative accuracy estimate. Easy/Hard describe these observed trajectories, not official dataset difficulty labels.",
+  "display": "Original context and option wording retained. The MathQA problem field is displayed as prose, its question is repeated as a short heading, and option keys are uppercased in the UI. Editorial answer explanations are not model reasoning.",
+  "features": [
+    "top probability",
+    "margin",
+    "normalised entropy",
+    "same answer as the previous depth",
+    "KL(previous depth || this depth)",
+    "log option count",
+    "top probability minus the previous depth's",
+    "depth"
+  ],
+  "fitted_stoppers": [
+    {
+      "held_out_fold": 0,
+      "threshold": 0.9275,
+      "coefficients": [
+        [
+          1.8177726888317134,
+          1.2164108045251345,
+          -1.6362144493475144,
+          0.3142525266617298,
+          0.0,
+          -0.18248579602295434,
+          0.0,
+          0.0
+        ],
+        [
+          -0.2568506277304674,
+          4.387708854990757,
+          -0.34262230108176084,
+          0.3295457980462332,
+          -0.6526291438700512,
+          0.3480192703748077,
+          -0.18653352253019215,
+          0.010875785906513887
+        ],
+        [
+          0.6949800557353737,
+          5.1031299523408,
+          0.2808302619392168,
+          0.4071217362239693,
+          -0.5214717058319877,
+          0.7749263762051971,
+          1.1634614087378663,
+          -0.4322270899806101
+        ]
+      ],
+      "intercepts": [
+        0.3986473381559831,
+        -0.11519241434714916,
+        -0.3246069767044413
+      ]
+    },
+    {
+      "held_out_fold": 1,
+      "threshold": 0.9225,
+      "coefficients": [
+        [
+          1.5411509109795631,
+          1.217183511395416,
+          -1.6852543455022044,
+          0.39521724421987753,
+          0.0,
+          -0.19192591152662086,
+          0.0,
+          0.0
+        ],
+        [
+          -0.025709194547677606,
+          3.4586320343197534,
+          -0.9311096820769365,
+          0.14015794862814734,
+          -0.6163221975366481,
+          0.21759986385374663,
+          0.17685187495769653,
+          0.23275961240769946
+        ],
+        [
+          0.8464335990417597,
+          5.192660717207364,
+          0.11623106022776104,
+          0.5445267275712011,
+          -0.3260925341065738,
+          0.4829585215926536,
+          1.8200858789781014,
+          -0.3069012588401383
+        ]
+      ],
+      "intercepts": [
+        0.476946865197514,
+        0.4205803445142968,
+        -0.23337231697949073
+      ]
+    }
+  ],
+  "cases": {
+    "easy": {
+      "label": "Easy",
+      "kind": "Social IQa",
+      "title": "Airport pickup",
+      "heading": "What will happen to Robin?",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "option_text": [
+        "got Robin seasick",
+        "got into Cameron's automobile",
+        "got lost looking for Cameron"
+      ],
+      "option_keys": [
+        "a",
+        "b",
+        "c"
+      ],
+      "state": "Cameron picked Robin up from the airport.",
+      "instructions": "What will happen to Robin?",
+      "dataset_label": "b",
+      "probabilities": [
+        [
+          0.7608458778888406,
+          97.12394043981078,
+          2.115213682300366
+        ],
+        [
+          1.597527221920221,
+          95.61023977102721,
+          2.7922330070525603
+        ],
+        [
+          0.4819611477977534,
+          96.63737019088698,
+          2.8806686613152577
+        ],
+        [
+          0.2594014421526442,
+          98.75309600816523,
+          0.9875025496821381
+        ]
+      ],
+      "logits": [
+        [
+          -2.491669178009033,
+          3.078727960586548,
+          -1.3171477317810059
+        ],
+        [
+          -2.3323044776916504,
+          2.4778294563293457,
+          -1.6758965253829956
+        ],
+        [
+          -3.1381423473358154,
+          2.9509437084198,
+          -1.0843682289123535
+        ],
+        [
+          -2.8968396186828613,
+          3.928727388381958,
+          -1.3612570762634277
+        ]
+      ],
+      "agreement": [
+        0.9564382524581166,
+        0.9826414758473851,
+        0.9973943657691757
+      ],
+      "threshold": 0.9225,
+      "exitDepth": 1,
+      "explanation": "The model selects B, matching the dataset label: got into Cameron's automobile. The stopper clears the threshold at loop 1.",
+      "source": {
+        "dataset": "Social IQa",
+        "record_id": "loopjev-eval-v1/development/id/loopjev_social_iqa/validation/1407",
+        "origin_id": "loopjev_social_iqa/validation/1407",
+        "partition": "LevBench development",
+        "upstream_split": "validation",
+        "upstream_row": 1407,
+        "url": "https://huggingface.co/datasets/allenai/social_i_qa",
+        "revision": "537a2ec8ec565adc0b70b70752893e59e024df26",
+        "license": "CC-BY-4.0",
+        "attribution": "Sap et al. (2019), Social IQa; Maarten Sap and collaborators.",
+        "state_sha256": "027c906c09b585af5c90e0112d1db1221295b69b36ec112776379c5722a04b45",
+        "record_group": "loopjev-eval-v1/loopjev_social_iqa/context/027c906c09b585af",
+        "held_out_fold": 1
+      }
+    },
+    "hard": {
+      "label": "Hard",
+      "kind": "MathQA",
+      "title": "Counting blue balls",
+      "heading": "How many balls are blue?",
+      "options": [
+        "6",
+        "5",
+        "4",
+        "3",
+        "8"
+      ],
+      "option_text": [
+        "6",
+        "5",
+        "4",
+        "3",
+        "8"
+      ],
+      "option_keys": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "state": {
+        "problem": "in a bag of small balls 1 / 4 are green , 1 / 8 are blue , 1 / 12 are yellow and the remaining 26 white . how many balls are blue ?"
+      },
+      "instructions": "Which option answers the problem?",
+      "dataset_label": "a",
+      "probabilities": [
+        [
+          6.781838224864344,
+          28.709399740983798,
+          32.15741438204579,
+          25.19233550084945,
+          7.1590121512566105
+        ],
+        [
+          24.38185572556243,
+          10.733656153103418,
+          22.049473029934944,
+          31.118644919963025,
+          11.716370171436177
+        ],
+        [
+          14.550483527674379,
+          2.1344759396220607,
+          46.48020713175704,
+          15.848127289977409,
+          20.98670611096911
+        ],
+        [
+          37.04200944408752,
+          1.448298323772584,
+          23.065493131743295,
+          36.40793500541953,
+          2.0362640949770836
+        ]
+      ],
+      "logits": [
+        [
+          1.0889716148376465,
+          2.746516227722168,
+          2.8767998218536377,
+          2.5963988304138184,
+          1.1511435508728027
+        ],
+        [
+          1.6802067756652832,
+          0.7157226204872131,
+          1.562004804611206,
+          1.9670027494430542,
+          0.8187038898468018
+        ],
+        [
+          3.108205556869507,
+          0.9033904075622559,
+          4.4423065185546875,
+          3.2063355445861816,
+          3.528933525085449
+        ],
+        [
+          3.4206666946411133,
+          -0.3030266761779785,
+          2.8765110969543457,
+          3.4008333683013916,
+          0.08836644887924194
+        ]
+      ],
+      "agreement": [
+        0.3992085457997849,
+        0.5497945241247091,
+        0.8736271928976953
+      ],
+      "threshold": 0.9225,
+      "exitDepth": 4,
+      "explanation": "The model selects 6 at the depth limit, matching the dataset label. White balls are 13/24 of the total: 26 ÷ (13/24) = 48; 48 ÷ 8 = 6. This explanation is editorial, not generated by Lev.",
+      "source": {
+        "dataset": "MathQA",
+        "record_id": "loopjev-eval-v1/development/id/loopjev_mathqa/validation/883",
+        "origin_id": "loopjev_mathqa/validation/883",
+        "partition": "LevBench development",
+        "upstream_split": "validation",
+        "upstream_row": 883,
+        "url": "https://huggingface.co/datasets/allenai/math_qa",
+        "revision": "fafb9f7ee5b9ec4da9499f9c4177a4c91389f2d6",
+        "license": "Apache-2.0",
+        "attribution": "Amini et al. (2019), MathQA; AQuA-RAT, Google/DeepMind (2017).",
+        "state_sha256": "2fda7c9919c3982d5d552cca839b3413d1d4eb2f91e82bad6e87aeb97a972c2b",
+        "record_group": "loopjev-eval-v1/loopjev_mathqa/template/4c1d0b5bc1149dda",
+        "held_out_fold": 1
+      }
+    }
+  },
+  "evidence_sha256": {
+    ".runtime/experiments/phase2-s31-2682/ouro26-ls-s0/rows/eval-v1-development.json": "ba9f1640828b8a2d37f142e15a40e1b48f0b40f62e0a61da09962e0bfcbe9fdb",
+    ".runtime/experiments/phase2-s31-2682/ouro26-ls-s0/rows/decision-v7-calibration.json": "e7697e34f3581cfeacebe1003a22d836a7d5028c5c62aa5a3e4ed484d7629c88",
+    ".runtime/experiments/phase2-s31-2682/ouro26-ls-s0/analysis-xfit-fix1/adaptive.json": "930f4cbeb57102f5f0fde1b72be6f0d1be3a0fe00ca5fb630faffdb720fdc5d9",
+    "Experiments/evals/loopjev/eval-v1/development.jsonl": "a0f8f8ad4a7c51aeb313b5ab4667ac23e9bd9e6ab184900d0a2069faa62a298c",
+    "Experiments/analysis/adaptive_depth.py": "a6b97bc1afcc277a357078de64b95dd34bade9f95729f57205a3ec146afc738c"
+  },
+  "verification": {
+    "archived_thresholds_reproduced": true,
+    "archived_stop_fractions_reproduced": [
+      0.09519450800915331,
+      0.21556064073226544,
+      0.28649885583524026,
+      0.40274599542334094
+    ],
+    "archived_accuracy_reproduced": 0.6276887871853547,
+    "locked_test_read": false
+  }
+}

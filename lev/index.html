@@ -28,10 +28,11 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css?v=9316405ece0e" />
     <link rel="stylesheet" href="motion.css?v=f934d05f356c" />
-    <link rel="stylesheet" href="decision-demo.css?v=f27928c1f474" />
+    <link rel="stylesheet" href="decision-demo.css?v=fbc0aee835e8" />
     <script src="release-config.js?v=87690b5c79f6" defer></script>
     <script src="app.js?v=bc88b82420d8" defer></script>
-    <script src="decision-demo.js?v=287b4783e8aa" defer></script>
+    <script src="decision-cases.js?v=9adacadff0a0" defer></script>
+    <script src="decision-demo.js?v=5567b8547256" defer></script>
     <script src="motion.js?v=7a7ca94c5282" defer></script>
   </head>
   <body>
@@ -71,67 +72,54 @@
             More computation through loops in hidden space.
           </p>
           <section class="case-worked-example" aria-labelledby="case-question">
-            <div class="case-card-heading"><span class="eyebrow">Example input</span><span class="case-kind" id="case-kind">Easy · direct rule</span></div>
-            <h2 id="case-question">Which order can ship today?</h2>
-            <div class="demo-scenarios" role="group" aria-label="Choose an example to play" hidden>
+            <div class="case-card-heading"><span class="eyebrow">Real dataset input</span><span class="case-kind" id="case-kind">Easy · Social IQa</span></div>
+            <h2 id="case-question">What will happen to Robin?</h2>
+            <div class="demo-scenarios" role="group" aria-label="Choose a recorded example to play" hidden>
               <button type="button" data-scenario="easy" aria-pressed="true" aria-controls="case-input-easy"><strong>Easy</strong><span>1 loop</span></button>
               <button type="button" data-scenario="hard" aria-pressed="false" aria-controls="case-input-hard"><strong>Hard</strong><span>4 loops</span></button>
             </div>
             <div class="case-input" id="case-input-easy">
-              <p class="case-rule"><strong>Rule</strong> An order can ship only if it is paid and in stock.</p>
-              <ul class="case-options" aria-label="Easy case options">
-                <li data-answer="0"><span class="option-key">A</span><div><strong>Maple</strong><span>Paid · in stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-                <li data-answer="1"><span class="option-key">B</span><div><strong>Cedar</strong><span>Unpaid · in stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-                <li data-answer="2"><span class="option-key">C</span><div><strong>Pine</strong><span>Paid · out of stock</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-              </ul>
+              <p class="case-rule"><strong>Context</strong> Cameron picked Robin up from the airport.</p>
+              <ul class="case-options" aria-label="Easy case options"><li data-answer="0"><span class="option-key">A</span><div><strong>got Robin seasick</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="1" class="is-selected"><span class="option-key">B</span><div><strong>got into Cameron&#x27;s automobile</strong></div><span class="answer-mark" aria-hidden="true">✓</span></li><li data-answer="2"><span class="option-key">C</span><div><strong>got lost looking for Cameron</strong></div><span class="answer-mark" aria-hidden="true"></span></li></ul>
+              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/social_i_qa">Social IQa</a> · validation #1407<br />In LevBench development · CC-BY-4.0</p>
             </div>
             <div class="case-input" id="case-input-hard" hidden>
-              <p class="case-rule"><strong>Rule</strong> An order must be paid, in stock and approved within 48 hours. <strong>Exception:</strong> priority orders keep approval for 72 hours.</p>
-              <ul class="case-options" aria-label="Hard case options">
-                <li data-answer="0"><span class="option-key">A</span><div><strong>Maple</strong><span>Paid · in stock · standard<br />Approved 60 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-                <li data-answer="1"><span class="option-key">B</span><div><strong>Cedar</strong><span>Paid · in stock · priority<br />Approved 60 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-                <li data-answer="2"><span class="option-key">C</span><div><strong>Pine</strong><span>Paid · out of stock · priority<br />Approved 24 hours ago</span></div><span class="answer-mark" aria-hidden="true"></span></li>
-              </ul>
+              <p class="case-rule"><strong>Context</strong> in a bag of small balls 1 / 4 are green , 1 / 8 are blue , 1 / 12 are yellow and the remaining 26 white . how many balls are blue ?</p>
+              <ul class="case-options case-options--numeric" aria-label="Hard case options"><li data-answer="0"><span class="option-key">A</span><div><strong>6</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="1"><span class="option-key">B</span><div><strong>5</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="2"><span class="option-key">C</span><div><strong>4</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="3"><span class="option-key">D</span><div><strong>3</strong></div><span class="answer-mark" aria-hidden="true"></span></li><li data-answer="4"><span class="option-key">E</span><div><strong>8</strong></div><span class="answer-mark" aria-hidden="true"></span></li></ul>
+              <p class="case-source"><a href="https://huggingface.co/datasets/allenai/math_qa">MathQA</a> · validation #883<br />In LevBench development · Apache-2.0</p>
             </div>
-            <p class="case-answer" id="case-answer">Maple meets both conditions. The other two orders each fail one.</p>
+            <p class="case-answer" id="case-answer">The model selects B, matching the dataset label: got into Cameron&#x27;s automobile. The stopper clears the threshold at loop 1.</p>
             <p class="case-playback" id="case-playback">Autoplay · choose a case to keep it selected.</p>
+            <details class="case-provenance"><summary>Source &amp; recorded trace</summary><p>Lev-2.6B · S31, seed 0 · E06. Saved fp32 outputs, with the experiment’s per-loop temperature scaling. The stopper is reconstructed offline using the original cross-fitting procedure; neither example enters its own stopper fit.</p><p>Social IQa: Sap et al. (2019), <a href="assets/licenses/Social-IQa-CC-BY-4.0.txt">CC BY 4.0</a>. MathQA: Amini et al. (2019); AQuA-RAT, Google/DeepMind (2017), <a href="assets/licenses/Apache-2.0.txt">Apache 2.0</a>. MathQA comes from Lev’s formula-verified subset, formatted as a typed request. Original context and options are retained; headings and answer explanations are editorial.</p><p><a href="assets/decision-cases.json">View both records, logits, probabilities and stopper parameters ↗</a></p></details>
           </section>
         </div>
-        <figure class="hero-diagram decision-demo" data-scenario="easy" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
+        <figure class="hero-diagram decision-demo" data-option-count="3" data-scenario="easy" data-finished="true" aria-labelledby="diagram-title" aria-describedby="diagram-desc">
           <div class="demo-heading"><div><span class="eyebrow">Inside a decision</span><h2 id="diagram-title">An answer at every loop.</h2></div><span class="demo-live"><span></span> <span id="demo-loop-label">Easy · 01 / 04</span></span></div>
-          <p class="stopper-explainer"><strong>Stopper <i>g</i><sub>k</sub></strong> predicts whether this answer matches the deepest one.<span>Stop if <i>g</i><sub>k</sub> ≥ <i>τ</i> · example <i>τ</i> = 95%</span></p>
-          <div class="flow-headings" aria-hidden="true"><span>Shared decoder</span><span>Order probabilities</span><span>Stopper → decision</span></div>
+          <p class="stopper-explainer"><strong>Stopper <i>g</i><sub>k</sub></strong> predicts whether this answer matches the deepest one.<span>Stop if <i>g</i><sub>k</sub> ≥ <i>τ</i> · fitted <i>τ</i> = <span id="demo-threshold">92.25%</span></span></p>
+          <div class="flow-headings" aria-hidden="true"><span>Shared decoder</span><span>Option probabilities</span><span>Stopper → decision</span></div>
           <ol class="loop-flow" aria-label="Four loops of the same decoder">
             <li class="loop-row" data-loop="1" data-state="exited">
               <div class="loop-compute"><span class="loop-number">01</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-              <div class="option-distribution" role="img" aria-label="Loop 1: Maple 88 percent, Cedar 8 percent, Pine 4 percent">
-                  <div class="option-bar is-top" data-option="A"><span class="bar-value">88%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.88"></span></span><span class="bar-label">Maple</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.08"></span></span><span class="bar-label">Cedar</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">4%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.04"></span></span><span class="bar-label">Pine</span></div>
-              </div>
+              <div class="option-distribution" role="img" aria-label="Loop 1: got Robin seasick: 0.76 percent; got into Cameron&#x27;s automobile: 97.12 percent; got lost looking for Cameron: 2.12 percent"><div class="option-bar"><span class="bar-value">0.8%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.007608458778888406"></span></span><span class="bar-label">A</span></div><div class="option-bar is-top"><span class="bar-value">97.1%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.9712394043981079"></span></span><span class="bar-label">B</span></div><div class="option-bar"><span class="bar-value">2.1%</span><span class="bar-track"><span class="bar-fill" style="--probability:0.021152136823003664"></span></span><span class="bar-label">C</span></div></div>
               <div class="loop-gate">
-                <div class="stopper-block" role="img" aria-label="Loop 1: stopper predicts 97 percent agreement; example threshold 95 percent">
+                <div class="stopper-block" role="img" aria-label="Loop 1: stopper predicts 95.64 percent agreement; fitted threshold 92.25 percent">
                   <span class="stopper-name">Stopper g<sub>1</sub></span><span class="stopper-inputs">p¹</span>
-                  <span class="stopper-comparison">97% ≥ 95%</span>
-                  <span class="stopper-meter" style="--agreement:0.97"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                  <span class="stopper-comparison">95.64% ≥ 92.25%</span>
+                  <span class="stopper-meter" style="--agreement:0.9564382524581166;--threshold:92.25%"><span class="stopper-fill"></span><span class="stopper-threshold" title="Fitted threshold: 92.25%"></span></span>
                 </div>
-                <span class="gate-label">Ship Maple</span>
+                <span class="gate-label">Select B</span>
                 <div class="gate-branches"><span class="exit-branch is-chosen">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
               </div>
               <div class="return-route" aria-hidden="true"><span>reuse hidden state</span></div>
             </li>
             <li class="loop-row" data-loop="2" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">02</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-              <div class="option-distribution" role="img" aria-label="Loop 2: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
-              </div>
+              <div class="option-distribution" role="img" aria-label="Loop 2: skipped"><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div></div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 2: skipped">
                   <span class="stopper-name">Stopper g<sub>2</sub></span><span class="stopper-inputs">p¹, p²</span>
                   <span class="stopper-comparison">—</span>
-                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Fitted threshold: 92.25%"></span></span>
                 </div>
                 <span class="gate-label">Not needed</span>
                 <div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
@@ -140,16 +128,12 @@
             </li>
             <li class="loop-row" data-loop="3" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">03</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-              <div class="option-distribution" role="img" aria-label="Loop 3: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
-              </div>
+              <div class="option-distribution" role="img" aria-label="Loop 3: skipped"><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div></div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 3: skipped">
                   <span class="stopper-name">Stopper g<sub>3</sub></span><span class="stopper-inputs">p², p³</span>
                   <span class="stopper-comparison">—</span>
-                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                  <span class="stopper-meter" style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Fitted threshold: 92.25%"></span></span>
                 </div>
                 <span class="gate-label">Not needed</span>
                 <div class="gate-branches"><span class="exit-branch">Yes <span aria-hidden="true">↗</span></span><span class="continue-branch">No <span aria-hidden="true">↓</span></span></div>
@@ -158,16 +142,12 @@
             </li>
             <li class="loop-row" data-loop="4" data-state="skipped">
               <div class="loop-compute"><span class="loop-number">04</span><div class="layer-stack"><span></span><span></span><span><i>F</i><sub>θ</sub></span></div><span class="compute-arrow" aria-hidden="true">→</span></div>
-              <div class="option-distribution" role="img" aria-label="Loop 4: skipped">
-                  <div class="option-bar" data-option="A"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Maple</span></div>
-                  <div class="option-bar" data-option="B"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Cedar</span></div>
-                  <div class="option-bar" data-option="C"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">Pine</span></div>
-              </div>
+              <div class="option-distribution" role="img" aria-label="Loop 4: skipped"><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">A</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">B</span></div><div class="option-bar"><span class="bar-value">—</span><span class="bar-track"><span class="bar-fill" style="--probability:0"></span></span><span class="bar-label">C</span></div></div>
               <div class="loop-gate">
                 <div class="stopper-block" role="img" aria-label="Loop 4: skipped">
                   <span class="stopper-name">Depth limit</span><span class="stopper-inputs">No stopper</span>
                   <span class="stopper-comparison">—</span>
-                  <span class="stopper-meter" hidden style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Illustrative threshold: 95%"></span></span>
+                  <span class="stopper-meter" hidden style="--agreement:0"><span class="stopper-fill"></span><span class="stopper-threshold" title="Fitted threshold: 92.25%"></span></span>
                 </div>
                 <span class="gate-label">Not needed</span>
                 <div class="gate-branches"><span class="exit-branch">Exit <span aria-hidden="true">↗</span></span><span class="continue-branch" hidden>No <span aria-hidden="true">↓</span></span></div>
@@ -175,12 +155,12 @@
 
             </li>
           </ol>
-          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Easy · Loop 1 · Ship Maple. Paid and in stock; three loops skipped.</p></div>
+          <div class="demo-outcome"><span class="outcome-symbol" aria-hidden="true">↗</span><p id="demo-status">Easy · Loop 1 · Select B. Correct dataset answer; three loops skipped.</p></div>
           <div class="demo-toolbar">
             <div class="demo-step-controls"><button type="button" id="demo-replay" disabled><span aria-hidden="true">↺</span> Replay</button><button type="button" id="demo-next" disabled>Next step <span aria-hidden="true">→</span></button></div>
             <button id="motion-toggle" type="button" aria-pressed="false" hidden><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause motion</span></button>
           </div>
-          <figcaption id="diagram-desc">The order examples are fully specified on this page. Probabilities and the 95% threshold illustrate the mechanism; they are not measured model outputs. Manual case selection plays once and stays selected. The stopper uses current/prior readouts (margin, entropy, KL, …): gₖ = σ(wₖᵀfₖ + bₖ). It is fitted without answer labels; the paper targets 98% aggregate agreement when fitting τ.</figcaption>
+          <figcaption id="diagram-desc">Recorded Lev-2.6B outputs on two selected LevBench development examples. Stopper scores are reconstructed from the original E06 procedure; fitted τ = 92.25%, targeting 98% aggregate agreement. Easy/Hard describe these trajectories, not dataset difficulty labels. The final loop returns the top option even if uncertainty remains. <a href="assets/decision-cases.json">Trace &amp; provenance ↗</a></figcaption>
           <p class="sr-only" id="demo-announcement" role="status" aria-live="polite"></p>
         </figure>
         <div class="authors">
