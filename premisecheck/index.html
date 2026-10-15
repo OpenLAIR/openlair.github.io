@@ -44,6 +44,7 @@
   "url": "https://openlair.github.io/premisecheck/",
   "image": "https://openlair.github.io/premisecheck/static/images/social-card.png",
   "datePublished": "2026",
+  "sameAs": "https://www.alphaxiv.org/abs/2610.premisecheck-peer-review-fact-checking",
   "author": [
     {"@type": "Person", "name": "Dingjie Song", "affiliation": "Lehigh University"},
     {"@type": "Person", "name": "Zhiling Yan", "affiliation": "Lehigh University"},
@@ -61,11 +62,11 @@
   <div class="inner">
     <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>PremiseCheck</a>
     <div class="links">
-      <a href="#abstract" class="opt">Abstract</a>
+      <a href="#abstract">Abstract</a>
       <a href="#method">Method</a>
-      <a href="#benchmark" class="opt">Benchmark</a>
+      <a href="#benchmark">Benchmark</a>
       <a href="#results">Results</a>
-      <a href="#findings" class="opt">Findings</a>
+      <a href="#findings">Findings</a>
       <a href="#cite">Cite</a>
       <a href="https://github.com/OpenLAIR/PremiseCheck" class="gh"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>Code</a>
     </div>
@@ -74,7 +75,7 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">Fact-checking peer reviews</p>
+    <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Fact-checking peer reviews</p>
     <h1 class="title"><span class="name">PremiseCheck</span>: Efficient <span class="nowrap">Fact-Checking</span> of Human and AI Peer Reviews</h1>
     <p class="subtitle">An <span class="hl-llm">LLM</span> rewrites each review comment as explicit premises without reading the paper, and a cheap <span class="hl-dm">decision model</span> checks each premise against the paper.</p>
 
@@ -85,16 +86,18 @@
       <span class="au">Yuxuan Zhang<sup>2,3</sup></span>,
       <span class="au">Lichao Sun<sup>1,&dagger;</sup></span>
     </p>
-    <p class="affils">
-      <span><sup>1</sup>Lehigh University</span> <span class="sep" aria-hidden="true">·</span> <span><sup>2</sup>University of British Columbia</span> <span class="sep" aria-hidden="true">·</span> <span><sup>3</sup>Vector Institute</span>
-    </p>
+    <ul class="affils" aria-label="Affiliations">
+      <li><img src="static/images/logos/lu.png" alt="" width="300" height="300"><span><sup>1</sup>Lehigh University</span></li>
+      <li><img src="static/images/logos/ubc.jpg" alt="" width="99" height="135"><span><sup>2</sup>University of British Columbia</span></li>
+      <li><img src="static/images/logos/vi.png" alt="" width="224" height="224"><span><sup>3</sup>Vector Institute</span></li>
+    </ul>
     <p class="notes"><span class="dag">&dagger;</span> Corresponding author</p>
 
-    <!-- Before launch: replace XXXX.XXXXX with the arXiv id (Paper button, footer, BibTeX); see README. -->
+    <!-- The paper links point to alphaXiv until arXiv lists the paper; see README for swapping in the arXiv link. -->
     <div class="btns">
-      <a class="btn paper" href="https://arxiv.org/abs/XXXX.XXXXX">
+      <a class="btn paper" href="https://www.alphaxiv.org/abs/2610.premisecheck-peer-review-fact-checking">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg>
-        Paper
+        Paper <span class="btn-hint">alphaXiv</span>
       </a>
       <a class="btn code" href="https://github.com/OpenLAIR/PremiseCheck">
         <svg class="ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
@@ -104,14 +107,22 @@
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
         Dataset
       </a>
-    </div>
-
-    <div class="logos">
-      <img src="static/images/logos/lu.png" alt="Lehigh University" width="300" height="300">
-      <img class="tall" src="static/images/logos/ubc.jpg" alt="University of British Columbia" width="99" height="135">
-      <img src="static/images/logos/vi.png" alt="Vector Institute" width="224" height="224">
+      <a class="btn cite" href="#cite">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h4v4c0 2.5-1.5 4.5-4 5"/><path d="M15 7h4v4c0 2.5-1.5 4.5-4 5"/></svg>
+        BibTeX
+      </a>
     </div>
   </div>
+
+  <figure class="teaser" id="teaser">
+    <div class="teaser-card">
+      <div class="fig-scroll" tabindex="0" role="group" aria-label="Figure 1, scrollable on small screens">
+        <a class="zoom" href="static/images/pipeline.webp" aria-label="Open Figure 1 at full size"><img class="wide" src="static/images/pipeline.webp" width="2300" height="927" alt="PremiseCheck on a ReviewFact sample labeled as a Neglect error. Comment: no baselines are compared to the proposed method in the experiment section. The LLM, which sees the comment only, writes three premises. The Jev router sends two of them to the paper and one to general knowledge. The Jev verifier scores them 0.99, 0.03 and 0.96, and the minimum, 0.03, is the comment score, which flags the comment for human checking." fetchpriority="high"></a>
+      </div>
+      <p class="scroll-hint" aria-hidden="true">Scroll sideways or tap to enlarge &rarr;</p>
+    </div>
+    <figcaption><span class="fig-no">Figure 1.</span> PremiseCheck on a ReviewFact sample that experts labeled as a factual error, with premises shortened for display. Only the verifier reads the paper, and the lowest premise score, shown in red, is the comment score.</figcaption>
+  </figure>
 </header>
 
 <main id="main">
@@ -124,7 +135,7 @@
       <p>To check whether a review comment misstates the paper, PremiseCheck lets an LLM rewrite the comment as explicit premises without reading the paper and lets a cheap decision model verify each premise against the paper. When each comment is checked on its own, it reaches accuracy <b>comparable to holistic GPT-5.5</b> on all three fields of our ReviewFact benchmark at <b>about half its cost</b>, and at a quarter of its cost on NLP reviews.</p>
     </div>
 
-    <p class="sec-tag">Abstract</p>
+    <p class="sec-tag"><span class="no">01</span>Abstract</p>
     <h2>Can review comments be fact-checked without an LLM reading the paper each time?</h2>
     <p class="abstract-body">
       Peer review is under strain from the growth of submissions, and review comments written by humans or AI can misstate what a paper says.
@@ -158,17 +169,26 @@
 <!-- THE IDEA -->
 <section id="idea">
   <div class="wrap">
-    <p class="sec-tag">The idea</p>
+    <p class="sec-tag"><span class="no">02</span>The idea</p>
     <h2>Three ways to check a review comment</h2>
     <div class="split">
       <figure class="figcard">
-        <a class="zoom" href="static/images/paradigms.webp" aria-label="Open Figure 1 at full size"><img class="cap" src="static/images/paradigms.webp" width="1000" height="1078" alt="A real ReviewFact comment checked three ways. Decision model only: score 0.61, the error is missed (AUROC 49.9, cost 2%, time 0.2 s). LLM only: score 0.15, the error is caught (AUROC 63.2, cost 100%, time 6.3 s). PremiseCheck: the premise that the paper tests reproducibility only on the Gopher model gets 0.03, so the error is caught (AUROC 63.1, cost 25%, time 2.8 s)."></a>
-        <figcaption><span class="fig-no">Figure 1.</span> Three ways to check a review comment, shown on a real comment from ReviewFact. AUROC, cost and time are measured on the NLP reviews, with cost relative to the LLM-only row. The LLM is GPT-5.5 and the decision model is Jev.</figcaption>
+        <a class="zoom" href="static/images/paradigms.webp" aria-label="Open Figure 2 at full size"><img class="cap" src="static/images/paradigms.webp" width="1000" height="1078" alt="A real ReviewFact comment checked three ways. Decision model only: score 0.61, the error is missed (AUROC 49.9, cost 2%, time 0.2 s). LLM only: score 0.15, the error is caught (AUROC 63.2, cost 100%, time 6.3 s). PremiseCheck: the premise that the paper tests reproducibility only on the Gopher model gets 0.03, so the error is caught (AUROC 63.1, cost 25%, time 2.8 s)." loading="lazy"></a>
+        <figcaption><span class="fig-no">Figure 2.</span> Three ways to check a review comment, shown on a real comment from ReviewFact. AUROC, cost and time are measured on the NLP reviews, with cost relative to the LLM-only row. The LLM is GPT-5.5 and the decision model is Jev.</figcaption>
       </figure>
       <div class="copy">
-        <p><b>Decision model only.</b> A decision model is cheap and fast, but on whole comments it is near chance on the NLP reviews (AUROC 49.9). A comment mixes several assertions, many of them implicit, while a decision model is reliable only on explicit, self-contained claims.</p>
-        <p><b>LLM only.</b> A frontier LLM judging each comment holistically is accurate (AUROC 63.2) but must reread the full paper for every comment, a cost that multiplies across tens of thousands of reviews.</p>
-        <p><b>PremiseCheck.</b> The LLM turns the comment into explicit premises from the comment alone, and the decision model checks each one against the paper. In this example the premise that the paper tests reproducibility only on the Gopher model gets 0.03, and the comment is caught. On the NLP reviews this setup reaches AUROC 63.1 at 25% of the cost and 2.8 s per comment.</p>
+        <div class="way dm">
+          <p class="way-k">Decision model only</p>
+          <p>A decision model is cheap and fast, but on whole comments it is near chance on the NLP reviews (AUROC 49.9). A comment mixes several assertions, many of them implicit, while a decision model is reliable only on explicit, self-contained claims.</p>
+        </div>
+        <div class="way llm">
+          <p class="way-k">LLM only</p>
+          <p>A frontier LLM judging each comment holistically is accurate (AUROC 63.2) but must reread the full paper for every comment, a cost that multiplies across tens of thousands of reviews.</p>
+        </div>
+        <div class="way pc">
+          <p class="way-k">PremiseCheck</p>
+          <p>The LLM turns the comment into explicit premises from the comment alone, and the decision model checks each one against the paper. In this example the premise that the paper tests reproducibility only on the Gopher model gets 0.03, and the comment is caught. On the NLP reviews this setup reaches AUROC 63.1 at 25% of the cost and 2.8 s per comment.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -177,40 +197,32 @@
 <!-- METHOD -->
 <section id="method" class="alt-bg">
   <div class="wrap">
-    <p class="sec-tag">Method</p>
+    <p class="sec-tag"><span class="no">03</span>Method</p>
     <h2>How PremiseCheck works</h2>
-    <p class="lead">PremiseCheck scores a comment on a paper in four steps. Only the first step uses an LLM, and it never sees the paper. Any LLM and any decision model can fill the two roles.</p>
+    <p class="lead">PremiseCheck scores a comment on a paper in four steps. Only the first step uses an LLM, and it never sees the paper. Any LLM and any decision model can fill the two roles. <a href="#teaser">Figure 1</a> shows the four steps on a real comment.</p>
 
     <ol class="steps">
       <li class="step llm">
-        <div class="num">Step 1 <span class="who">LLM</span></div>
+        <div class="num"><span class="n">1</span><span class="who">LLM</span></div>
         <h3>Decompose</h3>
         <p>The LLM reconstructs the comment as an argument with one to six premises. Each is one self-contained declarative sentence that names the method, table or section it refers to, including what a question presupposes about the paper.</p>
       </li>
       <li class="step dm">
-        <div class="num">Step 2 <span class="who">Decision model</span></div>
+        <div class="num"><span class="n">2</span><span class="who">Decision model</span></div>
         <h3>Route</h3>
         <p>From the premise alone, the decision model estimates whether it can be decided from the paper (&ldquo;the paper does not report results on dataset X&rdquo;) or relies on general knowledge (&ldquo;method Y is a standard baseline&rdquo;).</p>
       </li>
       <li class="step dm">
-        <div class="num">Step 3 <span class="who">Decision model</span></div>
+        <div class="num"><span class="n">3</span><span class="who">Decision model</span></div>
         <h3>Verify</h3>
         <p>The decision model reads the paper with the premise and answers the question that fits its route: &ldquo;true according to the paper&rdquo; for paper premises, &ldquo;true&rdquo; for knowledge premises.</p>
       </li>
       <li class="step agg">
-        <div class="num">Step 4 <span class="who">min</span></div>
+        <div class="num"><span class="n">4</span><span class="who">min</span></div>
         <h3>Aggregate</h3>
         <p>A comment that rests on a false premise contains a factual error, so the comment score is the lowest premise score. A low score flags the comment for a person to check.</p>
       </li>
     </ol>
-
-    <figure class="figcard bleed">
-      <div class="fig-scroll" tabindex="0" role="group" aria-label="Figure 2, scrollable on small screens">
-        <a class="zoom" href="static/images/pipeline.webp" aria-label="Open Figure 2 at full size"><img class="wide" src="static/images/pipeline.webp" width="2300" height="927" alt="PremiseCheck on a ReviewFact sample labeled as a Neglect error. Comment: no baselines are compared to the proposed method in the experiment section. The LLM, which sees the comment only, writes three premises. The Jev router sends two of them to the paper and one to general knowledge. The Jev verifier scores them 0.99, 0.03 and 0.96, and the minimum, 0.03, is the comment score, which flags the comment for human checking." loading="lazy"></a>
-      </div>
-      <p class="scroll-hint" aria-hidden="true">Scroll sideways to see the full figure &rarr;</p>
-      <figcaption><span class="fig-no">Figure 2.</span> PremiseCheck on a ReviewFact sample that experts labeled as a factual error, with premises shortened for display. Only the verifier reads the paper, and the lowest premise score, shown in red, is the comment score.</figcaption>
-    </figure>
 
     <div class="callout"><b>Why it is cheap.</b> The LLM call is short because it excludes the paper. A decision model generates no text, so its cost grows only with the length of its input, and asking several questions about the same input adds almost no cost. In holistic judgment, by contrast, the LLM reads the paper and reasons about it for every comment, so its cost grows with the length of the paper at LLM prices.</div>
   </div>
@@ -219,19 +231,35 @@
 <!-- BENCHMARK -->
 <section id="benchmark">
   <div class="wrap">
-    <p class="sec-tag">Benchmark</p>
+    <p class="sec-tag"><span class="no">04</span>Benchmark</p>
     <h2>ReviewFact: factual errors in human and AI review comments</h2>
-    <p class="lead">Given a paper and one comment from a review of it, a system scores how likely the comment says something the paper does not support. ReviewFact adds no new comments or papers: it maps the expert judgments of ReviewCritique (NLP), ReviewScore (machine learning) and PeerReview Bench (natural sciences) to <b>one definition of factual error</b>, and it measures cost and latency alongside AUROC.</p>
+    <p class="lead">ReviewFact asks whether a single review comment says something the paper does not support. It labels such factual errors in human-written and AI-written comments under <b>one definition</b> across three fields, and it measures cost and latency alongside AUROC.</p>
 
-    <div class="defn">
-      <p><b>What counts as a factual error.</b> The comment says something about the paper that the paper does not support. Following ReviewCritique, it either</p>
-      <ul>
-        <li><span class="et">Misunderstanding</span><span>misreads the paper,</span></li>
-        <li><span class="et">Neglect</span><span>claims that the paper lacks something it contains,</span></li>
-        <li><span class="et">Unstated statement</span><span>asserts something with no basis in the paper, or</span></li>
-        <li><span class="et">Inaccurate summary</span><span>misstates its content.</span></li>
-      </ul>
-      <p class="muted">Errors of judgment, such as whether a concern is important, are outside the task.</p>
+    <figure class="figcard bleed">
+      <div class="fig-scroll" tabindex="0" role="group" aria-label="Figure 3, scrollable on small screens">
+        <a class="zoom" href="static/images/bench_overview.webp" aria-label="Open Figure 3 at full size"><img class="wide" src="static/images/bench_overview.webp" width="2300" height="822" alt="(a) The task. A comment from a review of the LoRA paper says the authors did not report any baselines outside of the efficient fine-tuning setting, which experts labeled a factual error of type Neglect, because Section 5.1 of the paper reports full fine-tuning as a baseline. A system reads the comment and the paper and outputs a score between 0 and 1, where a low score means a likely factual error, and is evaluated by AUROC, cost and latency. A factual error is one of four types: Misunderstanding, Neglect, Unstated statement, Inaccurate summary; errors of judgment are out of scope. (b) Labels from expert annotations. The expert judgments of ReviewCritique (NLP), ReviewScore (machine learning) and PeerReview Bench (natural sciences) are mapped to the labels Error, Correct or Left out. For PeerReview Bench, two authors independently re-check which errors are factual on 178 comments. ReviewFact has 9,267 comments on 217 papers: 6,466 comments with 308 errors, 216 with 46, and 2,585 with 65." loading="lazy"></a>
+      </div>
+      <p class="scroll-hint" aria-hidden="true">Scroll sideways or tap to enlarge &rarr;</p>
+      <figcaption><span class="fig-no">Figure 3.</span> (a) The task on a real ReviewFact comment that claims a baseline is missing although the paper reports it. (b) ReviewFact labels from the expert annotations of three datasets. For PeerReview Bench, two authors independently re-check which errors are factual on 178 comments and agree with the GPT-5.5 labels with &kappa; of 0.76 and 0.77.</figcaption>
+    </figure>
+
+    <div class="explain">
+      <div class="xcard task">
+        <p class="xk"><span class="pl">a</span>The task</p>
+        <p>A system receives a paper and one comment from a review of it and returns a score between 0 and 1, where a low score means that the comment likely contains a factual error. A factual error says something about the paper that the paper does not support. Following ReviewCritique, the comment either</p>
+        <ul class="types">
+          <li><span class="et">Misunderstanding</span>misreads the paper,</li>
+          <li><span class="et">Neglect</span>claims that the paper lacks something it contains,</li>
+          <li><span class="et">Unstated statement</span>asserts something with no basis in the paper, or</li>
+          <li><span class="et">Inaccurate summary</span>misstates its content.</li>
+        </ul>
+        <p class="muted">Errors of judgment, such as whether a concern is important, are outside the task.</p>
+      </div>
+      <div class="xcard labels">
+        <p class="xk"><span class="pl">b</span>Labels from expert annotations</p>
+        <p>ReviewFact adds no new comments or papers. It maps the expert judgments of ReviewCritique (NLP), ReviewScore (machine learning) and PeerReview Bench (natural sciences) to one label, and it leaves out comments outside the task.</p>
+        <p><b>Human verification.</b> Many PeerReview Bench comments that the experts judged incorrect are errors of judgment, so GPT-5.5 decides from the expert's rationale whether an error is factual. Two authors independently repeat this decision on the 178 comments that have a rationale. They agree with each other at Cohen's &kappa; = 0.70 and with GPT-5.5 at 0.76 and 0.77. With their labels instead, the difference between PremiseCheck and holistic GPT-5.5 ranges from &minus;3.7 to +2.7 and is never significant.</p>
+      </div>
     </div>
 
     <div class="parts">
@@ -240,34 +268,35 @@
         <div class="v">6,466 <small>comments</small></div>
         <div class="e">308 factual errors (4.8%)</div>
         <p>100 papers. Human-written (278 errors / 6,061 comments) and AI-written (30 / 405).</p>
+        <p class="len">Median comment 17 words, median paper 8.5k tokens.</p>
       </div>
       <div class="part">
         <h3 class="nm">Machine learning</h3>
         <div class="v">216 <small>comments</small></div>
         <div class="e">46 factual errors (21.3%)</div>
         <p>39 papers. Human-written arguments only, so the share of errors is higher.</p>
+        <p class="len">Median comment 48 words, median paper 9.1k tokens.</p>
       </div>
       <div class="part">
         <h3 class="nm">Natural sciences</h3>
         <div class="v">2,585 <small>comments</small></div>
         <div class="e">65 factual errors (2.5%)</div>
         <p>78 papers. Human-written (40 errors / 1,726 comments) and AI-written (25 / 859).</p>
+        <p class="len">Median comment 70 words, median paper 14.4k tokens.</p>
       </div>
     </div>
 
     <figure class="figcard">
-      <a class="zoom" href="static/images/bench_stats.webp" aria-label="Open Figure 3 at full size"><img class="narrow" src="static/images/bench_stats.webp" width="1300" height="655" alt="ReviewFact statistics. Share of comments with a factual error: NLP human 4.6% (278 of 6,061), NLP AI 7.4% (30 of 405), machine learning human 21.3% (46 of 216), natural sciences human 2.3% (40 of 1,726), natural sciences AI 2.9% (25 of 859). Error types: NLP human 139 Misunderstanding and 132 Neglect; NLP AI 10, 13 and 7 Other; natural sciences human 16 and 20; natural sciences AI 14 and 9; machine learning has no type labels." loading="lazy"></a>
-      <figcaption><span class="fig-no">Figure 3.</span> ReviewFact by part and reviewer type: 9,267 comments on 217 papers. Left, the share of comments with a factual error, next to the counts of errors and comments. Right, the types of these errors, where Other is Unstated statement or Inaccurate summary. Errors are rare, so a system spends most of its calls on correct comments and its cost matters.</figcaption>
+      <a class="zoom" href="static/images/bench_stats.webp" aria-label="Open Figure 4 at full size"><img class="narrow" src="static/images/bench_stats.webp" width="1300" height="655" alt="ReviewFact statistics. Share of comments with a factual error: NLP human 4.6% (278 of 6,061), NLP AI 7.4% (30 of 405), machine learning human 21.3% (46 of 216), natural sciences human 2.3% (40 of 1,726), natural sciences AI 2.9% (25 of 859). Error types: NLP human 139 Misunderstanding and 132 Neglect; NLP AI 10, 13 and 7 Other; natural sciences human 16 and 20; natural sciences AI 14 and 9; machine learning has no type labels." loading="lazy"></a>
+      <figcaption><span class="fig-no">Figure 4.</span> ReviewFact by part and reviewer type: 9,267 comments on 217 papers. Left, the share of comments with a factual error, next to the counts of errors and comments. Right, the types of these errors, where Other is Unstated statement or Inaccurate summary. Errors are rare, so a system spends most of its calls on correct comments and its cost matters.</figcaption>
     </figure>
-
-    <div class="callout"><b>Label check.</b> On the natural-science reviews, GPT-5.5 decides from the expert's rationale whether an error is factual. Two authors independently repeated this decision on the 178 comments with a rationale: they agree with each other at Cohen's &kappa; = 0.70, and GPT-5.5 agrees with them at 0.76 and 0.77. With the human labels instead, the difference between PremiseCheck and holistic GPT-5.5 ranges from &minus;3.7 to +2.7 and is never significant.</div>
   </div>
 </section>
 
 <!-- RESULTS -->
 <section id="results" class="alt-bg">
   <div class="wrap">
-    <p class="sec-tag">Results</p>
+    <p class="sec-tag"><span class="no">05</span>Results</p>
     <h2>Accuracy comparable to holistic GPT-5.5 at a fraction of the cost</h2>
     <p class="lead">With each comment checked on its own, PremiseCheck with a medium-reasoning decomposer is within 0.3 points of holistic GPT-5.5 or above it on all three parts of ReviewFact, at about half the cost. It is non-inferior on the NLP reviews and not significantly different on the other two parts.</p>
 
@@ -279,7 +308,7 @@
     </div>
 
     <h3 class="sub" id="tab1-title">Table 1. Results on ReviewFact with each comment checked on its own</h3>
-    <p class="small-note" id="tab1-note">AUROC &times; 100 with the paired difference to the reference, computed before rounding, as a subscript. <span class="ni-key">&dagger;</span> marks non-inferiority: the lower bound of the 95% interval for the difference is above &minus;3. Cost and time are % of the reference, holistic GPT-5.5 at medium reasoning. Reasoning refers to the GPT-5.5 or GPT-5.4-mini call, which for PremiseCheck is the decomposer. Bold marks the best AUROC per part.</p>
+    <p class="small-note" id="tab1-note">AUROC &times; 100 with the paired difference to the reference, computed before rounding, as a subscript. <span class="ni-key">&dagger;</span> marks non-inferiority: the lower bound of the 95% interval for the difference is above &minus;3. Cost and time are % of the reference, holistic GPT-5.5 at medium reasoning, and their shading grows with the value. Reasoning refers to the GPT-5.5 or GPT-5.4-mini call, which for PremiseCheck is the decomposer. Bold marks the best AUROC per part.</p>
 
     <div class="table-scroll" tabindex="0" role="region" aria-labelledby="tab1-title">
       <table class="results" aria-describedby="tab1-note">
@@ -298,45 +327,45 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="group"><th colspan="11" scope="colgroup">Holistic judgment</th></tr>
-          <tr class="ref"><th class="dom" scope="row">GPT-5.5 (ref.)</th><td class="rs">medium</td>
-            <td class="gsep">63.2</td><td>100.0</td><td>100.0</td>
-            <td class="gsep">66.9</td><td>100.0</td><td>100.0</td>
-            <td class="gsep best">67.8</td><td>100.0</td><td>100.0</td></tr>
+          <tr class="group"><th colspan="11" scope="colgroup"><span class="gl">Holistic judgment</span></th></tr>
+          <tr class="ref"><th class="dom" scope="row">GPT-5.5 <span class="reftag">ref.</span></th><td class="rs">medium</td>
+            <td class="gsep au">63.2</td><td class="e" style="--e:40">100.0</td><td class="e" style="--e:40">100.0</td>
+            <td class="gsep au">66.9</td><td class="e" style="--e:40">100.0</td><td class="e" style="--e:40">100.0</td>
+            <td class="gsep au best">67.8</td><td class="e" style="--e:40">100.0</td><td class="e" style="--e:40">100.0</td></tr>
           <tr class="dim"><th class="dom" scope="row">GPT-5.5</th><td class="rs">low</td>
-            <td class="gsep">61.2<sub class="n">&minus;2.1</sub></td><td>76.1</td><td>67.6</td>
-            <td class="gsep">64.3<sub class="n">&minus;2.6</sub></td><td>120.5</td><td>67.9</td>
-            <td class="gsep">67.4<sub class="n">&minus;0.4</sub></td><td>75.5</td><td>46.0</td></tr>
+            <td class="gsep au">61.2<sub class="n">&minus;2.1</sub></td><td class="e" style="--e:30">76.1</td><td class="e" style="--e:27">67.6</td>
+            <td class="gsep au">64.3<sub class="n">&minus;2.6</sub></td><td class="e" style="--e:40">120.5</td><td class="e" style="--e:27">67.9</td>
+            <td class="gsep au">67.4<sub class="n">&minus;0.4</sub></td><td class="e" style="--e:30">75.5</td><td class="e" style="--e:18">46.0</td></tr>
           <tr class="dim"><th class="dom" scope="row">GPT-5.5</th><td class="rs">none</td>
-            <td class="gsep">49.3<sub class="n">&minus;14.0</sub></td><td>49.9</td><td>28.4</td>
-            <td class="gsep">66.5<sub class="n">&minus;0.4</sub></td><td>95.7</td><td>26.1</td>
-            <td class="gsep">63.7<sub class="n">&minus;4.1</sub></td><td>54.2</td><td>13.7</td></tr>
+            <td class="gsep au">49.3<sub class="n">&minus;14.0</sub></td><td class="e" style="--e:20">49.9</td><td class="e" style="--e:11">28.4</td>
+            <td class="gsep au">66.5<sub class="n">&minus;0.4</sub></td><td class="e" style="--e:38">95.7</td><td class="e" style="--e:10">26.1</td>
+            <td class="gsep au">63.7<sub class="n">&minus;4.1</sub></td><td class="e" style="--e:22">54.2</td><td class="e" style="--e:5">13.7</td></tr>
           <tr class="dim"><th class="dom" scope="row">GPT-5.4-mini</th><td class="rs">low</td>
-            <td class="gsep">53.7<sub class="n">&minus;9.5</sub></td><td>9.8</td><td>31.1</td>
-            <td class="gsep">58.7<sub class="n">&minus;8.2</sub></td><td>13.5</td><td>36.6</td>
-            <td class="gsep">61.4<sub class="n">&minus;6.4</sub></td><td>13.8</td><td>34.4</td></tr>
+            <td class="gsep au">53.7<sub class="n">&minus;9.5</sub></td><td class="e" style="--e:4">9.8</td><td class="e" style="--e:12">31.1</td>
+            <td class="gsep au">58.7<sub class="n">&minus;8.2</sub></td><td class="e" style="--e:5">13.5</td><td class="e" style="--e:15">36.6</td>
+            <td class="gsep au">61.4<sub class="n">&minus;6.4</sub></td><td class="e" style="--e:6">13.8</td><td class="e" style="--e:14">34.4</td></tr>
           <tr class="dim"><th class="dom" scope="row">Jev</th><td class="rs">&ndash;</td>
-            <td class="gsep">49.9<sub class="n">&minus;13.4</sub></td><td>2.1</td><td>3.6</td>
-            <td class="gsep">61.2<sub class="n">&minus;5.7</sub></td><td>1.6</td><td>3.6</td>
-            <td class="gsep">58.7<sub class="n">&minus;9.1</sub></td><td>1.6</td><td>1.9</td></tr>
-          <tr class="group"><th colspan="11" scope="colgroup">Cascade</th></tr>
+            <td class="gsep au">49.9<sub class="n">&minus;13.4</sub></td><td class="e" style="--e:1">2.1</td><td class="e" style="--e:1">3.6</td>
+            <td class="gsep au">61.2<sub class="n">&minus;5.7</sub></td><td class="e" style="--e:1">1.6</td><td class="e" style="--e:1">3.6</td>
+            <td class="gsep au">58.7<sub class="n">&minus;9.1</sub></td><td class="e" style="--e:1">1.6</td><td class="e" style="--e:1">1.9</td></tr>
+          <tr class="group"><th colspan="11" scope="colgroup"><span class="gl">Cascade</span></th></tr>
           <tr class="dim"><th class="dom" scope="row">Jev &rarr; GPT-5.5</th><td class="rs">medium</td>
-            <td class="gsep">59.1<sub class="n">&minus;4.2</sub></td><td>74.0</td><td>&ndash;</td>
-            <td class="gsep">65.7<sub class="n">&minus;1.1</sub></td><td>76.4</td><td>&ndash;</td>
-            <td class="gsep">66.7<sub class="n">&minus;1.1</sub></td><td>69.2</td><td>&ndash;</td></tr>
-          <tr class="group"><th colspan="11" scope="colgroup">PremiseCheck <span>(decomposer: GPT-5.5, verifier: Jev)</span></th></tr>
+            <td class="gsep au">59.1<sub class="n">&minus;4.2</sub></td><td class="e" style="--e:30">74.0</td><td>&ndash;</td>
+            <td class="gsep au">65.7<sub class="n">&minus;1.1</sub></td><td class="e" style="--e:31">76.4</td><td>&ndash;</td>
+            <td class="gsep au">66.7<sub class="n">&minus;1.1</sub></td><td class="e" style="--e:28">69.2</td><td>&ndash;</td></tr>
+          <tr class="group ours-h"><th colspan="11" scope="colgroup"><span class="gl">PremiseCheck <span>(decomposer: GPT-5.5, verifier: Jev)</span></span></th></tr>
           <tr class="ours"><th class="dom" scope="row">PremiseCheck</th><td class="rs">medium</td>
-            <td class="gsep">63.0<span class="ni">&dagger;</span><sub class="n">&minus;0.3</sub></td><td>51.2</td><td>81.6</td>
-            <td class="gsep best">68.7<sub class="p">+1.8</sub></td><td>46.6</td><td>95.7</td>
-            <td class="gsep">67.5<sub class="n">&minus;0.3</sub></td><td>47.4</td><td>60.6</td></tr>
+            <td class="gsep au">63.0<span class="ni">&dagger;</span><sub class="n">&minus;0.3</sub></td><td class="e" style="--e:20">51.2</td><td class="e" style="--e:33">81.6</td>
+            <td class="gsep au best">68.7<sub class="p">+1.8</sub></td><td class="e" style="--e:19">46.6</td><td class="e" style="--e:38">95.7</td>
+            <td class="gsep au">67.5<sub class="n">&minus;0.3</sub></td><td class="e" style="--e:19">47.4</td><td class="e" style="--e:24">60.6</td></tr>
           <tr class="ours"><th class="dom" scope="row">PremiseCheck</th><td class="rs">low</td>
-            <td class="gsep best">64.1<span class="ni">&dagger;</span><sub class="p">+0.8</sub></td><td>34.3</td><td>60.1</td>
-            <td class="gsep">63.9<sub class="n">&minus;3.0</sub></td><td>29.2</td><td>52.9</td>
-            <td class="gsep">65.7<sub class="n">&minus;2.1</sub></td><td>26.2</td><td>28.1</td></tr>
+            <td class="gsep au best">64.1<span class="ni">&dagger;</span><sub class="p">+0.8</sub></td><td class="e" style="--e:14">34.3</td><td class="e" style="--e:24">60.1</td>
+            <td class="gsep au">63.9<sub class="n">&minus;3.0</sub></td><td class="e" style="--e:12">29.2</td><td class="e" style="--e:21">52.9</td>
+            <td class="gsep au">65.7<sub class="n">&minus;2.1</sub></td><td class="e" style="--e:10">26.2</td><td class="e" style="--e:11">28.1</td></tr>
           <tr class="ours"><th class="dom" scope="row">PremiseCheck</th><td class="rs">none</td>
-            <td class="gsep">63.1<span class="ni">&dagger;</span><sub class="n">&minus;0.2</sub></td><td>24.6</td><td>45.0</td>
-            <td class="gsep">63.7<sub class="n">&minus;3.2</sub></td><td>19.5</td><td>37.5</td>
-            <td class="gsep">66.0<sub class="n">&minus;1.7</sub></td><td>22.3</td><td>21.9</td></tr>
+            <td class="gsep au">63.1<span class="ni">&dagger;</span><sub class="n">&minus;0.2</sub></td><td class="e" style="--e:10">24.6</td><td class="e" style="--e:18">45.0</td>
+            <td class="gsep au">63.7<sub class="n">&minus;3.2</sub></td><td class="e" style="--e:8">19.5</td><td class="e" style="--e:15">37.5</td>
+            <td class="gsep au">66.0<sub class="n">&minus;1.7</sub></td><td class="e" style="--e:9">22.3</td><td class="e" style="--e:9">21.9</td></tr>
         </tbody>
       </table>
     </div>
@@ -344,14 +373,15 @@
     <div class="tbl-legend">
       <span><span class="sw ours" aria-hidden="true"></span>PremiseCheck (ours)</span>
       <span><span class="sw" aria-hidden="true"></span>Baselines; cheaper variants in grey</span>
+      <span><span class="sw eff" aria-hidden="true"></span>Cost and time, shaded by value</span>
       <span>On machine learning and natural science, no PremiseCheck difference to the reference is significant.</span>
     </div>
 
     <h3 class="sub">Cost versus accuracy on the NLP reviews</h3>
     <div class="split frontier">
       <figure class="figcard">
-        <a class="zoom" href="static/images/frontier_v3.webp" aria-label="Open Figure 4 at full size"><img src="static/images/frontier_v3.webp" width="1100" height="796" alt="Scatter plot of AUROC against cost on a log scale, NLP reviews. (a) Per comment: PremiseCheck at no, low and medium reasoning lies inside the plus or minus 3 band around holistic GPT-5.5 at medium reasoning, at a fraction of its cost; holistic GPT-5.5 without reasoning, GPT-5.4-mini, Jev and the cascade lie lower. (b) Batched per review: batched holistic GPT-5.5, batched PremiseCheck, and their fusion, which is highest." loading="lazy"></a>
-        <figcaption><span class="fig-no">Figure 4.</span> Cost and AUROC on the NLP reviews, (a) per comment and (b) batched per review, where PremiseCheck uses 16 phrasings. Labels give the reasoning of the LLM; the line and band mark the per-comment reference and &plusmn;3.</figcaption>
+        <a class="zoom" href="static/images/frontier_v3.webp" aria-label="Open Figure 5 at full size"><img src="static/images/frontier_v3.webp" width="1100" height="796" alt="Scatter plot of AUROC against cost on a log scale, NLP reviews. (a) Per comment: PremiseCheck at no, low and medium reasoning lies inside the plus or minus 3 band around holistic GPT-5.5 at medium reasoning, at a fraction of its cost; holistic GPT-5.5 without reasoning, GPT-5.4-mini, Jev and the cascade lie lower. (b) Batched per review: batched holistic GPT-5.5, batched PremiseCheck, and their fusion, which is highest." loading="lazy"></a>
+        <figcaption><span class="fig-no">Figure 5.</span> Cost and AUROC on the NLP reviews, (a) per comment and (b) batched per review, where PremiseCheck uses 16 phrasings. Labels give the reasoning of the LLM; the line and band mark the per-comment reference and &plusmn;3.</figcaption>
       </figure>
       <div class="copy">
         <p><b>(a) Per comment.</b> At medium, low and no reasoning, PremiseCheck stays inside the &plusmn;3 band around holistic GPT-5.5, while its cost falls from 51.2% to 24.6% of the reference.</p>
@@ -365,18 +395,18 @@
 <!-- FINDINGS -->
 <section id="findings">
   <div class="wrap">
-    <p class="sec-tag">Findings</p>
+    <p class="sec-tag"><span class="no">06</span>Findings</p>
     <h2>What makes PremiseCheck work, and how to use it</h2>
     <p class="lead">Decomposition moves the work that needs reasoning from the LLM to the decision model. The LLM can then run without reasoning, and decision models from other providers, including an open-weight one, can check the premises.</p>
 
     <div class="findings">
       <article class="fcard" id="finding-1">
-        <p class="k">Finding 1</p>
+        <p class="k"><span class="kn">1</span>Finding 1</p>
         <h3>Decomposition makes decision models useful</h3>
         <div class="feature-grid">
           <figure>
-            <a class="zoom" href="static/images/models_dumbbell.webp" aria-label="Open Figure 5 at full size"><img src="static/images/models_dumbbell.webp" width="1100" height="922" alt="Dumbbell chart of AUROC on the NLP reviews for each model as a holistic judge and inside PremiseCheck. (a) Verifiers with GPT-5.5 as decomposer: GPT-5.5, GPT-5.4-mini, Jev, Kev-27B, Microsoft Decision-1, Perplexity Decider and MiniCheck-7B. (b) Decomposers with Kev-27B as verifier: GPT-5.5, Nemotron Super 3, GPT-5.6 Sol, GPT-5.6 Luna, Claude Haiku 5.5, Ministral 3 14B and Gemma 3 27B." loading="lazy"></a>
-            <figcaption><span class="fig-no">Figure 5.</span> AUROC on the NLP reviews of each model as a holistic judge and inside PremiseCheck. Cost is relative to holistic GPT-5.5 in (a) and to the same LLM in (b), where * marks API cost. The band marks holistic GPT-5.5 &plusmn;3.</figcaption>
+            <a class="zoom" href="static/images/models_dumbbell.webp" aria-label="Open Figure 6 at full size"><img src="static/images/models_dumbbell.webp" width="1100" height="922" alt="Dumbbell chart of AUROC on the NLP reviews for each model as a holistic judge and inside PremiseCheck. (a) Verifiers with GPT-5.5 as decomposer: GPT-5.5, GPT-5.4-mini, Jev, Kev-27B, Microsoft Decision-1, Perplexity Decider and MiniCheck-7B. (b) Decomposers with Kev-27B as verifier: GPT-5.5, Nemotron Super 3, GPT-5.6 Sol, GPT-5.6 Luna, Claude Haiku 5.5, Ministral 3 14B and Gemma 3 27B." loading="lazy"></a>
+            <figcaption><span class="fig-no">Figure 6.</span> AUROC on the NLP reviews of each model as a holistic judge and inside PremiseCheck. Cost is relative to holistic GPT-5.5 in (a) and to the same LLM in (b), where * marks API cost. The band marks holistic GPT-5.5 &plusmn;3.</figcaption>
           </figure>
           <ul>
             <li><b>Every decision model gains from decomposition.</b> Jev, Kev-27B, Microsoft Decision-1 and Perplexity Decider score 50 to 57 as holistic judges but come within one point of holistic GPT-5.5 as verifiers, although the intervals of Kev-27B and Perplexity Decider fall just short of non-inferiority.</li>
@@ -387,12 +417,12 @@
       </article>
 
       <article class="fcard" id="finding-2">
-        <p class="k">Finding 2</p>
+        <p class="k"><span class="kn">2</span>Finding 2</p>
         <h3>An open-weight decision model works as well</h3>
         <div class="feature-grid">
           <figure>
-            <a class="zoom" href="static/images/robust.webp" aria-label="Open Figure 6 at full size"><img src="static/images/robust.webp" width="1100" height="546" alt="Forest plot of the AUROC difference between PremiseCheck and holistic GPT-5.5 on the NLP reviews, with 95% intervals: with Kev-27B as decision model for the medium and no-reasoning decomposers, and within short, medium and long comments and combined with length. All point estimates lie within 3 points of zero." loading="lazy"></a>
-            <figcaption><span class="fig-no">Figure 6.</span> AUROC of PremiseCheck minus holistic GPT-5.5 on the NLP reviews, with 95% intervals; the dashed line marks the non-inferiority margin of &minus;3.</figcaption>
+            <a class="zoom" href="static/images/robust.webp" aria-label="Open Figure 7 at full size"><img src="static/images/robust.webp" width="1100" height="546" alt="Forest plot of the AUROC difference between PremiseCheck and holistic GPT-5.5 on the NLP reviews, with 95% intervals: with Kev-27B as decision model for the medium and no-reasoning decomposers, and within short, medium and long comments and combined with length. All point estimates lie within 3 points of zero." loading="lazy"></a>
+            <figcaption><span class="fig-no">Figure 7.</span> AUROC of PremiseCheck minus holistic GPT-5.5 on the NLP reviews, with 95% intervals; the dashed line marks the non-inferiority margin of &minus;3.</figcaption>
           </figure>
           <ul>
             <li><b>Kev-27B instead of Jev.</b> With the open-weight Kev-27B as router and verifier, PremiseCheck reaches the same AUROC as with Jev. With the no-reasoning decomposer it is non-inferior at an API cost of 17.8% of the reference, not counting the GPU time of Kev-27B; with the medium-reasoning decomposer its interval falls just short of non-inferiority.</li>
@@ -402,7 +432,7 @@
       </article>
 
       <article class="fcard" id="finding-3">
-        <p class="k">Finding 3</p>
+        <p class="k"><span class="kn">3</span>Finding 3</p>
         <h3>Batching helps both approaches, and fusing them gives the best result</h3>
         <div class="feature-grid">
           <div class="stack">
@@ -412,33 +442,33 @@
           <div class="mini" role="list" aria-label="Batched AUROC on the NLP reviews">
             <div class="rqstat" role="listitem"><div class="v h">67.8</div><div class="l"><b>Batched holistic GPT-5.5</b>, no reasoning, at 7.7% of the reference cost</div></div>
             <div class="rqstat" role="listitem"><div class="v b">69.0</div><div class="l"><b>Batched PremiseCheck</b>, no reasoning, 16 phrasings, at 20% of the reference cost</div></div>
-            <div class="rqstat" role="listitem"><div class="v f">71.5</div><div class="l"><b>Fusion of the two</b> at 28% of the reference cost</div></div>
+            <div class="rqstat f" role="listitem"><div class="v f">71.5</div><div class="l"><b>Fusion of the two</b> at 28% of the reference cost</div></div>
             <p class="mini-note">AUROC on the NLP reviews.</p>
           </div>
         </div>
       </article>
 
       <article class="fcard" id="finding-4">
-        <p class="k">Finding 4</p>
+        <p class="k"><span class="kn">4</span>Finding 4</p>
         <h3>Flagging comments for a person to check</h3>
         <div class="feature-grid">
           <figure>
-            <a class="zoom" href="static/images/flagging.webp" aria-label="Open Figure 7 at full size"><img src="static/images/flagging.webp" width="1100" height="515" alt="Bar chart of three flagging policies on the NLP reviews. Precision among the top 5% of comments: random 4.7, holistic GPT-5.5 5.9, PremiseCheck 9.6, batched holistic 5.1, batched PremiseCheck 14.3. Precision of one flag per review: 6.3, 8.8, 10.1, 11.8, 13.6. Hit rate of three flags per paper: 17.7, 20.2, 31.7, 28.6, 40.2." loading="lazy"></a>
-            <figcaption><span class="fig-no">Figure 7.</span> Flagging factual errors on the NLP reviews, where 4.8% of comments contain one. Hit rate is the share of papers with an error that one of the three flags hits. PremiseCheck uses 16 phrasings, and ties are broken at random.</figcaption>
+            <a class="zoom" href="static/images/flagging.webp" aria-label="Open Figure 8 at full size"><img src="static/images/flagging.webp" width="1100" height="515" alt="Bar chart of three flagging policies on the NLP reviews. Precision among the top 5% of comments: random 4.7, holistic GPT-5.5 5.9, PremiseCheck 9.6, batched holistic 5.1, batched PremiseCheck 14.3. Precision of one flag per review: 6.3, 8.8, 10.1, 11.8, 13.6. Hit rate of three flags per paper: 17.7, 20.2, 31.7, 28.6, 40.2." loading="lazy"></a>
+            <figcaption><span class="fig-no">Figure 8.</span> Flagging factual errors on the NLP reviews, where 4.8% of comments contain one. Hit rate is the share of papers with an error that one of the three flags hits. PremiseCheck uses 16 phrasings, and ties are broken at random.</figcaption>
           </figure>
           <ul>
             <li><b>Flags hit errors two to three times as often as random.</b> This holds for PremiseCheck and batched PremiseCheck among the 5% most suspicious comments, whereas holistic GPT-5.5, per comment or batched, does little better than random despite a similar AUROC.</li>
             <li><b>An area chair sees more errors.</b> Reading the three most suspicious comments of each paper finds an error for 40% of the papers that contain one with batched PremiseCheck, compared with 29% with batched holistic GPT-5.5.</li>
-            <li><b>A flag points to the premise that the paper refutes</b>, as in Figure 8.</li>
+            <li><b>A flag points to the premise that the paper refutes</b>, as in Figure 9.</li>
           </ul>
         </div>
         <figure class="example">
-          <a class="zoom" href="static/images/ex_flag.webp" aria-label="Open Figure 8 at full size"><img src="static/images/ex_flag.webp" width="1100" height="784" alt="A flagged review comment on the paper Prompting GPT-3 to Be Reliable (ICLR 2023): it is hard to follow the conclusions, and a summary of the main takeaways from each facet would help. The LLM writes two premises. The knowledge premise that the conclusions are hard to follow gets 0.13; the paper premise that the paper does not provide a summary of the main takeaways gets 0.04. The authors' OpenReview response: we actually have a takeaway paragraph at the end of each experiment section." loading="lazy"></a>
-          <figcaption><span class="fig-no">Figure 8.</span> A flagged comment from the machine learning reviews with the authors' OpenReview response, quoted verbatim. Jev gives the premise that the paper has no summary of its takeaways a probability of 0.04, and the authors reply that each experiment section ends with one.</figcaption>
+          <a class="zoom" href="static/images/ex_flag.webp" aria-label="Open Figure 9 at full size"><img src="static/images/ex_flag.webp" width="1100" height="784" alt="A flagged review comment on the paper Prompting GPT-3 to Be Reliable (ICLR 2023): it is hard to follow the conclusions, and a summary of the main takeaways from each facet would help. The LLM writes two premises. The knowledge premise that the conclusions are hard to follow gets 0.13; the paper premise that the paper does not provide a summary of the main takeaways gets 0.04. The authors' OpenReview response: we actually have a takeaway paragraph at the end of each experiment section." loading="lazy"></a>
+          <figcaption><span class="fig-no">Figure 9.</span> A flagged comment from the machine learning reviews with the authors' OpenReview response, quoted verbatim. Jev gives the premise that the paper has no summary of its takeaways a probability of 0.04, and the authors reply that each experiment section ends with one.</figcaption>
         </figure>
       </article>
 
-      <article class="fcard" id="design-choices">
+      <article class="fcard design" id="design-choices">
         <p class="k">Design choices</p>
         <h3>What each part of the pipeline contributes</h3>
         <ul class="cols2">
@@ -455,7 +485,7 @@
 <!-- LIMITATIONS -->
 <section id="limitations" class="alt-bg">
   <div class="wrap">
-    <p class="sec-tag">Limitations</p>
+    <p class="sec-tag"><span class="no">07</span>Limitations</p>
     <h2>What PremiseCheck does not solve</h2>
     <ul class="limits">
       <li><b>The task is hard.</b> Each error is something an expert reviewer overlooked or misread, and the evidence against it may lie anywhere in a long paper. On the NLP reviews, per-comment AUROC is 63.2 for holistic GPT-5.5, 63.0 to 64.1 for PremiseCheck in Table 1, and 65.7 with 16 verification phrasings.</li>
@@ -472,16 +502,17 @@
 <!-- CITE -->
 <section id="cite">
   <div class="wrap">
-    <p class="sec-tag">BibTeX</p>
+    <p class="sec-tag"><span class="no">08</span>BibTeX</p>
     <h2>Citation</h2>
     <div class="bib-wrap">
       <button class="copy-btn" type="button" id="copy-bib">Copy</button>
       <span class="sr-only" id="copy-status" aria-live="polite"></span>
-<pre class="bib" id="bibtex" tabindex="0" aria-label="BibTeX entry"><span class="k">@article</span>{song2026premisecheck,
-  <span class="f">title</span>   = {{PremiseCheck}: Efficient Fact-Checking of Human and {AI} Peer Reviews},
-  <span class="f">author</span>  = {Song, Dingjie and Yan, Zhiling and Zhang, Ziqian and Zhang, Yuxuan and Sun, Lichao},
-  <span class="f">journal</span> = {arXiv preprint arXiv:XXXX.XXXXX},
-  <span class="f">year</span>    = {2026}
+<pre class="bib" id="bibtex" tabindex="0" aria-label="BibTeX entry"><span class="k">@misc</span>{song2026premisecheck,
+  <span class="f">title</span>  = {{PremiseCheck}: Efficient Fact-Checking of Human and {AI} Peer Reviews},
+  <span class="f">author</span> = {Song, Dingjie and Yan, Zhiling and Zhang, Ziqian and Zhang, Yuxuan and Sun, Lichao},
+  <span class="f">year</span>   = {2026},
+  <span class="f">note</span>   = {Preprint},
+  <span class="f">url</span>    = {https://www.alphaxiv.org/abs/2610.premisecheck-peer-review-fact-checking}
 }</pre>
     </div>
   </div>
@@ -491,21 +522,28 @@
 
 <footer>
   <div class="wrap">
+    <a class="ft-brand" href="#top"><span class="dot" aria-hidden="true"></span>PremiseCheck</a>
     <nav class="ft-row" aria-label="Project links">
-      <a href="https://arxiv.org/abs/XXXX.XXXXX">Paper</a>
+      <a href="https://www.alphaxiv.org/abs/2610.premisecheck-peer-review-fact-checking">Paper</a>
       <a href="https://github.com/OpenLAIR/PremiseCheck">Code</a>
       <a href="https://huggingface.co/datasets/songdj/ReviewFact">Dataset</a>
+      <a href="#cite">BibTeX</a>
     </nav>
     <p>PremiseCheck: Efficient Fact-Checking of Human and AI Peer Reviews · 2026</p>
   </div>
 </footer>
 
+<dialog class="lightbox" id="lightbox" aria-label="Figure at full size">
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img alt="">
+</dialog>
+
 <script>
 (function () {
+  /* BibTeX copy */
   var btn = document.getElementById('copy-bib');
   var pre = document.getElementById('bibtex');
   var status = document.getElementById('copy-status');
-  if (!btn || !pre) return;
   function done(msg) {
     btn.textContent = msg;
     if (status) status.textContent = msg === 'Copied' ? 'BibTeX copied to clipboard' : msg;
@@ -520,14 +558,57 @@
     document.body.removeChild(ta);
     done(ok ? 'Copied' : 'Select and copy');
   }
-  btn.addEventListener('click', function () {
-    var text = pre.textContent;
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { fallback(text); });
-    } else {
-      fallback(text);
-    }
-  });
+  if (btn && pre) {
+    btn.addEventListener('click', function () {
+      var text = pre.textContent;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { fallback(text); });
+      } else {
+        fallback(text);
+      }
+    });
+  }
+
+  /* Figure lightbox; without <dialog> support the links open the image directly */
+  var lb = document.getElementById('lightbox');
+  if (lb && typeof lb.showModal === 'function') {
+    var lbImg = lb.querySelector('img');
+    document.querySelectorAll('a.zoom').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
+        ev.preventDefault();
+        var img = a.querySelector('img');
+        lbImg.src = a.getAttribute('href');
+        lbImg.alt = img ? img.alt : '';
+        lb.showModal();
+      });
+    });
+    lb.addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('close', function () { lbImg.removeAttribute('src'); });
+  }
+
+  /* Highlight the current section in the top bar */
+  var links = {};
+  document.querySelectorAll('nav.top .links a[href^="#"]').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var alias = { idea: 'abstract', limitations: 'findings' };
+  var secs = [].slice.call(document.querySelectorAll('main section[id]'));
+  var current = null, ticking = false;
+  function spy() {
+    ticking = false;
+    var line = window.innerHeight * 0.4, id = null;
+    secs.forEach(function (s) { if (s.getBoundingClientRect().top <= line) id = alias[s.id] || s.id; });
+    if (id === current) return;
+    current = id;
+    Object.keys(links).forEach(function (k) {
+      var on = k === id;
+      links[k].classList.toggle('active', on);
+      if (on) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current');
+    });
+    var a = id && links[id], bar = a && a.parentNode;
+    if (bar && bar.scrollWidth > bar.clientWidth) bar.scrollLeft = a.offsetLeft - bar.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+  spy();
 })();
 </script>
 </body>
