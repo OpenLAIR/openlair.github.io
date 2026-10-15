@@ -271,3 +271,30 @@ body {
     display: none;
   }
 }
+
+/* A quieter first screen: the demo keeps its layout and motion, and only secondary text is taken off the page.
+   Attribution and method notes stay in the "Source & recorded trace" dialog; the source line and the figure
+   caption remain available to screen readers. */
+.hero .case-playback,
+.hero .case-answer,
+.hero .return-route span {
+  display: none;
+}
+.hero .case-source,
+.hero #diagram-desc {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Rows that have not been read yet, or are skipped, show no "Await readout" / "Not needed" label. */
+.loop-row[data-state="waiting"] .gate-label,
+.loop-row[data-state="computing"] .gate-label,
+.loop-row[data-state="skipped"] .gate-label {
+  visibility: hidden;
+}
