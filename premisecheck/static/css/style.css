@@ -193,6 +193,8 @@ h1.title .name{
 .btn.code:hover{background:#000;border-color:#000;}
 .btn.data{background:var(--amber-tint);color:var(--amber-ink);border-color:var(--amber-line);}
 .btn.data:hover{border-color:var(--amber);}
+.btn.ax{background:#fdf2f2;color:#9b1c1c;border-color:#f3c9c9;}
+.btn.ax:hover{border-color:#b31b1b;}
 .btn.cite{color:var(--ink-soft);}
 .btn.cite:hover{border-color:#c5ccd4;color:var(--ink);}
 .btn .ic{width:17px;height:17px;display:inline-block;flex:none;}
