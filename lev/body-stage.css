@@ -308,3 +308,11 @@ footer a:focus-visible {
 .depth-explorer .curve-line {
   opacity: 0.55;
 }
+
+/* Logo lockup (glacier blue, made for dark backgrounds) in the header and footer. Height follows the
+   wordmark's font-size, so the existing breakpoints keep scaling it. */
+.wordmark.has-logo img {
+  display: block;
+  height: 1.12em;
+  width: auto;
+}
