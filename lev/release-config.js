@@ -1,12 +1,12 @@
-// linked controls navigation; available means verified public access (checked signed out on 2026-10-15).
+// linked controls navigation; available means verified public access (checked signed out on 2026-10-16).
 window.LEV_RELEASE = {
   paper: {
     linked: true,
     available: true,
     visibility: "public",
-    url: "https://www.alphaxiv.org/pdf/2610.lev-looped-decision-models",
-    status: "alphaXiv",
-    hint: "Read and discuss the Lev paper on alphaXiv. A PDF is also hosted on this page.",
+    url: "https://arxiv.org/abs/2610.20951",
+    status: "arXiv",
+    hint: "Lev paper on arXiv (2610.20951).",
   },
   code: {
     linked: true,
